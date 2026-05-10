@@ -100,32 +100,6 @@ export default function App() {
           </button>
         </div>
 
-        {/*Input text shape*/}
-        <div className="h-[60px] w-full max-w-[400px] flex items-center justify-center">
-          {mode === 'text' ? (
-              <input
-                  type="text"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  placeholder="ENTER TEXT"
-                  className="w-full bg-transparent border-b border-white/20 text-center text-[#ffffff] font-sans text-[24px] uppercase tracking-[0.2em] py-2 outline-none focus:border-white transition-colors placeholder:text-white/20"
-                  maxLength={12}
-                  autoFocus
-              />
-          ) : (
-              <div className="text-center font-sans tracking-[0.2em] uppercase text-[12px]">
-                {error ? (
-                    <span className="text-red-400">Sensor Error. Check permissions.</span>
-                ) : isInitializing ? (
-                    <span className="text-white/50">Initializing Neural Sensor...</span>
-                ) : (
-                    <span className="text-white/70">Move {mode === 'hands' ? 'hands' : 'face'} inside camera view</span>
-                )}
-              </div>
-          )}
-        </div>
-      </div>
-
         {/* Selector de Colores */}
         <div className="flex flex-col items-center gap-3 w-full">
           <div className="flex gap-2">
@@ -183,7 +157,31 @@ export default function App() {
             className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white"
           />
         </div>
-
+        {/*Enter your text*/}
+        <div className="h-[60px] w-full max-w-[400px] flex items-center justify-center">
+          {mode === 'text' ? (
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="ENTER TEXT"
+              className="w-full bg-transparent border-b border-white/20 text-center text-[#ffffff] font-sans text-[24px] uppercase tracking-[0.2em] py-2 outline-none focus:border-white transition-colors placeholder:text-white/20"
+              maxLength={12}
+              autoFocus
+            />
+          ) : (
+            <div className="text-center font-sans tracking-[0.2em] uppercase text-[12px]">
+              {error ? (
+                <span className="text-red-400">Sensor Error. Check permissions.</span>
+              ) : isInitializing ? (
+                <span className="text-white/50">Initializing Neural Sensor...</span>
+              ) : (
+                <span className="text-white/70">Move {mode === 'hands' ? 'hands' : 'face'} inside camera view</span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
