@@ -17,10 +17,10 @@ export default function App() {
   const [colorMode, setColorMode] = useState<ColorMode>('single');
   const [particleColor, setParticleColor] = useState<string | string[]>(SINGLE_COLORS[0].value);
   const [particleSize, setParticleSize] = useState<number>(1);
-  
+
   const isCameraMode = mode !== 'text';
   const { videoRef, cameraError } = useCamera(isCameraMode);
-  
+
   const { handLandmarks, handIsInitializing, handError } = useHandTracking(videoRef, mode === 'hands');
   const { faceLandmarks, faceIsInitializing, faceError } = useFaceTracking(videoRef, mode === 'face');
 
@@ -34,7 +34,7 @@ export default function App() {
         setText('');
         return;
       }
-      
+
       if (e.key === 'Tab') {
          e.preventDefault();
          setMode(prev => prev === 'text' ? 'hands' : prev === 'hands' ? 'face' : 'text');
@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <div className="relative w-full h-[100dvh] bg-black overflow-hidden flex flex-col items-center justify-center p-6 gap-8">
-      
+
       {/* Contenedor genérico para las partículas (limita alto, ancho y fondo) */}
       <ParticleCanvas>
         {mode === 'text' ? (
@@ -57,11 +57,11 @@ export default function App() {
         ) : (
           <VisionParticleEngine handLandmarks={handLandmarks} faceLandmarks={faceLandmarks} particleColor={particleColor} particleSize={particleSize} />
         )}
-        
+
         {isCameraMode && (
-          <video 
-            ref={videoRef} 
-            className="absolute top-0 left-0 w-[1px] h-[1px] opacity-0 pointer-events-none" 
+          <video
+            ref={videoRef}
+            className="absolute top-0 left-0 w-[1px] h-[1px] opacity-0 pointer-events-none"
             playsInline
             muted
             autoPlay
@@ -71,16 +71,16 @@ export default function App() {
 
       {/* Controles interactivos fuera del contenedor */}
       <div className="relative w-full max-w-[1000px] flex flex-col items-center gap-6 text-white">
-        
+
         {/* Selector de Modos */}
         <div className="flex gap-3">
-          <button 
+          <button
             className={`px-4 py-2 text-[10px] uppercase font-sans tracking-widest border rounded-md transition-all ${mode === 'text' ? 'border-white text-white bg-white/5' : 'border-white/20 text-white/50 hover:bg-white/5 hover:text-white/80'}`}
             onClick={() => setMode('text')}
           >
             Text Mode
           </button>
-          <button 
+          <button
             className={`px-4 py-2 text-[10px] uppercase font-sans tracking-widest border rounded-md transition-all ${mode === 'hands' ? 'border-white text-white bg-white/5' : 'border-white/20 text-white/50 hover:bg-white/5 hover:text-white/80'}`}
             onClick={() => {
               setMode('hands');
@@ -89,7 +89,7 @@ export default function App() {
           >
             Hands Mode
           </button>
-          <button 
+          <button
             className={`px-4 py-2 text-[10px] uppercase font-sans tracking-widest border rounded-md transition-all ${mode === 'face' ? 'border-white text-white bg-white/5' : 'border-white/20 text-white/50 hover:bg-white/5 hover:text-white/80'}`}
             onClick={() => {
               setMode('face');
@@ -100,16 +100,42 @@ export default function App() {
           </button>
         </div>
 
+        {/*Input text shape*/}
+        <div className="h-[60px] w-full max-w-[400px] flex items-center justify-center">
+          {mode === 'text' ? (
+              <input
+                  type="text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="ENTER TEXT"
+                  className="w-full bg-transparent border-b border-white/20 text-center text-[#ffffff] font-sans text-[24px] uppercase tracking-[0.2em] py-2 outline-none focus:border-white transition-colors placeholder:text-white/20"
+                  maxLength={12}
+                  autoFocus
+              />
+          ) : (
+              <div className="text-center font-sans tracking-[0.2em] uppercase text-[12px]">
+                {error ? (
+                    <span className="text-red-400">Sensor Error. Check permissions.</span>
+                ) : isInitializing ? (
+                    <span className="text-white/50">Initializing Neural Sensor...</span>
+                ) : (
+                    <span className="text-white/70">Move {mode === 'hands' ? 'hands' : 'face'} inside camera view</span>
+                )}
+              </div>
+          )}
+        </div>
+      </div>
+
         {/* Selector de Colores */}
         <div className="flex flex-col items-center gap-3 w-full">
           <div className="flex gap-2">
-            <button 
+            <button
               className={`px-3 py-1 text-[9px] uppercase font-sans tracking-widest border rounded transition-all ${colorMode === 'single' ? 'border-white text-white bg-white/10' : 'border-white/20 text-white/50 hover:bg-white/5'}`}
               onClick={() => setColorMode('single')}
             >
               Solid Colors
             </button>
-            <button 
+            <button
               className={`px-3 py-1 text-[9px] uppercase font-sans tracking-widest border rounded transition-all ${colorMode === 'palette' ? 'border-white text-white bg-white/10' : 'border-white/20 text-white/50 hover:bg-white/5'}`}
               onClick={() => setColorMode('palette')}
             >
@@ -147,41 +173,17 @@ export default function App() {
           <label className="text-[9px] uppercase font-sans tracking-widest text-white/50">
             Particle Size: {particleSize.toFixed(1)}x
           </label>
-          <input 
-            type="range" 
-            min="0.5" 
-            max="3.0" 
-            step="0.1" 
+          <input
+            type="range"
+            min="0.5"
+            max="3.0"
+            step="0.1"
             value={particleSize}
             onChange={(e) => setParticleSize(parseFloat(e.target.value))}
             className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white"
           />
         </div>
 
-        <div className="h-[60px] w-full max-w-[400px] flex items-center justify-center">
-          {mode === 'text' ? (
-            <input
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="ENTER TEXT"
-              className="w-full bg-transparent border-b border-white/20 text-center text-[#ffffff] font-sans text-[24px] uppercase tracking-[0.2em] py-2 outline-none focus:border-white transition-colors placeholder:text-white/20"
-              maxLength={12}
-              autoFocus
-            />
-          ) : (
-            <div className="text-center font-sans tracking-[0.2em] uppercase text-[12px]">
-              {error ? (
-                <span className="text-red-400">Sensor Error. Check permissions.</span>
-              ) : isInitializing ? (
-                <span className="text-white/50">Initializing Neural Sensor...</span>
-              ) : (
-                <span className="text-white/70">Move {mode === 'hands' ? 'hands' : 'face'} inside camera view</span>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }
