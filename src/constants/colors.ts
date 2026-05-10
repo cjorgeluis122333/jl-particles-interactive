@@ -1,0 +1,16 @@
+export const SINGLE_COLORS = [
+  { name: 'White', value: '255, 255, 255', bg: 'bg-white' },
+  { name: 'Cyan', value: '34, 211, 238', bg: 'bg-cyan-400' },
+  { name: 'Rose', value: '251, 113, 133', bg: 'bg-rose-400' },
+  { name: 'Emerald', value: '52, 211, 153', bg: 'bg-emerald-400' },
+  { name: 'Amber', value: '251, 191, 36', bg: 'bg-amber-400' },
+  { name: 'Purple', value: '192, 132, 252', bg: 'bg-purple-400' },
+  { name: 'Blue', value: '59, 130, 246', bg: 'bg-blue-500' },
+  { name: 'Indigo', value: '99, 102, 241', bg: 'bg-indigo-500' },
+  { name: 'Pink', value: '236, 72, 153', bg: 'bg-pink-500' },
+  { name: 'Red', value: '239, 68, 68', bg: 'bg-red-500' },
+  { name: 'Orange', value: '249, 115, 22', bg: 'bg-orange-500' },
+  { name: 'Yellow', value: '234, 179, 8', bg: 'bg-yellow-500' },
+  { name: 'Lime', value: '132, 204, 22', bg: 'bg-lime-500' },
+  { name: 'Teal', value: '20, 184, 166', bg: 'bg-teal-500' },
+];
