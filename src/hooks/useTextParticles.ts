@@ -6,6 +6,7 @@ import { Particle } from '../components/Particle';
  * of non-transparent pixels, serving as targets for the particles.
  */
 function getPixelsForText(text: string, width: number, height: number): {x: number, y: number}[] {
+    if (width <= 0 || height <= 0) return [];
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -37,7 +38,7 @@ function getPixelsForText(text: string, width: number, height: number): {x: numb
     const points = [];
 
     // Analyze pixels. We step by "gap" to skip pixels and optimize the amount of points.
-    const gap = window.innerWidth < 600 ? 5 : 6;
+    const gap = window.innerWidth < 600 ? 6 : 8;
     for (let y = 0; y < height; y += gap) {
         for (let x = 0; x < width; x += gap) {
             const index = (y * width + x) * 4;
@@ -70,8 +71,16 @@ export function useTextParticles(text: string, particlesRef: React.MutableRefObj
             // Disperse randomly across the screen but within a slightly padded bounding box
             const padding = 50;
             particlesRef.current.forEach(p => {
-                p.targetX = padding + Math.random() * (width - padding * 2);
-                p.targetY = padding + Math.random() * (height - padding * 2);
+                const targetX = padding + Math.random() * (width - padding * 2);
+                const targetY = padding + Math.random() * (height - padding * 2);
+                
+                if (Math.abs(targetX - p.x) > 20 || Math.abs(targetY - p.y) > 20) {
+                     p.vx += (Math.random() - 0.5) * 20;
+                     p.vy += (Math.random() - 0.5) * 20;
+                }
+                
+                p.targetX = targetX;
+                p.targetY = targetY;
             });
             return;
         }
@@ -79,10 +88,15 @@ export function useTextParticles(text: string, particlesRef: React.MutableRefObj
         const points = getPixelsForText(char, width, height);
         if (points.length === 0) return;
 
-        // Sort both points and particles by X-coordinate
-        const sortedPoints = [...points].sort((a, b) => a.x - b.x);
-        const sortedParticleIndices = Array.from({ length: particlesRef.current.length }, (_, i) => i)
-            .sort((a, b) => particlesRef.current[a].x - particlesRef.current[b].x);
+        // Add 15% noise to sorting key for organic crossing of paths rather than strict rigid blocks
+        const noiseFactor = width * 0.15; 
+        const ptsWithKeys = points.map(pt => ({ pt, key: pt.x + (Math.random() - 0.5) * noiseFactor }));
+        ptsWithKeys.sort((a, b) => a.key - b.key);
+        const sortedPoints = ptsWithKeys.map(k => k.pt);
+
+        const indicesWithKeys = particlesRef.current.map((p, i) => ({ i, key: p.x + (Math.random() - 0.5) * noiseFactor }));
+        indicesWithKeys.sort((a, b) => a.key - b.key);
+        const sortedParticleIndices = indicesWithKeys.map(k => k.i);
 
         // To prevent wild vertical swapping, chunk them by sqrt(N) and sort each chunk by Y
         const chunkSize = Math.ceil(Math.sqrt(sortedParticleIndices.length));
@@ -107,6 +121,20 @@ export function useTextParticles(text: string, particlesRef: React.MutableRefObj
                 const particleIndex = pIndicesChunk[j];
                 const p = particlesRef.current[particleIndex];
                 const pt = ptsChunk[j];
+                
+                const distanceX = pt.x - p.x;
+                const distanceY = pt.y - p.y;
+                
+                // Add organic impulse on reassignment
+                if (Math.abs(distanceX) > 20 || Math.abs(distanceY) > 20) {
+                     p.vx += (Math.random() - 0.5) * 20;
+                     p.vy += (Math.random() - 0.5) * 20;
+                     
+                     // Tangential velocity for arced movement
+                     const arcStrength = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 10 + 5);
+                     p.vx += Math.sign(distanceY) * arcStrength;
+                     p.vy -= Math.sign(distanceX) * arcStrength;
+                }
                 
                 p.targetX = pt.x;
                 p.targetY = pt.y;

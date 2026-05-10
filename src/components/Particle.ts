@@ -1,5 +1,4 @@
-import { useRef, useEffect } from 'react';
-import { Landmark } from '@mediapipe/tasks-vision';
+import { ClickMode, getMagnetTarget } from '../hooks/useParticleInteraction';
 
 export class Particle {
   x: number;
@@ -14,6 +13,7 @@ export class Particle {
   sizeMultiplier: number;
   friction: number;
   ease: number;
+  easeMultiplier: number;
   floatSpeed: number;
   floatOffset: number;
   
@@ -35,24 +35,29 @@ export class Particle {
     
     // Physics properties
     this.friction = 0.82 + Math.random() * 0.1;
-    this.ease = 0.04 + Math.random() * 0.08;
+    this.ease = 0.03 + Math.random() * 0.05;
+    this.easeMultiplier = 1;
     
     // Levitation properties
     this.floatSpeed = Math.random() * 0.02 + 0.005;
     this.floatOffset = Math.random() * Math.PI * 2;
   }
 
-  update(time: number, isActive: boolean) {
+  update(time: number, isActive: boolean, mx: number | null = null, my: number | null = null, isMouseDown: boolean = false, isMagnet: boolean = true, clickMode: ClickMode = 'none') {
+    const { x: currentTargetX, y: currentTargetY } = getMagnetTarget(
+      this.x, this.y, this.targetX, this.targetY, mx, my, isMouseDown, isMagnet, clickMode
+    );
+
     // Easing towards the target
-    const dx = this.targetX - this.x;
-    const dy = this.targetY - this.y;
+    const dx = currentTargetX - this.x;
+    const dy = currentTargetY - this.y;
     
     // Add some random organic movement when idle
     const noiseX = isActive ? 0 : Math.cos(time * 0.01 + this.y * 0.01) * 0.5;
     const noiseY = isActive ? 0 : Math.sin(time * 0.01 + this.x * 0.01) * 0.5;
     
-    this.vx += (dx * this.ease) + noiseX;
-    this.vy += (dy * this.ease) + noiseY;
+    this.vx += (dx * (this.ease * this.easeMultiplier)) + noiseX;
+    this.vy += (dy * (this.ease * this.easeMultiplier)) + noiseY;
 
     // Apply friction to slow down
     this.vx *= this.friction;
@@ -67,11 +72,16 @@ export class Particle {
     this.y += Math.sin(time * this.floatSpeed + this.floatOffset) * amplitude;
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  draw(ctx: CanvasRenderingContext2D, shape: 'circle' | 'square' = 'circle') {
     ctx.fillStyle = `rgba(${this.baseColor}, ${this.opacity})`;
-    ctx.beginPath();
-    // Use sizeMultiplier but clamp the minimum visual size a bit if needed, or simply multiply
-    ctx.arc(this.x, this.y, Math.max(0.1, this.size * this.sizeMultiplier), 0, Math.PI * 2);
-    ctx.fill();
+    const r = Math.max(0.1, this.size * this.sizeMultiplier);
+    
+    if (shape === 'square') {
+      ctx.fillRect(this.x - r, this.y - r, r * 2, r * 2);
+    } else {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 }

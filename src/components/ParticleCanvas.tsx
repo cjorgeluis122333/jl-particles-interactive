@@ -13,7 +13,7 @@ export default function ParticleCanvas({
   width = '100%',
   height = '60vh',
   backgroundColor = '#050505',
-  className = "relative max-w-[1000px] min-h-[400px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" 
+  className = "relative border border-white/10 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 ease-out" 
 }: ParticleCanvasProps) {
   return (
     <div 

@@ -1,8 +1,6 @@
 {
   "name": "Particle Vowels",
   "description": "Una aplicación interactiva donde partículas levitantes toman la forma de las vocales al interactuar con ellas.",
-  "requestFramePermissions": [
-    "camera"
-  ],
+  "requestFramePermissions": [],
   "majorCapabilities": []
 }
