@@ -1,0 +1,46 @@
+{
+  "name": "jl-particle-interactive",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Interactive particle text animation components for React",
+  "author": "JL",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/jl-particle-interactive.umd.cjs",
+  "module": "./dist/jl-particle-interactive.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/jl-particle-interactive.js",
+      "require": "./dist/jl-particle-interactive.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "particles",
+    "animation",
+    "canvas",
+    "interactive",
+    "text"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.0"
+  }
+}
