@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 import type { ClickMode, ParticleShape, ColorMode } from 'jl-particle-interactive';
+import { BookOpen } from 'lucide-react';
 import { SINGLE_COLORS } from './constants/colors';
 import { COLOR_PALETTES } from './constants/palettes';
 import { DEFAULT_WORDS } from './constants/words';
+import DocumentationPage from './pages/DocumentationPage';
 
 export default function App() {
+    const [currentPage, setCurrentPage] = useState<'main' | 'documentation'>('main');
     const [text, setText] = useState<string>('');
     const [colorMode, setColorMode] = useState<ColorMode>('single');
     const [particleColor, setParticleColor] = useState<string | string[]>(SINGLE_COLORS[0].value);
@@ -59,18 +62,32 @@ export default function App() {
     }, []);
 
     return (
-        <div className="fixed inset-0 bg-black overflow-hidden flex flex-col items-center justify-center transition-colors duration-500">
+        <>
+            {currentPage === 'documentation' ? (
+                <DocumentationPage onBack={() => setCurrentPage('main')} />
+            ) : (
+                <div className="fixed inset-0 bg-black overflow-hidden flex flex-col items-center justify-center transition-colors duration-500">
 
-            {/* Contenedor genérico para las partículas (limita alto, ancho y fondo) */}
-            <div className="absolute inset-0 flex items-center justify-center p-6 pb-[240px] pointer-events-none">
-                <div className="pointer-events-auto w-full h-full flex items-center justify-center">
-                    <ParticleCanvas width={`${canvasWidth}%`} height={`${canvasHeight}vh`} backgroundColor={canvasBg}>
-                        <TextParticleEngine text={displayText} particleColor={particleColor} particleSize={particleSize} particleDensity={particleDensity} particleEase={particleEase} isMagnet={isMagnet} clickMode={clickMode} particleShape={particleShape} backgroundColor={canvasBg} />
-                    </ParticleCanvas>
-                </div>
-            </div>
+                    {/* Documentation Button - Top Right */}
+                    <button
+                        onClick={() => setCurrentPage('documentation')}
+                        className="absolute top-6 right-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 text-white text-sm font-sans tracking-widest uppercase transition-all duration-200 group"
+                        title="View documentation"
+                    >
+                        <BookOpen size={18} className="group-hover:scale-110 transition-transform" />
+                        <span className="hidden sm:inline">Docs</span>
+                    </button>
 
-            {/* Controles interactivos flotantes */}
+                    {/* Contenedor genérico para las partículas (limita alto, ancho y fondo) */}
+                    <div className="absolute inset-0 flex items-center justify-center p-6 pb-[240px] pointer-events-none">
+                        <div className="pointer-events-auto w-full h-full flex items-center justify-center">
+                            <ParticleCanvas width={`${canvasWidth}%`} height={`${canvasHeight}vh`} backgroundColor={canvasBg}>
+                                <TextParticleEngine text={displayText} particleColor={particleColor} particleSize={particleSize} particleDensity={particleDensity} particleEase={particleEase} isMagnet={isMagnet} clickMode={clickMode} particleShape={particleShape} backgroundColor={canvasBg} />
+                            </ParticleCanvas>
+                        </div>
+                    </div>
+
+                    {/* Controles interactivos flotantes */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[900px] bg-[#050505]/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-5 text-white shadow-2xl z-30">
 
                 {/* Fila 1: Colores e Interacciones */}
@@ -258,6 +275,8 @@ export default function App() {
                     />
                 </div>
             </div>
-        </div>
+                </div>
+            )}
+        </>
     );
 }

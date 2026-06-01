@@ -27,7 +27,8 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - **Gestión de Partículas**: Librería externa `jl-particle-interactive` (sin código local de partículas).
 
 ## Estructura de Directorios
-- `/src/App.tsx`: Componente principal y UI de control (inputs, selectores). Importa `ParticleCanvas` y `TextParticleEngine` desde `jl-particle-interactive`.
+- `/src/App.tsx`: Componente principal con sistema de navegación. Contiene la UI de control (inputs, selectores) y enrutamiento entre la página principal y la documentación.
+- `/src/pages/DocumentationPage.tsx`: Página de documentación con dashboard para navegar entre diferentes secciones de documentación. Gestiona el estado de la sección actual.
 - `/src/constants/`: Datos compartidos de la UI (`colors.ts`, `palettes.ts`, `words.ts`). **No contiene lógica de partículas.**
 
 ## Características Principales
@@ -40,6 +41,10 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
     - Selección de color de fondo del canvas.
     - Forma de las partículas (círculo, cuadrado).
 4. **Palabras por Defecto**: Gestionadas en `src/constants/words.ts`.
+5. **Sistema de Navegación**: 
+    - Botón "Docs" en la esquina superior derecha (top-right) que navega a la página de Documentación.
+    - Página de Documentación con dashboard que permite navegar entre diferentes secciones.
+    - Navegación bidireccional: desde la página principal se accede a documentación, y desde documentación se puede volver a la página principal.
 
 ## Reglas de Desarrollo
 - **Tailwind**: Usar clases de utilidad directamente. No crear CSS personalizado fuera de `/src/index.css`.
