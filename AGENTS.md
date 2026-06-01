@@ -8,24 +8,30 @@ Cualquier cambio, añadido o modificación en el código o funcionalidad que afe
 ## Descripción del Proyecto
 Una aplicación web interactiva desarrollada en **React + Vite + TypeScript** que renderiza texto (proporcionado por el usuario o por defecto) mediante una nube de partículas animadas.
 
+Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-interactive`. Toda la lógica de partículas vive en la librería; aquí solo existe la UI de control y la integración.
+
+## Librería de Partículas: `jl-particle-interactive`
+- **Paquete npm**: `jl-particle-interactive`
+- **Código fuente**: `d:\PROGRAMACION\HTML_CSS_JS\react\myprojects\jl-particles-interactive\`
+- **Componentes exportados**: `ParticleCanvas`, `TextParticleEngine`
+- **Hooks exportados**: `useParticleInteraction`, `useTextParticles`
+- **Tipos exportados**: `ParticleShape`, `ColorMode`, `ClickMode`, `ParticleCanvasProps`, `TextParticleEngineProps`
+
+> Cuando detectes un bug o necesites modificar el comportamiento de las partículas, **edita el proyecto de la librería** en la ruta indicada, ejecuta `npm run build` allí, y luego actualiza la dependencia aquí con `npm install jl-particle-interactive@latest` (o mediante `npm install ../jl-particles-interactive` si todavía no se ha publicado la nueva versión).
+
 ## Stack Tecnológico
-- **Frontend**: React 18+ (Vite)
+- **Frontend**: React 19 (Vite)
 - **Lenguaje**: TypeScript
 - **Estilos**: Tailwind CSS
 - **Estado**: Hooks nativos de React (`useState`, `useRef`, `useEffect`)
-- **Gestión de Partículas**: Lógica personalizada en `Particle.ts` y motor de renderizado en canvas.
+- **Gestión de Partículas**: Librería externa `jl-particle-interactive` (sin código local de partículas).
 
 ## Estructura de Directorios
-- `/src/App.tsx`: Componente principal y UI de control (inputs, selectores).
-- `/src/components/`:
-    - `ParticleCanvas.tsx`: Envoltorio para el canvas.
-    - `TextParticleEngine.tsx`: Motor principal que renderiza el texto como partículas.
-    - `Particle.ts`: Clase que define el comportamiento físico de cada partícula.
-- `/src/hooks/`: Lógica reutilizable (`useParticleInteraction.ts`, `useTextParticles.ts`).
-- `/src/constants/`: Datos compartidos (`colors.ts`, `palettes.ts`, `words.ts`).
+- `/src/App.tsx`: Componente principal y UI de control (inputs, selectores). Importa `ParticleCanvas` y `TextParticleEngine` desde `jl-particle-interactive`.
+- `/src/constants/`: Datos compartidos de la UI (`colors.ts`, `palettes.ts`, `words.ts`). **No contiene lógica de partículas.**
 
 ## Características Principales
-1. **Renderizado de Texto**: Convierte texto de entrada en una estructura de partículas basada en píxeles.
+1. **Renderizado de Texto**: Convierte texto de entrada en una estructura de partículas basada en píxeles (via librería).
 2. **Interactividad**:
     - Efecto imán (magnet) para atraer o repeler partículas.
     - Modos de clic configurables.
@@ -37,5 +43,5 @@ Una aplicación web interactiva desarrollada en **React + Vite + TypeScript** qu
 
 ## Reglas de Desarrollo
 - **Tailwind**: Usar clases de utilidad directamente. No crear CSS personalizado fuera de `/src/index.css`.
-- **Limpieza**: No dejar residuos de sistemas de seguimiento (cara/mano) anteriores. El sistema está totalmente optimizado para entrada de texto y ratón/puntero.
-- **Tipado**: Mantener tipado estricto en todos los componentes y hooks.
+- **Sin código de partículas local**: Toda la lógica de partículas (`Particle.ts`, `TextParticleEngine`, `ParticleCanvas`, hooks) reside exclusivamente en la librería `jl-particle-interactive`. No duplicar código aquí.
+- **Tipado**: Importar los tipos directamente desde la librería: `import type { ParticleShape, ClickMode, ColorMode } from 'jl-particle-interactive'`.

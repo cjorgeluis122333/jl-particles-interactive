@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
-import ParticleCanvas from './components/ParticleCanvas';
-import TextParticleEngine from './components/TextParticleEngine';
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
+import type { ClickMode, ParticleShape, ColorMode } from 'jl-particle-interactive';
 import { SINGLE_COLORS } from './constants/colors';
 import { COLOR_PALETTES } from './constants/palettes';
 import { DEFAULT_WORDS } from './constants/words';
-import { ClickMode } from './hooks/useParticleInteraction';
-
-export type ColorMode = 'single' | 'palette';
-export type ParticleShape = 'circle' | 'square';
 
 export default function App() {
     const [text, setText] = useState<string>('');
