@@ -35,6 +35,9 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - `/src/modules/docs/layout/Sidebar.tsx`: Sidebar de navegación de la documentación con `<NavLink>` de React Router.
 - `/src/modules/docs/pages/DocsIndex.tsx`: Dashboard de la documentación (`/docs`). Grid de tarjetas con links a cada sección.
 - `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `Examples`).
+- `/src/modules/docs/examples/`: 15 componentes de ejemplo interactivos + componente shell reutilizable:
+  - `_ExampleShell.tsx`: Componente contenedor que muestra preview del ejemplo + código fuente en acordeón.
+  - `Example01BasicText.tsx` - `Example15WordCarousel.tsx`: Uno por cada ejemplo del README de la librería.
 - `/src/constants/`: Datos compartidos de la UI (`colors.ts`, `palettes.ts`, `words.ts`). **No contiene lógica de partículas.**
 
 ## Características Principales
@@ -47,7 +50,12 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
     - Selección de color de fondo del canvas.
     - Forma de las partículas (círculo, cuadrado).
 4. **Palabras por Defecto**: Gestionadas en `src/constants/words.ts`.
-5. **Sistema de Navegación**: 
+5. **Galería de 15 Ejemplos Interactivos**: En `/docs/examples/` se renderizan todos los ejemplos del README con:
+    - Preview visual interactivo del componente
+    - Código fuente visible en acordeón (mostrar/ocultar)
+    - Interfaz modular y reutilizable con `_ExampleShell.tsx`
+    - Grid responsive (1 columna en móvil, 2 en desktop)
+6. **Sistema de Navegación**: 
     - Botón "Docs" en la esquina superior derecha (top-right) que navega a `/docs` usando `<Link>` de React Router.
     - Página `/docs` muestra el dashboard con grid de tarjetas. Cada tarjeta es un `<Link>` a su ruta de sección.
     - Layout de sidebar persistente en todas las rutas `/docs/*` via nested routes + `<Outlet>`.
