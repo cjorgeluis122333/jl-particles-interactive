@@ -23,12 +23,18 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - **Frontend**: React 19 (Vite)
 - **Lenguaje**: TypeScript
 - **Estilos**: Tailwind CSS
+- **Routing**: React Router v6 (`react-router-dom`) con `createBrowserRouter` y nested routes
 - **Estado**: Hooks nativos de React (`useState`, `useRef`, `useEffect`)
 - **Gestión de Partículas**: Librería externa `jl-particle-interactive` (sin código local de partículas).
 
 ## Estructura de Directorios
-- `/src/App.tsx`: Componente principal con sistema de navegación. Contiene la UI de control (inputs, selectores) y enrutamiento entre la página principal y la documentación.
-- `/src/pages/DocumentationPage.tsx`: Página de documentación con dashboard para navegar entre diferentes secciones de documentación. Gestiona el estado de la sección actual.
+- `/src/main.tsx`: Punto de entrada. Monta `<RouterProvider>` con el router de React Router v6.
+- `/src/router.tsx`: Define todas las rutas de la aplicación con `createBrowserRouter`.
+- `/src/modules/playground/PlaygroundPage.tsx`: Módulo del playground. Contiene la UI de control (inputs, selectores) y el canvas de partículas.
+- `/src/modules/docs/layout/DocsLayout.tsx`: Layout compartido del módulo de documentación. Incluye header con back link y sidebar lateral.
+- `/src/modules/docs/layout/Sidebar.tsx`: Sidebar de navegación de la documentación con `<NavLink>` de React Router.
+- `/src/modules/docs/pages/DocsIndex.tsx`: Dashboard de la documentación (`/docs`). Grid de tarjetas con links a cada sección.
+- `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `Examples`).
 - `/src/constants/`: Datos compartidos de la UI (`colors.ts`, `palettes.ts`, `words.ts`). **No contiene lógica de partículas.**
 
 ## Características Principales
@@ -42,9 +48,11 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
     - Forma de las partículas (círculo, cuadrado).
 4. **Palabras por Defecto**: Gestionadas en `src/constants/words.ts`.
 5. **Sistema de Navegación**: 
-    - Botón "Docs" en la esquina superior derecha (top-right) que navega a la página de Documentación.
-    - Página de Documentación con dashboard que permite navegar entre diferentes secciones.
-    - Navegación bidireccional: desde la página principal se accede a documentación, y desde documentación se puede volver a la página principal.
+    - Botón "Docs" en la esquina superior derecha (top-right) que navega a `/docs` usando `<Link>` de React Router.
+    - Página `/docs` muestra el dashboard con grid de tarjetas. Cada tarjeta es un `<Link>` a su ruta de sección.
+    - Layout de sidebar persistente en todas las rutas `/docs/*` via nested routes + `<Outlet>`.
+    - Navegación bidireccional: botón back en el header de docs usa `<Link to="/">` para regresar al playground.
+    - Refresh en cualquier ruta `/docs/*` mantiene la página correcta (sin 404).
 
 ## Reglas de Desarrollo
 - **Tailwind**: Usar clases de utilidad directamente. No crear CSS personalizado fuera de `/src/index.css`.
