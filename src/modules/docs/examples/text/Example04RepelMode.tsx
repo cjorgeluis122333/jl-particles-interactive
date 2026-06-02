@@ -1,5 +1,5 @@
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 
@@ -45,3 +45,4 @@ export default function Example04RepelMode({ isActive, isPaused, onActivate }: E
     </ExampleShell>
   );
 }
+

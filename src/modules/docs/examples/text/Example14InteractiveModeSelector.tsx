@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 import type { ClickMode } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const modes: ClickMode[] = ['none', 'attract', 'repel'];
 
@@ -118,3 +118,4 @@ export default function Example14InteractiveModeSelector({ isActive, isPaused, o
     </ExampleShell>
   );
 }
+

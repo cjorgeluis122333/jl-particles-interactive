@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const EXAMPLE_CODE = `import { useState, useEffect } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
@@ -106,3 +106,4 @@ export default function Example12LoadingScreen({ isActive, isPaused, onActivate 
     </ExampleShell>
   );
 }
+

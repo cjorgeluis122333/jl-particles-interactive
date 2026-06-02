@@ -37,10 +37,10 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `TextSamples`, `CanvasSamples`).
   - `TextSamples.tsx`: Galería de 16 ejemplos con texto (`/docs/examples/text`).
   - `CanvasSamples.tsx`: Galería de ejemplos de canvas sin texto (`/docs/examples/canvas`). Actualmente solo `CanvasExample01Default`.
-- `/src/modules/docs/examples/`: 16 componentes de ejemplo interactivos con texto + 1 canvas + componente shell reutilizable:
-  - `_ExampleShell.tsx`: Componente contenedor (sin cambios).
-  - `Example01BasicText.tsx` - `Example16AdaptiveText.tsx`: Ejemplos con texto (usados en `TextSamples`).
-  - `CanvasExample01Default.tsx`: Canvas por defecto sin texto (usado en `CanvasSamples`). Base para futuras variaciones.
+- `/src/modules/docs/examples/`: Ejemplos de documentación organizados por tipo.
+  - `/src/modules/docs/examples/_ExampleShell.tsx`: Componente contenedor reutilizable para previews y código.
+  - `/src/modules/docs/examples/text/`: 16 ejemplos con texto (`Example01BasicText.tsx` - `Example16AdaptiveText.tsx`) usados en `TextSamples`.
+  - `/src/modules/docs/examples/canvas/`: Ejemplos sin texto para fondos. Actualmente contiene `CanvasExample01Default.tsx` usado en `CanvasSamples`.
   - `_ExampleShell.tsx`: Componente contenedor que:
     - Muestra preview del componente + código fuente en acordeón (Show/Hide Code)
     - Estados visuales: activo (borde verde), pausado (opacidad 50%), inactivo (dimmed)

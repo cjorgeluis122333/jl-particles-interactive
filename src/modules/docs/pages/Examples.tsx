@@ -1,20 +1,20 @@
 import { useState, useMemo } from 'react';
-import Example01BasicText from '../examples/Example01BasicText';
-import Example02DynamicText from '../examples/Example02DynamicText';
-import Example03ColorPalette from '../examples/Example03ColorPalette';
-import Example04RepelMode from '../examples/Example04RepelMode';
-import Example05AttractMode from '../examples/Example05AttractMode';
-import Example06NoMagnet from '../examples/Example06NoMagnet';
-import Example07SquareParticles from '../examples/Example07SquareParticles';
-import Example08DenseParticles from '../examples/Example08DenseParticles';
-import Example09CustomBackground from '../examples/Example09CustomBackground';
-import Example10FixedCanvas from '../examples/Example10FixedCanvas';
-import Example11HeroSection from '../examples/Example11HeroSection';
-import Example12LoadingScreen from '../examples/Example12LoadingScreen';
-import Example13AnimatedCounter from '../examples/Example13AnimatedCounter';
-import Example14InteractiveModeSelector from '../examples/Example14InteractiveModeSelector';
-import Example15WordCarousel from '../examples/Example15WordCarousel';
-import Example16AdaptiveText from '../examples/Example16AdaptiveText';
+import Example01BasicText from '../examples/text/Example01BasicText';
+import Example02DynamicText from '../examples/text/Example02DynamicText';
+import Example03ColorPalette from '../examples/text/Example03ColorPalette';
+import Example04RepelMode from '../examples/text/Example04RepelMode';
+import Example05AttractMode from '../examples/text/Example05AttractMode';
+import Example06NoMagnet from '../examples/text/Example06NoMagnet';
+import Example07SquareParticles from '../examples/text/Example07SquareParticles';
+import Example08DenseParticles from '../examples/text/Example08DenseParticles';
+import Example09CustomBackground from '../examples/text/Example09CustomBackground';
+import Example10FixedCanvas from '../examples/text/Example10FixedCanvas';
+import Example11HeroSection from '../examples/text/Example11HeroSection';
+import Example12LoadingScreen from '../examples/text/Example12LoadingScreen';
+import Example13AnimatedCounter from '../examples/text/Example13AnimatedCounter';
+import Example14InteractiveModeSelector from '../examples/text/Example14InteractiveModeSelector';
+import Example15WordCarousel from '../examples/text/Example15WordCarousel';
+import Example16AdaptiveText from '../examples/text/Example16AdaptiveText';
 
 const exampleComponents = [
   Example01BasicText,

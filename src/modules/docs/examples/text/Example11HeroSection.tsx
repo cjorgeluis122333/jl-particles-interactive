@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const EXAMPLE_CODE = `import { useState } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
@@ -83,3 +83,4 @@ export default function Example11HeroSection({ isActive, isPaused, onActivate }:
     </ExampleShell>
   );
 }
+

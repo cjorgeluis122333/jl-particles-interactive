@@ -1,5 +1,5 @@
 import { ParticleCanvas } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const EXAMPLE_CODE = `import { ParticleCanvas } from 'jl-particle-interactive';
 
@@ -33,3 +33,4 @@ export default function CanvasExample01Default({ isActive, isPaused, onActivate 
     </ExampleShell>
   );
 }
+

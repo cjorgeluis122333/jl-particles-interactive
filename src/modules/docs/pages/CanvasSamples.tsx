@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import CanvasExample01Default from '../examples/CanvasExample01Default';
+import CanvasExample01Default from '../examples/canvas/CanvasExample01Default';
 
 const canvasExampleComponents = [
   CanvasExample01Default,

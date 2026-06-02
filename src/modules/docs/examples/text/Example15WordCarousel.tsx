@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
-import ExampleShell from './_ExampleShell';
+import ExampleShell from '../_ExampleShell';
 
 const WORDS = ['CREA', 'CODE', 'UX', 'FX', 'WEB'];
 const COLORS = [
@@ -82,3 +82,4 @@ export default function Example15WordCarousel({ isActive, isPaused, onActivate }
     </ExampleShell>
   );
 }
+
