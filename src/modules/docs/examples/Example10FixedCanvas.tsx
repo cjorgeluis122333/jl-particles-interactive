@@ -5,17 +5,25 @@ const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function FixedCanvas() {
   return (
-    <ParticleCanvas width={600} height={300} style={{ margin: '0 auto' }}>
-      <TextParticleEngine
-        text="600×300"
-        particleColor="255, 200, 0"
-        isMagnet={true}
-      />
-    </ParticleCanvas>
+    <div className="h-full w-full flex items-center justify-center">
+      <ParticleCanvas width={600} height={300}>
+        <TextParticleEngine
+          text="600"
+          particleColor="255, 200, 0"
+          isMagnet={true}
+        />
+      </ParticleCanvas>
+    </div>
   );
 }`;
 
-export default function Example10FixedCanvas() {
+interface Example10Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example10FixedCanvas({ isActive, isPaused, onActivate }: Example10Props) {
   return (
     <ExampleShell
       number={10}
@@ -23,16 +31,21 @@ export default function Example10FixedCanvas() {
       description="Dimensiones exactas (600×300) útiles para tarjetas o componentes con tamaño predefinido."
       code={EXAMPLE_CODE}
       height="40vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <div className="h-full flex items-center justify-center bg-black/30">
-        <ParticleCanvas width={600} height={300}>
-          <TextParticleEngine
-            text="600×300"
-            particleColor="255, 200, 0"
-            isMagnet={true}
-          />
-        </ParticleCanvas>
-      </div>
+      {isActive && (
+        <div className="h-full w-full flex items-center justify-center">
+          <ParticleCanvas width={600} height={300}>
+            <TextParticleEngine
+              text="600"
+              particleColor="255, 200, 0"
+              isMagnet={true}
+            />
+          </ParticleCanvas>
+        </div>
+      )}
     </ExampleShell>
   );
 }

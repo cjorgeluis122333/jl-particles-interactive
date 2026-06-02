@@ -5,9 +5,9 @@ const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function AttractMode() {
   return (
-    <ParticleCanvas height="60vh">
+    <ParticleCanvas height="100%">
       <TextParticleEngine
-        text="Imán"
+        text="IMAN"
         clickMode="attract"
         isMagnet={false}
         particleColor="80, 220, 200"
@@ -16,7 +16,13 @@ export default function AttractMode() {
   );
 }`;
 
-export default function Example05AttractMode() {
+interface Example05Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example05AttractMode({ isActive, isPaused, onActivate }: Example05Props) {
   return (
     <ExampleShell
       number={5}
@@ -24,15 +30,20 @@ export default function Example05AttractMode() {
       description="Mantén pulsado para que las partículas sean atraídas fuertemente hacia el cursor. El efecto es opuesto a la repulsión."
       code={EXAMPLE_CODE}
       height="60vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <ParticleCanvas height="100%">
-        <TextParticleEngine
-          text="Imán"
-          clickMode="attract"
-          isMagnet={false}
-          particleColor="80, 220, 200"
-        />
-      </ParticleCanvas>
+      {isActive && (
+        <ParticleCanvas height="100%">
+          <TextParticleEngine
+            text="IMAN"
+            clickMode="attract"
+            isMagnet={false}
+            particleColor="80, 220, 200"
+          />
+        </ParticleCanvas>
+      )}
     </ExampleShell>
   );
 }

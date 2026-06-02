@@ -1,8 +1,11 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Sidebar from './Sidebar';
 
 export default function DocsLayout() {
+    const location = useLocation();
+    const isExamplesRoute = location.pathname === '/docs/examples';
+
     return (
         <div className="fixed inset-0 bg-gradient-to-br from-[#050505] to-[#0f0f0f] overflow-y-auto flex flex-col">
             {/* Header */}
@@ -26,7 +29,7 @@ export default function DocsLayout() {
 
             {/* Body: Sidebar + Content */}
             <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-10 flex gap-10">
-                <Sidebar />
+                {!isExamplesRoute && <Sidebar />}
                 <main className="flex-1 min-w-0">
                     <Outlet />
                 </main>

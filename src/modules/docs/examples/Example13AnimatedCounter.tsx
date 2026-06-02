@@ -14,20 +14,27 @@ export default function AnimatedCounter() {
   }, []);
 
   return (
-    <ParticleCanvas height="40vh" width={300} style={{ margin: '0 auto' }}>
-      <TextParticleEngine
-        text={String(count)}
-        particleColor="255, 180, 50"
-        particleEase={3}
-        particleDensity={1.5}
-        isMagnet={false}
-        backgroundColor="#050505"
-      />
-    </ParticleCanvas>
+    <div className="h-full w-full flex items-center justify-center">
+      <ParticleCanvas width={300} height={300}>
+        <TextParticleEngine
+          text={String(count)}
+          particleColor="255, 180, 50"
+          particleEase={3}
+          particleDensity={1.5}
+          isMagnet={false}
+          backgroundColor="#050505"
+        />
+      </ParticleCanvas>
+    </div>
   );
 }`;
 
-export default function Example13AnimatedCounter() {
+interface Example13Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+export default function Example13AnimatedCounter({ isActive, isPaused, onActivate }: Example13Props) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -42,19 +49,24 @@ export default function Example13AnimatedCounter() {
       description="Las partículas se reorganizan cada vez que cambia el número (0-9). Se reinicia después de 9."
       code={EXAMPLE_CODE}
       height="40vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <div className="h-full flex items-center justify-center">
-        <ParticleCanvas width={300} height={300}>
-          <TextParticleEngine
-            text={String(count)}
-            particleColor="255, 180, 50"
-            particleEase={3}
-            particleDensity={1.5}
-            isMagnet={false}
-            backgroundColor="#050505"
-          />
-        </ParticleCanvas>
-      </div>
+      {isActive && (
+        <div className="h-full w-full flex items-center justify-center">
+          <ParticleCanvas width={300} height={300}>
+            <TextParticleEngine
+              text={String(count)}
+              particleColor="255, 180, 50"
+              particleEase={3}
+              particleDensity={1.5}
+              isMagnet={false}
+              backgroundColor="#050505"
+            />
+          </ParticleCanvas>
+        </div>
+      )}
     </ExampleShell>
   );
 }

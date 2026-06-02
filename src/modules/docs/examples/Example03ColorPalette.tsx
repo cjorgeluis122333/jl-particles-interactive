@@ -5,9 +5,9 @@ const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function ColorPalette() {
   return (
-    <ParticleCanvas height="60vh">
+    <ParticleCanvas height="100%">
       <TextParticleEngine
-        text="Color"
+        text="RGB"
         particleColor={[
           '255, 100, 100',   // rojo
           '100, 200, 255',   // azul claro
@@ -20,7 +20,13 @@ export default function ColorPalette() {
   );
 }`;
 
-export default function Example03ColorPalette() {
+interface Example03Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example03ColorPalette({ isActive, isPaused, onActivate }: Example03Props) {
   return (
     <ExampleShell
       number={3}
@@ -28,19 +34,24 @@ export default function Example03ColorPalette() {
       description="Cada partícula elige un color al azar de una paleta predefinida. Crea un efecto visual más dinámico y colorido."
       code={EXAMPLE_CODE}
       height="60vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <ParticleCanvas height="100%">
-        <TextParticleEngine
-          text="Color"
-          particleColor={[
-            '255, 100, 100',
-            '100, 200, 255',
-            '150, 255, 150',
-            '255, 220, 80',
-            '200, 100, 255',
-          ]}
-        />
-      </ParticleCanvas>
+      {isActive && (
+        <ParticleCanvas height="100%">
+          <TextParticleEngine
+            text="RGB"
+            particleColor={[
+              '255, 100, 100',
+              '100, 200, 255',
+              '150, 255, 150',
+              '255, 220, 80',
+              '200, 100, 255',
+            ]}
+          />
+        </ParticleCanvas>
+      )}
     </ExampleShell>
   );
 }

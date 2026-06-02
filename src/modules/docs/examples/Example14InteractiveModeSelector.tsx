@@ -16,23 +16,8 @@ export default function InteractiveModeSelector() {
   const [magnet, setMagnet] = useState(true);
 
   return (
-    <div>
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        {modes.map((m) => (
-          <button
-            key={m}
-            onClick={() => setMode(m)}
-            style={{ fontWeight: mode === m ? 'bold' : 'normal' }}
-          >
-            Clic: {m}
-          </button>
-        ))}
-        <button onClick={() => setMagnet((v) => !v)}>
-          Magneto: {magnet ? 'ON' : 'OFF'}
-        </button>
-      </div>
-
-      <ParticleCanvas height="55vh">
+    <div className="relative h-full w-full">
+      <ParticleCanvas height="100%">
         <TextParticleEngine
           text="DEMO"
           clickMode={mode}
@@ -41,11 +26,42 @@ export default function InteractiveModeSelector() {
           particleSize={1.2}
         />
       </ParticleCanvas>
+
+      <div className="absolute inset-x-0 top-0 p-4 bg-black/40 border-b border-white/10 flex gap-2 flex-wrap pointer-events-none">
+        {modes.map((m) => (
+          <button
+            key={m}
+            onClick={() => setMode(m)}
+            className={\`pointer-events-auto px-3 py-2 rounded text-sm font-medium transition-colors \${
+              mode === m
+                ? 'bg-green-600 text-white'
+                : 'bg-white/10 text-white/60 hover:bg-white/20'
+            }\`}
+          >
+            Clic: {m}
+          </button>
+        ))}
+        <button
+          onClick={() => setMagnet((v) => !v)}
+          className={\`pointer-events-auto px-3 py-2 rounded text-sm font-medium transition-colors \${
+            magnet
+              ? 'bg-blue-600 text-white'
+              : 'bg-white/10 text-white/60 hover:bg-white/20'
+          }\`}
+        >
+          Magneto: {magnet ? 'ON' : 'OFF'}
+        </button>
+      </div>
     </div>
   );
 }`;
 
-export default function Example14InteractiveModeSelector() {
+interface Example14Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+export default function Example14InteractiveModeSelector({ isActive, isPaused, onActivate }: Example14Props) {
   const [mode, setMode] = useState<ClickMode>('none');
   const [magnet, setMagnet] = useState(true);
 
@@ -56,34 +72,12 @@ export default function Example14InteractiveModeSelector() {
       description="Permite cambiar en tiempo real el modo de interacción (click) y el efecto magnético (hover)."
       code={EXAMPLE_CODE}
       height="55vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <div className="h-full flex flex-col">
-        <div className="px-6 py-4 border-b border-white/10 bg-black/30 flex gap-2 flex-wrap">
-          {modes.map((m) => (
-            <button
-              key={m}
-              onClick={() => setMode(m)}
-              className={`px-3 py-2 rounded text-sm font-medium transition-colors ${
-                mode === m
-                  ? 'bg-green-600 text-white'
-                  : 'bg-white/10 text-white/60 hover:bg-white/20'
-              }`}
-            >
-              Clic: {m}
-            </button>
-          ))}
-          <button
-            onClick={() => setMagnet((v) => !v)}
-            className={`px-3 py-2 rounded text-sm font-medium transition-colors ${
-              magnet
-                ? 'bg-blue-600 text-white'
-                : 'bg-white/10 text-white/60 hover:bg-white/20'
-            }`}
-          >
-            Magneto: {magnet ? 'ON' : 'OFF'}
-          </button>
-        </div>
-        <div style={{ flex: 1 }} className="relative">
+      {isActive && (
+        <div className="relative h-full w-full">
           <ParticleCanvas height="100%">
             <TextParticleEngine
               text="DEMO"
@@ -93,8 +87,34 @@ export default function Example14InteractiveModeSelector() {
               particleSize={1.2}
             />
           </ParticleCanvas>
+
+          <div className="absolute inset-x-0 top-0 p-4 bg-black/40 border-b border-white/10 flex gap-2 flex-wrap pointer-events-none">
+            {modes.map((m) => (
+              <button
+                key={m}
+                onClick={() => setMode(m)}
+                className={`pointer-events-auto px-3 py-2 rounded text-sm font-medium transition-colors ${
+                  mode === m
+                    ? 'bg-green-600 text-white'
+                    : 'bg-white/10 text-white/60 hover:bg-white/20'
+                }`}
+              >
+                Clic: {m}
+              </button>
+            ))}
+            <button
+              onClick={() => setMagnet((v) => !v)}
+              className={`pointer-events-auto px-3 py-2 rounded text-sm font-medium transition-colors ${
+                magnet
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white/10 text-white/60 hover:bg-white/20'
+              }`}
+            >
+              Magneto: {magnet ? 'ON' : 'OFF'}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </ExampleShell>
   );
 }

@@ -36,8 +36,15 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - `/src/modules/docs/pages/DocsIndex.tsx`: Dashboard de la documentación (`/docs`). Grid de tarjetas con links a cada sección.
 - `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `Examples`).
 - `/src/modules/docs/examples/`: 15 componentes de ejemplo interactivos + componente shell reutilizable:
-  - `_ExampleShell.tsx`: Componente contenedor que muestra preview del ejemplo + código fuente en acordeón.
+  - `_ExampleShell.tsx`: Componente contenedor que:
+    - Muestra preview del componente + código fuente en acordeón (Show/Hide Code)
+    - Estados visuales: activo (borde verde), pausado (opacidad 50%), inactivo (dimmed)
+    - Botón de control: "Ejecutar" (inactivo) → "Pausa/Reanuda" (activo) según estado
+    - Overlay "Pausado" cuando el ejemplo está pausado o no es el activo
+    - **Estructura de contenedor tipo Playground**: wrapper externo centrado + wrapper interno con `pointer-events-auto` para garantizar interactividad correcta del canvas
+    - Los ejemplos con controles (inputs/botones/selectores) usan overlays con `pointer-events-none` en la capa y `pointer-events-auto` en controles para mantener la adaptación del texto al contenedor sin romper la interacción
   - `Example01BasicText.tsx` - `Example15WordCarousel.tsx`: Uno por cada ejemplo del README de la librería.
+    - `Example11HeroSection.tsx`: Incluye input editable de texto para comprobar visualmente la adaptación de tamaño según longitud (comportamiento similar a Playground).
 - `/src/constants/`: Datos compartidos de la UI (`colors.ts`, `palettes.ts`, `words.ts`). **No contiene lógica de partículas.**
 
 ## Características Principales
@@ -55,6 +62,10 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
     - Código fuente visible en acordeón (mostrar/ocultar)
     - Interfaz modular y reutilizable con `_ExampleShell.tsx`
     - Grid responsive (1 columna en móvil, 2 en desktop)
+        - **Probe de adaptación**: bloque superior con input editable + canvas para comprobar en tiempo real el reescalado de texto según longitud (comportamiento tipo Playground).
+        - **Sistema de pausa/ejecución**: Solo un ejemplo se ejecuta a la vez. Al hacer clic en "Ejecutar" en un ejemplo, los demás se pausan automáticamente para optimizar rendimiento. El primer ejemplo (#1) está activo por defecto.
+        - **Estados visuales**: Ejemplos activos tienen borde verde, pausados se oscurecen (50% opacidad).
+        - **Control granular**: Botón "Pausa/Reanuda" en ejemplos activos para controlar la animación sin cambiar de ejemplo.
 6. **Sistema de Navegación**: 
     - Botón "Docs" en la esquina superior derecha (top-right) que navega a `/docs` usando `<Link>` de React Router.
     - Página `/docs` muestra el dashboard con grid de tarjetas. Cada tarjeta es un `<Link>` a su ruta de sección.
@@ -66,3 +77,11 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - **Tailwind**: Usar clases de utilidad directamente. No crear CSS personalizado fuera de `/src/index.css`.
 - **Sin código de partículas local**: Toda la lógica de partículas (`Particle.ts`, `TextParticleEngine`, `ParticleCanvas`, hooks) reside exclusivamente en la librería `jl-particle-interactive`. No duplicar código aquí.
 - **Tipado**: Importar los tipos directamente desde la librería: `import type { ParticleShape, ClickMode, ColorMode } from 'jl-particle-interactive'`.
+- **Patrón de Contenedor para Canvases**: El patrón correcto para renderizar ParticleCanvas (tanto en Playground como en ejemplos) es un wrapper externo con flex centering + pointer-events-none, conteniendo un wrapper interno con pointer-events-auto. Esto garantiza que el canvas se centre correctamente y el texto se adapte al contenedor disponible:
+  ```jsx
+  <div className="h-full w-full p-6 pointer-events-none flex items-center justify-center">
+    <div className="pointer-events-auto w-full h-full">
+      <ParticleCanvas>{/* content */}</ParticleCanvas>
+    </div>
+  </div>
+  ```

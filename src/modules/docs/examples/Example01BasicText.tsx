@@ -5,13 +5,19 @@ const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function BasicExample() {
   return (
-    <ParticleCanvas height="50vh">
-      <TextParticleEngine text="Hola Mundo" />
+    <ParticleCanvas height="100%">
+      <TextParticleEngine text="HOLA" />
     </ParticleCanvas>
   );
 }`;
 
-export default function Example01BasicText() {
+interface Example01Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example01BasicText({ isActive, isPaused, onActivate }: Example01Props) {
   return (
     <ExampleShell
       number={1}
@@ -19,10 +25,15 @@ export default function Example01BasicText() {
       description="El caso más simple. Las partículas forman el texto al cargar y permanecen interactivas al pasar el cursor."
       code={EXAMPLE_CODE}
       height="50vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <ParticleCanvas height="100%">
-        <TextParticleEngine text="Hola Mundo" />
-      </ParticleCanvas>
+      {isActive && (
+        <ParticleCanvas height="100%">
+          <TextParticleEngine text="HOLA" />
+        </ParticleCanvas>
+      )}
     </ExampleShell>
   );
 }

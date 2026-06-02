@@ -7,9 +7,9 @@ export default function CustomBackground() {
   const bg = '#0d1b2a'; // azul oscuro
 
   return (
-    <ParticleCanvas height="60vh" backgroundColor={bg}>
+    <ParticleCanvas height="100%" backgroundColor={bg}>
       <TextParticleEngine
-        text="Noche"
+        text="NITE"
         backgroundColor={bg}
         particleColor={['200, 220, 255', '150, 180, 255', '100, 140, 230']}
       />
@@ -17,7 +17,13 @@ export default function CustomBackground() {
   );
 }`;
 
-export default function Example09CustomBackground() {
+interface Example09Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example09CustomBackground({ isActive, isPaused, onActivate }: Example09Props) {
   const bg = '#0d1b2a';
 
   return (
@@ -27,14 +33,19 @@ export default function Example09CustomBackground() {
       description="Personaliza el color de fondo del canvas. Asegúrate de que sea igual en ParticleCanvas y TextParticleEngine."
       code={EXAMPLE_CODE}
       height="60vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <ParticleCanvas height="100%" backgroundColor={bg}>
-        <TextParticleEngine
-          text="Noche"
-          backgroundColor={bg}
-          particleColor={['200, 220, 255', '150, 180, 255', '100, 140, 230']}
-        />
-      </ParticleCanvas>
+      {isActive && (
+        <ParticleCanvas height="100%" backgroundColor={bg}>
+          <TextParticleEngine
+            text="NITE"
+            backgroundColor={bg}
+            particleColor={['200, 220, 255', '150, 180, 255', '100, 140, 230']}
+          />
+        </ParticleCanvas>
+      )}
     </ExampleShell>
   );
 }

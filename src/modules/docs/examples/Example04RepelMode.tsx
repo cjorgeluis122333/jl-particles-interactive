@@ -5,9 +5,9 @@ const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function RepelMode() {
   return (
-    <ParticleCanvas height="60vh">
+    <ParticleCanvas height="100%">
       <TextParticleEngine
-        text="¡Explota!"
+        text="BOOM"
         clickMode="repel"
         particleColor="255, 140, 0"
       />
@@ -15,7 +15,13 @@ export default function RepelMode() {
   );
 }`;
 
-export default function Example04RepelMode() {
+interface Example04Props {
+  isActive: boolean;
+  isPaused: boolean;
+  onActivate: () => void;
+}
+
+export default function Example04RepelMode({ isActive, isPaused, onActivate }: Example04Props) {
   return (
     <ExampleShell
       number={4}
@@ -23,14 +29,19 @@ export default function Example04RepelMode() {
       description="Mantén presionado el botón del ratón para que las partículas se dispersen desde el cursor. Prueba hacer clic y arrastra."
       code={EXAMPLE_CODE}
       height="60vh"
+      isActive={isActive}
+      isPaused={isPaused}
+      onActivate={onActivate}
     >
-      <ParticleCanvas height="100%">
-        <TextParticleEngine
-          text="¡Explota!"
-          clickMode="repel"
-          particleColor="255, 140, 0"
-        />
-      </ParticleCanvas>
+      {isActive && (
+        <ParticleCanvas height="100%">
+          <TextParticleEngine
+            text="BOOM"
+            clickMode="repel"
+            particleColor="255, 140, 0"
+          />
+        </ParticleCanvas>
+      )}
     </ExampleShell>
   );
 }
