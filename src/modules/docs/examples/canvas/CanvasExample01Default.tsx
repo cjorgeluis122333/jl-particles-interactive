@@ -1,11 +1,13 @@
-import { ParticleCanvas } from 'jl-particle-interactive';
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 import ExampleShell from '../_ExampleShell';
 
-const EXAMPLE_CODE = `import { ParticleCanvas } from 'jl-particle-interactive';
+const EXAMPLE_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 
 export default function DefaultCanvas() {
   return (
-    <ParticleCanvas height="100%" />
+    <ParticleCanvas height="100%">
+      <TextParticleEngine text="" />
+    </ParticleCanvas>
   );
 }`;
 
@@ -28,7 +30,9 @@ export default function CanvasExample01Default({ isActive, isPaused, onActivate 
       onActivate={onActivate}
     >
       {isActive && (
-        <ParticleCanvas height="100%" />
+        <ParticleCanvas height="100%">
+          <TextParticleEngine text="" />
+        </ParticleCanvas>
       )}
     </ExampleShell>
   );

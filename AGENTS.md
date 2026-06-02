@@ -41,6 +41,7 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
   - `/src/modules/docs/examples/_ExampleShell.tsx`: Componente contenedor reutilizable para previews y código.
   - `/src/modules/docs/examples/text/`: 16 ejemplos con texto (`Example01BasicText.tsx` - `Example16AdaptiveText.tsx`) usados en `TextSamples`.
   - `/src/modules/docs/examples/canvas/`: Ejemplos sin texto para fondos. Actualmente contiene `CanvasExample01Default.tsx` usado en `CanvasSamples`.
+    - `CanvasExample01Default.tsx`: Para mostrar partículas libres (sin forma de texto), renderiza `<TextParticleEngine text="" />` dentro de `<ParticleCanvas>`.
   - `_ExampleShell.tsx`: Componente contenedor que:
     - Muestra preview del componente + código fuente en acordeón (Show/Hide Code)
     - Estados visuales: activo (borde verde), pausado (opacidad 50%), inactivo (dimmed)
