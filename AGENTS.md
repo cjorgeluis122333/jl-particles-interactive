@@ -34,8 +34,13 @@ Este proyecto actúa como **banco de pruebas** de la librería `jl-particle-inte
 - `/src/modules/docs/layout/DocsLayout.tsx`: Layout compartido del módulo de documentación. Incluye header con back link y sidebar lateral.
 - `/src/modules/docs/layout/Sidebar.tsx`: Sidebar de navegación de la documentación con `<NavLink>` de React Router.
 - `/src/modules/docs/pages/DocsIndex.tsx`: Dashboard de la documentación (`/docs`). Grid de tarjetas con links a cada sección.
-- `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `Examples`).
-- `/src/modules/docs/examples/`: 15 componentes de ejemplo interactivos + componente shell reutilizable:
+- `/src/modules/docs/pages/`: Páginas individuales de cada sección (`GettingStarted`, `Components`, `Customization`, `ApiReference`, `Hooks`, `TextSamples`, `CanvasSamples`).
+  - `TextSamples.tsx`: Galería de 16 ejemplos con texto (`/docs/examples/text`).
+  - `CanvasSamples.tsx`: Galería de ejemplos de canvas sin texto (`/docs/examples/canvas`). Actualmente solo `CanvasExample01Default`.
+- `/src/modules/docs/examples/`: 16 componentes de ejemplo interactivos con texto + 1 canvas + componente shell reutilizable:
+  - `_ExampleShell.tsx`: Componente contenedor (sin cambios).
+  - `Example01BasicText.tsx` - `Example16AdaptiveText.tsx`: Ejemplos con texto (usados en `TextSamples`).
+  - `CanvasExample01Default.tsx`: Canvas por defecto sin texto (usado en `CanvasSamples`). Base para futuras variaciones.
   - `_ExampleShell.tsx`: Componente contenedor que:
     - Muestra preview del componente + código fuente en acordeón (Show/Hide Code)
     - Estados visuales: activo (borde verde), pausado (opacidad 50%), inactivo (dimmed)

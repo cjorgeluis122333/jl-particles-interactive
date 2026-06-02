@@ -33,9 +33,15 @@ const documentationSections = [
         icon: Settings,
     },
     {
-        path: '/docs/examples',
-        title: 'Examples',
-        description: 'Code examples and interactive demos',
+        path: '/docs/examples/text',
+        title: 'Text Samples',
+        description: '16 ejemplos interactivos con texto y partículas',
+        icon: Code,
+    },
+    {
+        path: '/docs/examples/canvas',
+        title: 'Canvas Samples',
+        description: 'Canvas sin texto: partículas libres para usar como fondo',
         icon: Code,
     },
 ];

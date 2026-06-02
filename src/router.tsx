@@ -7,7 +7,8 @@ import Components from './modules/docs/pages/Components';
 import Customization from './modules/docs/pages/Customization';
 import ApiReference from './modules/docs/pages/ApiReference';
 import Hooks from './modules/docs/pages/Hooks';
-import Examples from './modules/docs/pages/Examples';
+import TextSamples from './modules/docs/pages/TextSamples';
+import CanvasSamples from './modules/docs/pages/CanvasSamples';
 
 const router = createBrowserRouter([
     {
@@ -24,7 +25,8 @@ const router = createBrowserRouter([
             { path: 'customization', element: <Customization /> },
             { path: 'api-reference', element: <ApiReference /> },
             { path: 'hooks', element: <Hooks /> },
-            { path: 'examples', element: <Examples /> },
+            { path: 'examples/text', element: <TextSamples /> },
+            { path: 'examples/canvas', element: <CanvasSamples /> },
         ],
     },
 ]);

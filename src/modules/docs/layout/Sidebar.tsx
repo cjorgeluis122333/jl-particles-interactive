@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Zap, Code, Palette, Book, Settings } from 'lucide-react';
+import { Zap, Code, Palette, Book, Settings, Type, Monitor } from 'lucide-react';
 
 const sections = [
     { path: '/docs', label: 'Overview', icon: Book, end: true },
@@ -8,7 +8,8 @@ const sections = [
     { path: '/docs/customization', label: 'Customization', icon: Palette, end: false },
     { path: '/docs/api-reference', label: 'API Reference', icon: Book, end: false },
     { path: '/docs/hooks', label: 'Hooks', icon: Settings, end: false },
-    { path: '/docs/examples', label: 'Examples', icon: Code, end: false },
+    { path: '/docs/examples/text', label: 'Text Samples', icon: Type, end: false },
+    { path: '/docs/examples/canvas', label: 'Canvas Samples', icon: Monitor, end: false },
 ];
 
 export default function Sidebar() {
