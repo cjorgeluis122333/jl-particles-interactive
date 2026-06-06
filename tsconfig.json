@@ -18,6 +18,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "jl-particle-interactive": [
+        "../jl-particles-interactive/src/index.ts"
       ]
     },
     "allowImportingTsExtensions": true,
