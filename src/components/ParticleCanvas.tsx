@@ -1,4 +1,8 @@
 import React, { ReactNode, CSSProperties } from 'react';
+import { BackgroundCanvas } from '../types/background';
+import BackgroundParticleEngine from './background/BackgroundParticleEngine';
+import NetParticleEngine from './background/NetParticleEngine';
+import JellyfishParticleEngine from './background/JellyfishParticleEngine';
 
 export interface ParticleCanvasProps {
   children?: ReactNode;
@@ -7,6 +11,7 @@ export interface ParticleCanvasProps {
   backgroundColor?: string;
   className?: string;
   style?: CSSProperties;
+  background?: BackgroundCanvas;
 }
 
 const baseStyle: CSSProperties = {
@@ -25,13 +30,25 @@ export default function ParticleCanvas({
   backgroundColor = '#050505',
   className = '',
   style,
+  background = { name: 'NONE' },
 }: ParticleCanvasProps) {
   return (
     <div
       className={className}
       style={{ ...baseStyle, width, height, backgroundColor, ...style }}
     >
-      {children}
+      {background.name === 'FOLLOW_POINTER' && (
+        <BackgroundParticleEngine config={background} backgroundColor={backgroundColor} />
+      )}
+      {background.name === 'NET' && (
+        <NetParticleEngine config={background} backgroundColor={backgroundColor} />
+      )}
+      {background.name === 'JELLYFISH' && (
+        <JellyfishParticleEngine config={background} backgroundColor={backgroundColor} />
+      )}
+      <div style={{ position: 'relative', zIndex: 10, width: '100%', height: '100%' }}>
+        {children}
+      </div>
     </div>
   );
 }
