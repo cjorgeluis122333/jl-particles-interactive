@@ -2,9 +2,20 @@
   "name": "jl-particle-interactive",
   "version": "0.2.0",
   "private": false,
-  "description": "Interactive particle text animation components for React",
-  "author": "JL",
+  "description": "Canvas-based React library for particle text animations and interactive backgrounds — spring physics, magnetic hover, click attract/repel, NET/JELLYFISH modes. TypeScript. Zero dependencies.",
+  "author": {
+    "name": "cjorgeluis122333",
+    "url": "https://github.com/cjorgeluis122333"
+  },
   "license": "MIT",
+  "homepage": "https://cjorgeluis122333.github.io/jl-particles-interactive",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cjorgeluis122333/jl-particles-interactive"
+  },
+  "bugs": {
+    "url": "https://github.com/cjorgeluis122333/jl-particles-interactive/issues"
+  },
   "type": "module",
   "main": "./dist/jl-particle-interactive.umd.cjs",
   "module": "./dist/jl-particle-interactive.js",
@@ -17,7 +28,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "vite build",
@@ -29,7 +41,21 @@
     "animation",
     "canvas",
     "interactive",
-    "text"
+    "text",
+    "particle-text",
+    "text-animation",
+    "particle-background",
+    "canvas-animation",
+    "react-particles",
+    "magnetic",
+    "hover-effect",
+    "cursor-effect",
+    "spring-physics",
+    "hero",
+    "hero-section",
+    "typescript",
+    "zero-dependencies",
+    "particle-network"
   ],
   "peerDependencies": {
     "react": ">=18.0.0",

@@ -1,6 +1,38 @@
-# jl-particle-interactive
+# jl-particle-interactive — React Canvas Particle Animations
 
-Particle animations for React — text that comes alive and backgrounds that react to your cursor.
+[![npm version](https://img.shields.io/npm/v/jl-particle-interactive)](https://www.npmjs.com/package/jl-particle-interactive)
+[![npm downloads](https://img.shields.io/npm/dm/jl-particle-interactive)](https://www.npmjs.com/package/jl-particle-interactive)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/jl-particle-interactive)](https://bundlephobia.com/package/jl-particle-interactive)
+[![license](https://img.shields.io/npm/l/jl-particle-interactive)](https://github.com/cjorgeluis122333/jl-particles-interactive/blob/main/LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
+
+A canvas-based React library for rendering text and backgrounds as thousands of animated particles. Letters form from particle swarms, respond to magnetic hover, attract or repel on click, and backgrounds come alive with NET graphs, JELLYFISH glows, or pointer-following swarms. Built with zero runtime dependencies, full TypeScript support, and DPR-aware rendering for sharp output on retina displays.
+
+> Requires React 18+. No global CSS. Zero runtime dependencies.
+
+---
+
+## Why jl-particle-interactive?
+
+| Feature | jl-particle-interactive | tsparticles | particles.js |
+|---|---|---|---|
+| **Text that forms from particles** | ✓ (native, spatial coherence) | Plugin only (complex setup) | ✗ |
+| **Spring physics + float noise** | ✓ | ✗ | ✗ |
+| **Magnetic hover / click interact** | ✓ (attract & repel) | ✗ | ✗ |
+| **Ready-made background presets** | ✓ NET, JELLYFISH, FOLLOW_POINTER | General engine (DIY) | General engine (DIY) |
+| **Runtime dependencies** | **Zero** | 14+ packages | 0 (vanilla JS only) |
+| **React integration** | Native React hooks | Wrapper package needed | Manual integration |
+| **TypeScript** | Strict mode | Partial | ✗ |
+| **DPR-aware (retina)** | ✓ | ✗ | ✗ |
+
+---
+
+## Use cases
+
+- **Hero section animated titles** — Text materializes from particle chaos on page load
+- **Loading screens** — Words form and dissolve while content loads
+- **Interactive word carousels** — Cycle through words; particles re-form smoothly
+- **Animated backgrounds** — NET graph, JELLYFISH glow, or pointer-following swarm behind any content
 
 ---
 
@@ -10,7 +42,18 @@ Particle animations for React — text that comes alive and backgrounds that rea
 npm install jl-particle-interactive
 ```
 
-> Requires React 18+. No global CSS. No extra dependencies.
+---
+
+## Framework compatibility
+
+| Framework | Supported |
+|---|---|
+| Vite + React | ✓ |
+| Next.js (App Router & Pages) | ✓ (client components only — add `'use client'`) |
+| Create React App | ✓ |
+| Remix | ✓ (client-side only) |
+| Astro | ✓ (inside `client:only` components) |
+| TypeScript | ✓ (strict mode, declarations included) |
 
 ---
 
@@ -18,11 +61,12 @@ npm install jl-particle-interactive
 
 | Feature | Description |
 |---|---|
-| **Text particles** | Thousands of particles that form any text string |
-| **Magnetic hover** | Particles are attracted to the cursor on hover |
-| **Click interactions** | Attract or repel particles on click/tap |
-| **Animated backgrounds** | NET, JELLYFISH, and FOLLOW_POINTER modes |
-| **Customizable** | Colors, shapes, density, speed, and more |
+| **Text particles** | Thousands of canvas particles that form any text string using pixel-sampling with spatial coherence — letters look sharp at any size |
+| **Magnetic hover** | Particles are attracted to the cursor on hover (~173px radius spring force) |
+| **Click interactions** | Attract or repel particles on click/tap — particles flee or swarm toward the pointer |
+| **Animated backgrounds** | NET (connected node graph), JELLYFISH (organic glow rings), and FOLLOW_POINTER (swarm) modes |
+| **Spring physics** | Each particle uses spring + friction + float-noise physics — movement feels natural, never robotic |
+| **Customizable** | Colors (hex or RGB palettes), shapes (circle, square, bean), density, speed, ease, and more |
 
 ---
 
