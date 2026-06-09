@@ -16,3 +16,4 @@ export interface BackgroundCanvas {
   particleSpeed?: number;
   pointerTrackingSpeed?: number;
 }
+
