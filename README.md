@@ -146,7 +146,6 @@ A connected particle network moves behind your content.
   background={{
     name: 'NET',
     color: '#4ecdc4',
-    lineDistance: 120,
     density: 0.8,
   }}
 >
@@ -200,6 +199,149 @@ export default function Carousel() {
 
 ---
 
+## Background guide
+
+The `background` prop on `ParticleCanvas` supports four usage patterns:
+
+1. No animated background
+2. `FOLLOW_POINTER` swarm background
+3. `NET` node-link graph background
+4. `JELLYFISH` organic glow/swim background
+
+### 1) No background engine
+
+Use this when you only want text particles.
+
+```tsx
+<ParticleCanvas background={{ name: 'NONE' }}>
+  <TextParticleEngine text="Only Text" />
+</ParticleCanvas>
+```
+
+### 2) FOLLOW_POINTER background
+
+Particles form a swarm that follows the cursor smoothly.
+
+```tsx
+<ParticleCanvas
+  background={{
+    name: 'FOLLOW_POINTER',
+    orientation: 'diagonal',
+    density: 1,
+    shape: 'bean',
+    colors: ['#00d4ff', '#6ee7b7', '#facc15'],
+    colorMode: 'wave',
+    particleSpeed: 1,
+    pointerTrackingSpeed: 0.06,
+  }}
+>
+  <TextParticleEngine text="Follow" particleColor="255, 255, 255" />
+</ParticleCanvas>
+```
+
+### 3) NET background
+
+Moving nodes connect with lines. Great for tech-style hero sections.
+
+```tsx
+<ParticleCanvas
+  background={{
+    name: 'NET',
+    density: 0.9,
+    shape: 'circle',
+    colors: ['#7dd3fc', '#60a5fa'],
+    colorMode: 'mixed',
+    particleSpeed: 1,
+    pointerTrackingSpeed: 0.08,
+  }}
+>
+  <TextParticleEngine text="Network" particleColor="255, 255, 255" />
+</ParticleCanvas>
+```
+
+### 4) JELLYFISH background
+
+Soft organic particle body with pulse/swimming motion.
+
+```tsx
+<ParticleCanvas
+  background={{
+    name: 'JELLYFISH',
+    density: 1.1,
+    shape: 'bean',
+    colors: ['#f472b6', '#a78bfa', '#22d3ee'],
+    colorMode: 'wave',
+    particleSpeed: 1,
+    pointerTrackingSpeed: 0.02,
+  }}
+>
+  <TextParticleEngine text="Jelly" particleColor="255, 255, 255" />
+</ParticleCanvas>
+```
+
+### Background with transparent stage
+
+Use `backgroundColor="transparent"` to place particles over your own image/gradient layer.
+
+```tsx
+<div style={{ background: 'linear-gradient(135deg, #0f172a, #111827)' }}>
+  <ParticleCanvas
+    height="70vh"
+    backgroundColor="transparent"
+    background={{ name: 'NET', density: 0.7, color: '#67e8f9' }}
+  >
+    <TextParticleEngine text="Overlay" backgroundColor="transparent" />
+  </ParticleCanvas>
+</div>
+```
+
+### Full `BackgroundCanvas` type
+
+```ts
+type BackgroundModeName = 'NONE' | 'FOLLOW_POINTER' | 'NET' | 'JELLYFISH';
+type ParticleOrientation = 'vertical' | 'horizontal' | 'diagonal';
+
+interface BackgroundCanvas {
+  name: BackgroundModeName;
+  orientation?: ParticleOrientation;
+  density?: number;
+  color?: string;
+  colors?: string[];
+  colorMode?: 'wave' | 'mixed';
+  interactionRadius?: number;
+  lineDistance?: number;
+  shape?: 'circle' | 'square' | 'bean';
+  particleSpeed?: number;
+  pointerTrackingSpeed?: number;
+}
+```
+
+### Option matrix (what applies to each mode)
+
+| Option | FOLLOW_POINTER | NET | JELLYFISH | Notes |
+|---|---|---|---|---|
+| `name` | ✓ | ✓ | ✓ | Mode selector |
+| `density` | ✓ | ✓ | ✓ | Particle count multiplier |
+| `color` | ✓ | ✓ | ✓ | Single hex/HSL/CSS color |
+| `colors` | ✓ | ✓ | ✓ | Palette override |
+| `colorMode` | ✓ | ✓ | ✓ | `wave` (default) or `mixed` |
+| `shape` | ✓ | ✓ | ✓ | `bean` default in FOLLOW_POINTER, `circle` in NET/JELLYFISH |
+| `particleSpeed` | ✓ | ✓ | ✓ | Animation speed multiplier |
+| `pointerTrackingSpeed` | ✓ | ✓ | ✓ | Cursor-follow/response smoothness |
+| `orientation` | ✓ | — | — | Only FOLLOW_POINTER (`vertical` default) |
+| `interactionRadius` | — | — | — | Declared in type, currently not applied in v0.2.1 |
+| `lineDistance` | — | — | — | Declared in type, currently not applied in v0.2.1 |
+
+### Practical presets
+
+| Goal | Suggested config |
+|---|---|
+| Calm ambient hero | `JELLYFISH`, `density: 0.8`, `pointerTrackingSpeed: 0.015` |
+| High-energy interactive background | `FOLLOW_POINTER`, `density: 1.2`, `particleSpeed: 1.3`, `shape: 'bean'` |
+| Tech/network look | `NET`, `density: 0.9`, `colorMode: 'mixed'`, cool blue palette |
+
+---
+
 ## API reference
 
 ### `<ParticleCanvas>`
@@ -212,6 +354,22 @@ export default function Carousel() {
 | `background` | `BackgroundCanvas` | `{ name: 'NONE' }` | Animated background config |
 | `className` | `string` | `''` | Additional CSS class |
 | `style` | `CSSProperties` | — | Inline style overrides |
+
+### `BackgroundCanvas`
+
+| Prop | Type | Description |
+|---|---|---|
+| `name` | `'NONE' \| 'FOLLOW_POINTER' \| 'NET' \| 'JELLYFISH'` | Background mode |
+| `orientation` | `'vertical' \| 'horizontal' \| 'diagonal'` | Direction style for `FOLLOW_POINTER` |
+| `density` | `number` | Particle amount multiplier |
+| `color` | `string` | Single background particle color |
+| `colors` | `string[]` | Background particle palette |
+| `colorMode` | `'wave' \| 'mixed'` | Palette propagation mode |
+| `shape` | `'circle' \| 'square' \| 'bean'` | Particle drawing shape |
+| `particleSpeed` | `number` | Background animation speed multiplier |
+| `pointerTrackingSpeed` | `number` | Cursor tracking interpolation factor |
+| `interactionRadius` | `number` | Reserved in type (not applied in v0.2.1) |
+| `lineDistance` | `number` | Reserved in type (not applied in v0.2.1) |
 
 ### `<TextParticleEngine>`
 

@@ -761,6 +761,9 @@ function yt({
   );
 }
 export {
+  et as BackgroundParticleEngine,
+  ot as JellyfishParticleEngine,
+  rt as NetParticleEngine,
   ft as ParticleCanvas,
   yt as TextParticleEngine,
   at as getMagnetTarget,
