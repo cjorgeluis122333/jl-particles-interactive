@@ -86,112 +86,24 @@ export default function App() {
 
 ---
 
-## Examples
+## Text examples
 
-### Text with a color palette
+### 1. Free-floating particles
 
-Assign multiple colors and each particle picks one at random.
-
-```tsx
-<ParticleCanvas height="60vh">
-  <TextParticleEngine
-    text="React"
-    particleColor={['#ff6b6b', '#feca57', '#48dbfb']}
-    particleSize={1.5}
-  />
-</ParticleCanvas>
-```
-
----
-
-### Repel on click
-
-Particles flee from the cursor while the mouse button is held down.
+When `text` is an empty string, particles scatter and drift freely across the canvas — great for ambient loading screens or decorative backgrounds.
 
 ```tsx
-<ParticleCanvas height="60vh">
-  <TextParticleEngine
-    text="Boom"
-    clickMode="repel"
-    particleEase={2}
-  />
-</ParticleCanvas>
-```
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 
----
-
-### Attract on click
-
-The opposite — particles swarm toward the cursor on press.
-
-```tsx
-<ParticleCanvas height="60vh">
-  <TextParticleEngine
-    text="Pull"
-    clickMode="attract"
-    isMagnet={false}
-  />
-</ParticleCanvas>
-```
-
----
-
-### Animated NET background
-
-A connected particle network moves behind your content.
-
-```tsx
-<ParticleCanvas
-  height="80vh"
-  background={{
-    name: 'NET',
-    color: '#4ecdc4',
-    density: 0.8,
-  }}
->
-  <TextParticleEngine text="Network" particleColor="#ffffff" />
-</ParticleCanvas>
-```
-
----
-
-### Jellyfish background
-
-Smooth, organic blobs that drift across the canvas.
-
-```tsx
-<ParticleCanvas
-  height="80vh"
-  background={{
-    name: 'JELLYFISH',
-    colors: ['#ff6b6b', '#a29bfe', '#00cec9'],
-    colorMode: 'wave',
-  }}
->
-  <TextParticleEngine text="Fluid" particleColor="#ffffff" />
-</ParticleCanvas>
-```
-
----
-
-### Dynamic text
-
-Change the `text` prop and the particles re-form automatically.
-
-```tsx
-const words = ['Hello', 'World', 'React'];
-
-export default function Carousel() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setIndex(i => (i + 1) % words.length), 2000);
-    return () => clearInterval(id);
-  }, []);
-
+export default function FloatingParticles() {
   return (
-    <ParticleCanvas height="60vh">
-      <TextParticleEngine text={words[index]} />
+    <ParticleCanvas height="60vh" backgroundColor="#050505">
+      <TextParticleEngine
+        text=""
+        particleColor={['#60a5fa', '#a78bfa', '#34d399']}
+        particleSize={1.2}
+        isMagnet={true}
+      />
     </ParticleCanvas>
   );
 }
@@ -199,177 +111,202 @@ export default function Carousel() {
 
 ---
 
-## Background guide
+### 2. Hello 🖐️ — magnetic hover + color palette
 
-The `background` prop on `ParticleCanvas` supports four usage patterns:
-
-1. No animated background
-2. `FOLLOW_POINTER` swarm background
-3. `NET` node-link graph background
-4. `JELLYFISH` organic glow/swim background
-
-### 1) No background engine
-
-Use this when you only want text particles.
+Particles form the text and spring toward the cursor on hover. Click and hold to repel them outward.
 
 ```tsx
-<ParticleCanvas background={{ name: 'NONE' }}>
-  <TextParticleEngine text="Only Text" />
-</ParticleCanvas>
-```
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
 
-### 2) FOLLOW_POINTER background
-
-Particles form a swarm that follows the cursor smoothly.
-
-```tsx
-<ParticleCanvas
-  background={{
-    name: 'FOLLOW_POINTER',
-    orientation: 'diagonal',
-    density: 1,
-    shape: 'bean',
-    colors: ['#00d4ff', '#6ee7b7', '#facc15'],
-    colorMode: 'wave',
-    particleSpeed: 1,
-    pointerTrackingSpeed: 0.06,
-  }}
->
-  <TextParticleEngine text="Follow" particleColor="255, 255, 255" />
-</ParticleCanvas>
-```
-
-### 3) NET background
-
-Moving nodes connect with lines. Great for tech-style hero sections.
-
-```tsx
-<ParticleCanvas
-  background={{
-    name: 'NET',
-    density: 0.9,
-    shape: 'circle',
-    colors: ['#7dd3fc', '#60a5fa'],
-    colorMode: 'mixed',
-    particleSpeed: 1,
-    pointerTrackingSpeed: 0.08,
-  }}
->
-  <TextParticleEngine text="Network" particleColor="255, 255, 255" />
-</ParticleCanvas>
-```
-
-### 4) JELLYFISH background
-
-Soft organic particle body with pulse/swimming motion.
-
-```tsx
-<ParticleCanvas
-  background={{
-    name: 'JELLYFISH',
-    density: 1.1,
-    shape: 'bean',
-    colors: ['#f472b6', '#a78bfa', '#22d3ee'],
-    colorMode: 'wave',
-    particleSpeed: 1,
-    pointerTrackingSpeed: 0.02,
-  }}
->
-  <TextParticleEngine text="Jelly" particleColor="255, 255, 255" />
-</ParticleCanvas>
-```
-
-### Background with transparent stage
-
-Use `backgroundColor="transparent"` to place particles over your own image/gradient layer.
-
-```tsx
-<div style={{ background: 'linear-gradient(135deg, #0f172a, #111827)' }}>
-  <ParticleCanvas
-    height="70vh"
-    backgroundColor="transparent"
-    background={{ name: 'NET', density: 0.7, color: '#67e8f9' }}
-  >
-    <TextParticleEngine text="Overlay" backgroundColor="transparent" />
-  </ParticleCanvas>
-</div>
-```
-
-### Full `BackgroundCanvas` type
-
-```ts
-type BackgroundModeName = 'NONE' | 'FOLLOW_POINTER' | 'NET' | 'JELLYFISH';
-type ParticleOrientation = 'vertical' | 'horizontal' | 'diagonal';
-
-interface BackgroundCanvas {
-  name: BackgroundModeName;
-  orientation?: ParticleOrientation;
-  density?: number;
-  color?: string;
-  colors?: string[];
-  colorMode?: 'wave' | 'mixed';
-  interactionRadius?: number;
-  lineDistance?: number;
-  shape?: 'circle' | 'square' | 'bean';
-  particleSpeed?: number;
-  pointerTrackingSpeed?: number;
+export default function HelloParticles() {
+  return (
+    <ParticleCanvas height="60vh" backgroundColor="#050505">
+      <TextParticleEngine
+        text="Hello 🖐️"
+        particleColor={['#f472b6', '#fb923c', '#facc15', '#34d399', '#60a5fa']}
+        particleSize={1.3}
+        particleEase={1.2}
+        isMagnet={true}
+        clickMode="repel"
+        particleShape="circle"
+      />
+    </ParticleCanvas>
+  );
 }
 ```
 
-### Option matrix (what applies to each mode)
+---
 
-| Option | FOLLOW_POINTER | NET | JELLYFISH | Notes |
-|---|---|---|---|---|
-| `name` | ✓ | ✓ | ✓ | Mode selector |
-| `density` | ✓ | ✓ | ✓ | Particle count multiplier |
-| `color` | ✓ | ✓ | ✓ | Single hex/HSL/CSS color |
-| `colors` | ✓ | ✓ | ✓ | Palette override |
-| `colorMode` | ✓ | ✓ | ✓ | `wave` (default) or `mixed` |
-| `shape` | ✓ | ✓ | ✓ | `bean` default in FOLLOW_POINTER, `circle` in NET/JELLYFISH |
-| `particleSpeed` | ✓ | ✓ | ✓ | Animation speed multiplier |
-| `pointerTrackingSpeed` | ✓ | ✓ | ✓ | Cursor-follow/response smoothness |
-| `orientation` | ✓ | — | — | Only FOLLOW_POINTER (`vertical` default) |
-| `interactionRadius` | — | — | — | Declared in type, currently not applied in v0.2.1 |
-| `lineDistance` | — | — | — | Declared in type, currently not applied in v0.2.1 |
+### 3. Word carousel — cycles every 3 seconds
 
-### Practical presets
+The particles re-form automatically each time the `text` prop changes. No extra animation code needed.
 
-| Goal | Suggested config |
-|---|---|
-| Calm ambient hero | `JELLYFISH`, `density: 0.8`, `pointerTrackingSpeed: 0.015` |
-| High-energy interactive background | `FOLLOW_POINTER`, `density: 1.2`, `particleSpeed: 1.3`, `shape: 'bean'` |
-| Tech/network look | `NET`, `density: 0.9`, `colorMode: 'mixed'`, cool blue palette |
+```tsx
+import { useEffect, useState } from 'react';
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
+
+const words = ['Create', 'Inspire', 'React'];
+
+export default function WordCarousel() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex(i => (i + 1) % words.length), 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <ParticleCanvas height="60vh" backgroundColor="#050505">
+      <TextParticleEngine
+        text={words[index]}
+        particleColor={['#60a5fa', '#a78bfa', '#f472b6']}
+        particleSize={1.5}
+        particleEase={1.2}
+        isMagnet={true}
+        particleShape="bean"
+      />
+    </ParticleCanvas>
+  );
+}
+```
+
+---
+
+## Background examples
+
+Use `<ParticleBackground>` for standalone animated backgrounds. Set the mode with the `name` prop and pass all options through `config`.
+
+### 1. FOLLOW_POINTER — swarm that follows the cursor
+
+Particles form a loose swarm that chases the cursor across the canvas.
+
+```tsx
+import { ParticleBackground } from 'jl-particle-interactive';
+
+export default function FollowPointerDemo() {
+  return (
+    <ParticleBackground
+      name="FOLLOW_POINTER"
+      height="60vh"
+      backgroundColor="#050505"
+      config={{
+        orientation: 'diagonal',
+        density: 1,
+        shape: 'bean',
+        colors: ['#00d4ff', '#6ee7b7', '#facc15'],
+        colorMode: 'wave',
+        particleSpeed: 1,
+        pointerTrackingSpeed: 0.06,
+      }}
+    />
+  );
+}
+```
+
+---
+
+### 2. NET — connected node graph
+
+Particles bounce around and draw lines between nearby nodes. Great for tech-style hero sections.
+
+```tsx
+import { ParticleBackground } from 'jl-particle-interactive';
+
+export default function NetDemo() {
+  return (
+    <ParticleBackground
+      name="NET"
+      height="60vh"
+      backgroundColor="#050505"
+      config={{
+        density: 0.9,
+        shape: 'circle',
+        colors: ['#7dd3fc', '#60a5fa', '#a78bfa'],
+        colorMode: 'mixed',
+        particleSpeed: 1,
+        pointerTrackingSpeed: 0.08,
+      }}
+    />
+  );
+}
+```
+
+---
+
+### 3. JELLYFISH — organic pulsing glow
+
+Soft concentric rings expand and contract in a slow breathing cycle. Particles drift with organic float noise.
+
+```tsx
+import { ParticleBackground } from 'jl-particle-interactive';
+
+export default function JellyfishDemo() {
+  return (
+    <ParticleBackground
+      name="JELLYFISH"
+      height="60vh"
+      backgroundColor="#050505"
+      config={{
+        density: 1.1,
+        shape: 'circle',
+        colors: ['#f472b6', '#a78bfa', '#22d3ee'],
+        colorMode: 'wave',
+        particleSpeed: 1,
+        pointerTrackingSpeed: 0.02,
+      }}
+    />
+  );
+}
+```
 
 ---
 
 ## API reference
 
-### `<ParticleCanvas>`
+### `<ParticleBackground>`
+
+Standalone background component. Use this when you want an animated background without any text particles.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `name` | `'NONE' \| 'FOLLOW_POINTER' \| 'NET' \| 'JELLYFISH'` | **required** | Background engine to render |
+| `config` | `BackgroundConfig` | `undefined` | All engine options (see table below) |
 | `width` | `string \| number` | `'100%'` | Container width |
 | `height` | `string \| number` | `'60vh'` | Container height |
-| `backgroundColor` | `string` | `'#050505'` | Background color |
-| `background` | `BackgroundCanvas` | `{ name: 'NONE' }` | Animated background config |
+| `backgroundColor` | `string` | `'#050505'` | Background fill color |
 | `className` | `string` | `''` | Additional CSS class |
 | `style` | `CSSProperties` | — | Inline style overrides |
 
-### `BackgroundCanvas`
+### `BackgroundConfig` (`config` prop options)
 
-| Prop | Type | Description |
-|---|---|---|
-| `name` | `'NONE' \| 'FOLLOW_POINTER' \| 'NET' \| 'JELLYFISH'` | Background mode |
-| `orientation` | `'vertical' \| 'horizontal' \| 'diagonal'` | Direction style for `FOLLOW_POINTER` |
-| `density` | `number` | Particle amount multiplier |
-| `color` | `string` | Single background particle color |
-| `colors` | `string[]` | Background particle palette |
-| `colorMode` | `'wave' \| 'mixed'` | Palette propagation mode |
-| `shape` | `'circle' \| 'square' \| 'bean'` | Particle drawing shape |
-| `particleSpeed` | `number` | Background animation speed multiplier |
-| `pointerTrackingSpeed` | `number` | Cursor tracking interpolation factor |
-| `interactionRadius` | `number` | Reserved in type (not applied in v0.2.1) |
-| `lineDistance` | `number` | Reserved in type (not applied in v0.2.1) |
+All fields are optional. Pass any combination inside the `config` prop of `<ParticleBackground>`.
+
+| Option | Type | Applies to | Description |
+|---|---|---|---|
+| `density` | `number` | all modes | Particle count multiplier. Base counts: FOLLOW_POINTER=350, NET≈300, JELLYFISH=350 |
+| `color` | `string` | all modes | Single hex color for all particles |
+| `colors` | `string[]` | all modes | Palette of hex colors; overrides `color` |
+| `colorMode` | `'wave' \| 'mixed'` | all modes | How colors propagate across particles |
+| `shape` | `'circle' \| 'square' \| 'bean'` | all modes | Particle drawing shape |
+| `particleSpeed` | `number` | all modes | Animation speed multiplier |
+| `pointerTrackingSpeed` | `number` | all modes | How fast particles follow the cursor (lower = floatier) |
+| `orientation` | `'vertical' \| 'horizontal' \| 'diagonal'` | FOLLOW_POINTER only | Swarm drift direction |
+| `interactionRadius` | `number` | — | Declared in type; not applied in current version |
+| `lineDistance` | `number` | — | Declared in type; not applied in current version |
+
+### `<ParticleCanvas>`
+
+Container that combines text particles with an optional background. Use `background` to activate a background engine alongside `<TextParticleEngine>` children.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | — | Content rendered above background (z-index 10) |
+| `width` | `string \| number` | `'100%'` | Container width |
+| `height` | `string \| number` | `'60vh'` | Container height |
+| `backgroundColor` | `string` | `'#050505'` | Background fill color |
+| `background` | `BackgroundCanvas` | `{ name: 'NONE' }` | Background engine config (flat object with `name` + all options) |
+| `className` | `string` | `''` | Additional CSS class |
+| `style` | `CSSProperties` | — | Inline style overrides |
 
 ### `<TextParticleEngine>`
 
