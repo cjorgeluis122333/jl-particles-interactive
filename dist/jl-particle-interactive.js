@@ -1,30 +1,30 @@
 var J = Object.defineProperty;
 var K = (t, e, n) => e in t ? J(t, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : t[e] = n;
-var g = (t, e, n) => K(t, typeof e != "symbol" ? e + "" : e, n);
+var m = (t, e, n) => K(t, typeof e != "symbol" ? e + "" : e, n);
 import { jsx as $, jsxs as _ } from "react/jsx-runtime";
 import { useRef as I, useEffect as L } from "react";
 function U(t, e, n, i) {
-  let s = e + t.baseX, m = n + t.baseY;
-  s += Math.sin(i * t.randomSpeed + t.baseY * 0.05) * 15 * t.z, m += Math.cos(i * t.randomSpeed + t.baseX * 0.05) * 15 * t.z;
-  const r = s - t.x, o = m - t.y, h = r * 0.06, y = o * 0.06;
-  return { forceX: h, forceY: y };
+  let s = e + t.baseX, y = n + t.baseY;
+  s += Math.sin(i * t.randomSpeed + t.baseY * 0.05) * 15 * t.z, y += Math.cos(i * t.randomSpeed + t.baseX * 0.05) * 15 * t.z;
+  const r = s - t.x, o = y - t.y, h = r * 0.06, g = o * 0.06;
+  return { forceX: h, forceY: g };
 }
-function Q(t, e, n, i, s, m) {
-  const r = i, o = s, h = t.x - r, y = t.y - o, d = Math.max(Math.sqrt(h * h + y * y), 1);
+function Q(t, e, n, i, s, y) {
+  const r = i, o = s, h = t.x - r, g = t.y - o, d = Math.max(Math.sqrt(h * h + g * g), 1);
   let c = 0, a = 0;
-  const u = Math.sin(d * 0.02 - m * 3) * 2.5 * t.z;
-  c += h / d * u, a += y / d * u;
-  const P = Math.cos(d * 0.01 - m * 1 + t.randomSpeed) * 0.8 * t.z, q = -y / d, b = h / d;
-  return c += q * P, a += b * P, { forceX: c, forceY: a, dxCenter: h, dyCenter: y, distToCenter: d };
+  const u = Math.sin(d * 0.02 - y * 3) * 2.5 * t.z;
+  c += h / d * u, a += g / d * u;
+  const P = Math.cos(d * 0.01 - y * 1 + t.randomSpeed) * 0.8 * t.z, q = -g / d, b = h / d;
+  return c += q * P, a += b * P, { forceX: c, forceY: a, dxCenter: h, dyCenter: g, distToCenter: d };
 }
 function V(t, e) {
   let s = Math.min(e / 400, 1) * 2.5 + t.sizeBias * 1;
   s < 0.4 && (s = 0), t.scale += (s - t.scale) * 0.15;
 }
-function Z(t, e, n, i, s, m) {
+function Z(t, e, n, i, s, y) {
   let r = 0, o = 0;
   s === "horizontal" ? (r = 1, o = 0) : s === "diagonal" ? (r = -e / i, o = -n / i) : (r = -n / i, o = e / i);
-  const h = Math.atan2(o, r), y = t.sizeBias > 0.3 ? 1 : 0, d = Math.max(0, Math.sin(m * 0.5 + t.randomSpeed * 10)), c = Math.sin(m * 3 + t.baseX * 0.1 + t.randomSpeed) * 0.5 * d * y;
+  const h = Math.atan2(o, r), g = t.sizeBias > 0.3 ? 1 : 0, d = Math.max(0, Math.sin(y * 0.5 + t.randomSpeed * 10)), c = Math.sin(y * 3 + t.baseX * 0.1 + t.randomSpeed) * 0.5 * d * g;
   r = Math.cos(h + c), o = Math.sin(h + c);
   const a = Math.max(1 - i / 400, 0.1);
   s === "horizontal" ? (t.dirX = t.dirX * (1 - 0.2) + r * 0.2, t.dirY = t.dirY * (1 - 0.2) + o * 0.2) : (t.dirX = t.dirX * (1 - a * 0.3) + r * a * 0.3, t.dirY = t.dirY * (1 - a * 0.3) + o * a * 0.3);
@@ -33,31 +33,31 @@ function Z(t, e, n, i, s, m) {
 }
 class tt {
   constructor(e, n, i) {
-    g(this, "x");
-    g(this, "y");
-    g(this, "baseX");
+    m(this, "x");
+    m(this, "y");
+    m(this, "baseX");
     // Relative X to swarm center
-    g(this, "baseY");
+    m(this, "baseY");
     // Relative Y to swarm center
-    g(this, "z");
-    g(this, "vx");
-    g(this, "vy");
-    g(this, "color");
-    g(this, "targetColor", null);
-    g(this, "colorDelay", 0);
-    g(this, "angleTarget");
-    g(this, "randomSpeed");
-    g(this, "sizeBias");
-    g(this, "scale");
-    g(this, "dirX");
-    g(this, "dirY");
-    g(this, "initialized", !1);
+    m(this, "z");
+    m(this, "vx");
+    m(this, "vy");
+    m(this, "color");
+    m(this, "targetColor", null);
+    m(this, "colorDelay", 0);
+    m(this, "angleTarget");
+    m(this, "randomSpeed");
+    m(this, "sizeBias");
+    m(this, "scale");
+    m(this, "dirX");
+    m(this, "dirY");
+    m(this, "initialized", !1);
     this.x = e, this.y = n, this.baseX = e, this.baseY = n, this.z = Math.random() * 1.5 + 0.2, this.vx = 0, this.vy = 0, this.color = i, this.angleTarget = Math.random() * Math.PI * 2, this.randomSpeed = Math.random() * 2 + 1, this.sizeBias = Math.random(), this.scale = 1, this.dirX = Math.cos(this.angleTarget), this.dirY = Math.sin(this.angleTarget);
   }
-  update(e, n, i, s, m, r, o, h = "vertical") {
+  update(e, n, i, s, y, r, o, h = "vertical") {
     this.initialized || (this.x = i + this.baseX, this.y = s + this.baseY, this.initialized = !0);
     const {
-      forceX: y,
+      forceX: g,
       forceY: d,
       dxCenter: c,
       dyCenter: a,
@@ -66,13 +66,13 @@ class tt {
       forceX: u,
       forceY: w
     } = U(this, i, s, o);
-    this.vx += y + u, this.vy += d + w, this.vx *= 0.75, this.vy *= 0.75, this.x += this.vx, this.y += this.vy, V(this, l), Z(this, c, a, l, h, o), this.targetColor && (this.colorDelay -= 1, this.colorDelay <= 0 && (this.color = this.targetColor, this.targetColor = null));
+    this.vx += g + u, this.vy += d + w, this.vx *= 0.75, this.vy *= 0.75, this.x += this.vx, this.y += this.vy, V(this, l), Z(this, c, a, l, h, o), this.targetColor && (this.colorDelay -= 1, this.colorDelay <= 0 && (this.color = this.targetColor, this.targetColor = null));
   }
   draw(e, n, i = "bean") {
     if (this.scale <= 0.05) return;
     e.fillStyle = this.color;
-    const s = Math.sqrt(this.baseX * this.baseX + this.baseY * this.baseY), m = Math.max(0, 1 - s / 350);
-    if (e.globalAlpha = Math.min(1, (0.5 + this.z * 0.5) * Math.min(this.scale, 1) * m), !(e.globalAlpha <= 0.01))
+    const s = Math.sqrt(this.baseX * this.baseX + this.baseY * this.baseY), y = Math.max(0, 1 - s / 350);
+    if (e.globalAlpha = Math.min(1, (0.5 + this.z * 0.5) * Math.min(this.scale, 1) * y), !(e.globalAlpha <= 0.01))
       if (i === "circle") {
         const r = Math.max(0.1, 2 * this.scale * this.z);
         e.beginPath(), e.arc(this.x, this.y, r, 0, Math.PI * 2), e.fill();
@@ -80,13 +80,13 @@ class tt {
         const r = Math.max(0.1, 2 * this.scale * this.z);
         e.fillRect(this.x - r, this.y - r, r * 2, r * 2);
       } else {
-        const o = (6 + this.sizeBias * 6) * this.scale, h = Math.sin(n * 3.5 + this.baseX * 0.1 + this.randomSpeed * 5), y = 0.4 + 0.6 * ((h + 1) / 2), d = o * 0.5 * y, c = Math.max(0.8, this.z * 1.5 * this.scale * (0.8 + 0.2 * h)), a = Math.atan2(this.dirY, this.dirX);
+        const o = (6 + this.sizeBias * 6) * this.scale, h = Math.sin(n * 3.5 + this.baseX * 0.1 + this.randomSpeed * 5), g = 0.4 + 0.6 * ((h + 1) / 2), d = o * 0.5 * g, c = Math.max(0.8, this.z * 1.5 * this.scale * (0.8 + 0.2 * h)), a = Math.atan2(this.dirY, this.dirX);
         e.beginPath(), e.ellipse(this.x, this.y, d, c, a, 0, Math.PI * 2), e.fill();
       }
   }
 }
 function et({ config: t, backgroundColor: e }) {
-  const n = I(null), i = I(null), s = I([]), m = I(0), r = I({ x: -1e3, y: -1e3, isDown: !1, active: !1 }), o = I({ x: 0, y: 0, initialized: !1 });
+  const n = I(null), i = I(null), s = I([]), y = I(0), r = I({ x: -1e3, y: -1e3, isDown: !1, active: !1 }), o = I({ x: 0, y: 0, initialized: !1 });
   L(() => {
     const c = (l) => {
       if (!n.current) return;
@@ -99,11 +99,11 @@ function et({ config: t, backgroundColor: e }) {
       window.removeEventListener("pointermove", c), window.removeEventListener("pointerleave", a);
     };
   }, []);
-  const h = I(t), y = I(null), d = I(0);
+  const h = I(t), g = I(null), d = I(0);
   return L(() => {
     h.current = t;
   }, [t]), L(() => {
-    if (y.current && (clearInterval(y.current), y.current = null), !t.colors || t.colors.length === 0) {
+    if (g.current && (clearInterval(g.current), g.current = null), !t.colors || t.colors.length === 0) {
       const a = t.color || "#8B5CF6";
       s.current.forEach((l) => {
         l.targetColor = a, l.colorDelay = Math.random() * 20;
@@ -119,11 +119,11 @@ function et({ config: t, backgroundColor: e }) {
     };
     return t.colorMode === "mixed" ? s.current.forEach((a, l) => {
       a.targetColor = t.colors[l % t.colors.length], a.colorDelay = Math.random() * 20;
-    }) : (d.current = 0, c(t.colors[0]), t.colors.length > 1 && (y.current = setInterval(() => {
+    }) : (d.current = 0, c(t.colors[0]), t.colors.length > 1 && (g.current = setInterval(() => {
       const a = t.colors;
       d.current = (d.current + 1) % a.length, c(a[d.current]);
     }, 3e3))), () => {
-      y.current && clearInterval(y.current);
+      g.current && clearInterval(g.current);
     };
   }, [t.colors, t.color, t.colorMode]), L(() => {
     if (!n.current || !i.current || h.current.name === "NONE") return;
@@ -179,49 +179,49 @@ function et({ config: t, backgroundColor: e }) {
           M.draw(w, P, x);
         }
       }
-      m.current = requestAnimationFrame(q);
+      y.current = requestAnimationFrame(q);
     };
     return q(), () => {
-      u.disconnect(), cancelAnimationFrame(m.current);
+      u.disconnect(), cancelAnimationFrame(y.current);
     };
   }, [e, t.density]), t.name === "NONE" ? null : /* @__PURE__ */ $("div", { ref: n, style: { position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }, children: /* @__PURE__ */ $("canvas", { ref: i, style: { display: "block", width: "100%", height: "100%" } }) });
 }
 class nt {
   constructor(e, n) {
-    g(this, "x");
-    g(this, "y");
-    g(this, "vx");
-    g(this, "vy");
-    g(this, "radius");
-    g(this, "currentColor", "#8B5CF6");
-    g(this, "targetColor", null);
-    g(this, "colorDelay", 0);
+    m(this, "x");
+    m(this, "y");
+    m(this, "vx");
+    m(this, "vy");
+    m(this, "radius");
+    m(this, "currentColor", "#8B5CF6");
+    m(this, "targetColor", null);
+    m(this, "colorDelay", 0);
     this.x = e, this.y = n;
     const i = Math.random() * Math.PI * 2, s = Math.random() * 0.5 + 0.1;
     this.vx = Math.cos(i) * s, this.vy = Math.sin(i) * s, this.radius = Math.random() * 1.5 + 1;
   }
-  update(e, n, i, s, m = 1, r = 0.06) {
-    if (this.x += this.vx * m, this.y += this.vy * m, this.x < 0 ? (this.x = 0, this.vx *= -1) : this.x > e && (this.x = e, this.vx *= -1), this.y < 0 ? (this.y = 0, this.vy *= -1) : this.y > n && (this.y = n, this.vy *= -1), i !== null && s !== null) {
-      const o = i - this.x, h = s - this.y, y = o * o + h * h, d = 150, c = d * d;
-      if (y < c) {
-        const a = Math.sqrt(y), l = (d - a) / d, u = r / 0.06;
+  update(e, n, i, s, y = 1, r = 0.06) {
+    if (this.x += this.vx * y, this.y += this.vy * y, this.x < 0 ? (this.x = 0, this.vx *= -1) : this.x > e && (this.x = e, this.vx *= -1), this.y < 0 ? (this.y = 0, this.vy *= -1) : this.y > n && (this.y = n, this.vy *= -1), i !== null && s !== null) {
+      const o = i - this.x, h = s - this.y, g = o * o + h * h, d = 150, c = d * d;
+      if (g < c) {
+        const a = Math.sqrt(g), l = (d - a) / d, u = r / 0.06;
         this.x -= o / a * l * 2 * u, this.y -= h / a * l * 2 * u;
       }
     }
-    this.targetColor && (this.colorDelay -= 1 * m, this.colorDelay <= 0 && (this.currentColor = this.targetColor, this.targetColor = null));
+    this.targetColor && (this.colorDelay -= 1 * y, this.colorDelay <= 0 && (this.currentColor = this.targetColor, this.targetColor = null));
   }
   draw(e, n = "circle", i = 0) {
     if (e.fillStyle = this.currentColor, n === "square")
       e.fillRect(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
     else if (n === "bean") {
-      const s = Math.sin(i * 0.05 + this.x * 0.01 + this.y * 0.01), m = this.radius * 2 * (0.8 + 0.4 * s), r = this.radius * (0.8 + 0.2 * s), o = this.vx !== 0 || this.vy !== 0 ? Math.atan2(this.vy, this.vx) : 0;
-      e.beginPath(), e.ellipse(this.x, this.y, m, r, o, 0, Math.PI * 2), e.fill();
+      const s = Math.sin(i * 0.05 + this.x * 0.01 + this.y * 0.01), y = this.radius * 2 * (0.8 + 0.4 * s), r = this.radius * (0.8 + 0.2 * s), o = this.vx !== 0 || this.vy !== 0 ? Math.atan2(this.vy, this.vx) : 0;
+      e.beginPath(), e.ellipse(this.x, this.y, y, r, o, 0, Math.PI * 2), e.fill();
     } else
       e.beginPath(), e.arc(this.x, this.y, this.radius, 0, Math.PI * 2), e.fill();
   }
 }
 function rt({ config: t, backgroundColor: e }) {
-  const n = I(null), i = I(null), s = I([]), m = I(0), r = I({ x: -1e3, y: -1e3, active: !1 });
+  const n = I(null), i = I(null), s = I([]), y = I(0), r = I({ x: -1e3, y: -1e3, active: !1 });
   L(() => {
     const d = (a) => {
       if (!n.current) return;
@@ -234,11 +234,11 @@ function rt({ config: t, backgroundColor: e }) {
       window.removeEventListener("pointermove", d), window.removeEventListener("pointerleave", c);
     };
   }, []);
-  const o = I(t), h = I(0), y = I(null);
+  const o = I(t), h = I(0), g = I(null);
   return L(() => {
     o.current = t;
   }, [t]), L(() => {
-    if (y.current && (clearInterval(y.current), y.current = null), !t.colors || t.colors.length === 0) {
+    if (g.current && (clearInterval(g.current), g.current = null), !t.colors || t.colors.length === 0) {
       const l = t.color || "#8B5CF6";
       s.current.forEach((u) => {
         u.targetColor = l, u.colorDelay = Math.random() * 20;
@@ -253,11 +253,11 @@ function rt({ config: t, backgroundColor: e }) {
     };
     return t.colorMode === "mixed" ? s.current.forEach((l, u) => {
       l.targetColor = t.colors[u % t.colors.length], l.colorDelay = Math.random() * 20;
-    }) : (h.current = 0, a(t.colors[0]), t.colors.length > 1 && (y.current = setInterval(() => {
+    }) : (h.current = 0, a(t.colors[0]), t.colors.length > 1 && (g.current = setInterval(() => {
       const l = t.colors;
       h.current = (h.current + 1) % l.length, a(l[h.current]);
     }, 3e3))), () => {
-      y.current && clearInterval(y.current);
+      g.current && clearInterval(g.current);
     };
   }, [t.colors, t.color, t.colorMode]), L(() => {
     if (!n.current || !i.current) return;
@@ -304,44 +304,44 @@ function rt({ config: t, backgroundColor: e }) {
             u.beginPath(), u.moveTo(x.x, x.y), u.lineTo(b, C), u.strokeStyle = x.currentColor, u.globalAlpha = F * 0.8, u.lineWidth = 1.5, u.stroke();
           }
         }
-      u.globalAlpha = 1, m.current = requestAnimationFrame(P);
+      u.globalAlpha = 1, y.current = requestAnimationFrame(P);
     };
     return P(), () => {
-      l.disconnect(), cancelAnimationFrame(m.current);
+      l.disconnect(), cancelAnimationFrame(y.current);
     };
   }, [e, t.density]), /* @__PURE__ */ $("div", { ref: n, style: { position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }, children: /* @__PURE__ */ $("canvas", { ref: i, style: { display: "block", width: "100%", height: "100%" } }) });
 }
 class st {
   constructor(e, n, i, s) {
-    g(this, "x", 0);
-    g(this, "y", 0);
-    g(this, "baseX");
-    g(this, "baseY");
-    g(this, "vx", 0);
-    g(this, "vy", 0);
-    g(this, "color");
-    g(this, "size");
-    g(this, "angle");
-    g(this, "dist");
-    g(this, "spring");
-    g(this, "friction");
-    g(this, "targetColor", null);
-    g(this, "colorDelay", 0);
+    m(this, "x", 0);
+    m(this, "y", 0);
+    m(this, "baseX");
+    m(this, "baseY");
+    m(this, "vx", 0);
+    m(this, "vy", 0);
+    m(this, "color");
+    m(this, "size");
+    m(this, "angle");
+    m(this, "dist");
+    m(this, "spring");
+    m(this, "friction");
+    m(this, "targetColor", null);
+    m(this, "colorDelay", 0);
     this.baseX = e, this.baseY = n, this.color = i, this.size = s, this.angle = Math.atan2(n, e), this.dist = Math.sqrt(e * e + n * n);
-    const m = Math.min(1, this.dist / 350);
-    this.spring = 0.15 - m * 0.13, this.friction = 0.85 + m * 0.1;
+    const y = Math.min(1, this.dist / 350);
+    this.spring = 0.15 - y * 0.13, this.friction = 0.85 + y * 0.1;
   }
   update(e, n, i, s) {
-    const r = 1 + Math.sin(this.angle * 3 + i * 1.2) * 0.05 + Math.cos(this.angle * 5 - i * 0.6) * 0.03, o = this.dist * s * r, h = Math.cos(this.angle) * o, y = Math.sin(this.angle) * o, d = this.dist * 0.1 * r, c = Math.sin(i * 3 + this.dist * 0.05) * d, a = e + h + Math.cos(this.angle + Math.PI / 2) * c, l = n + y + Math.sin(this.angle + Math.PI / 2) * c, u = a - this.x, w = l - this.y;
+    const r = 1 + Math.sin(this.angle * 3 + i * 1.2) * 0.05 + Math.cos(this.angle * 5 - i * 0.6) * 0.03, o = this.dist * s * r, h = Math.cos(this.angle) * o, g = Math.sin(this.angle) * o, d = this.dist * 0.1 * r, c = Math.sin(i * 3 + this.dist * 0.05) * d, a = e + h + Math.cos(this.angle + Math.PI / 2) * c, l = n + g + Math.sin(this.angle + Math.PI / 2) * c, u = a - this.x, w = l - this.y;
     this.vx += u * this.spring, this.vy += w * this.spring, this.vx *= this.friction, this.vy *= this.friction, this.x += this.vx, this.y += this.vy, this.targetColor && (this.colorDelay -= 1, this.colorDelay <= 0 && (this.color = this.targetColor, this.targetColor = null));
   }
   draw(e, n, i) {
-    const s = Math.min(1, this.dist / 350), m = 1 + (1 - s) * (i - 1) * 1.5, r = this.size * m;
+    const s = Math.min(1, this.dist / 350), y = 1 + (1 - s) * (i - 1) * 1.5, r = this.size * y;
     e.globalAlpha = Math.max(0.15, 1 - s * 0.7), e.fillStyle = this.color, e.beginPath(), n === "circle" ? e.arc(this.x, this.y, r, 0, Math.PI * 2) : n === "square" ? e.rect(this.x - r, this.y - r, r * 2, r * 2) : e.ellipse(this.x, this.y, r * 1.5, r, 0, 0, Math.PI * 2), e.fill();
   }
 }
 function ot({ config: t, backgroundColor: e }) {
-  const n = I(null), i = I(null), s = I([]), m = I(0), r = I({ x: -1e3, y: -1e3, active: !1 }), o = I({ x: 0, y: 0, initialized: !1, angle: -Math.PI / 2 });
+  const n = I(null), i = I(null), s = I([]), y = I(0), r = I({ x: -1e3, y: -1e3, active: !1 }), o = I({ x: 0, y: 0, initialized: !1, angle: -Math.PI / 2 });
   L(() => {
     const c = (a) => {
       if (!n.current) return;
@@ -352,7 +352,7 @@ function ot({ config: t, backgroundColor: e }) {
       window.removeEventListener("pointermove", c);
     };
   }, []);
-  const h = I(t), y = I(0), d = I(null);
+  const h = I(t), g = I(0), d = I(null);
   return L(() => {
     h.current = t;
   }, [t]), L(() => {
@@ -370,9 +370,9 @@ function ot({ config: t, backgroundColor: e }) {
     };
     return t.colorMode === "mixed" ? s.current.forEach((a, l) => {
       a.targetColor = t.colors[l % t.colors.length], a.colorDelay = Math.max(0, a.dist * 0.2) + Math.random() * 10;
-    }) : (y.current = 0, c(t.colors[0]), t.colors.length > 1 && (d.current = setInterval(() => {
+    }) : (g.current = 0, c(t.colors[0]), t.colors.length > 1 && (d.current = setInterval(() => {
       const a = t.colors;
-      y.current = (y.current + 1) % a.length, c(a[y.current]);
+      g.current = (g.current + 1) % a.length, c(a[g.current]);
     }, 3e3))), () => {
       d.current && clearInterval(d.current);
     };
@@ -444,10 +444,10 @@ function ot({ config: t, backgroundColor: e }) {
         const G = h.current.shape || "circle";
         B.draw(w, G, E);
       }
-      m.current = requestAnimationFrame(q);
+      y.current = requestAnimationFrame(q);
     };
     return q(), () => {
-      u.disconnect(), cancelAnimationFrame(m.current);
+      u.disconnect(), cancelAnimationFrame(y.current);
     };
   }, [e, t.density]), /* @__PURE__ */ $(
     "div",
@@ -472,20 +472,20 @@ const it = {
   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
   transition: "all 300ms ease-out"
 };
-function ft({
+function ct({
   children: t,
   width: e = "100%",
   height: n = "60vh",
   backgroundColor: i = "#050505",
   className: s = "",
-  style: m,
+  style: y,
   background: r = { name: "NONE" }
 }) {
   return /* @__PURE__ */ _(
     "div",
     {
       className: s,
-      style: { ...it, width: e, height: n, backgroundColor: i, ...m },
+      style: { ...it, width: e, height: n, backgroundColor: i, ...y },
       children: [
         r.name === "FOLLOW_POINTER" && /* @__PURE__ */ $(et, { config: r, backgroundColor: i }),
         r.name === "NET" && /* @__PURE__ */ $(rt, { config: r, backgroundColor: i }),
@@ -495,7 +495,7 @@ function ft({
     }
   );
 }
-function ct(t) {
+function at(t) {
   const e = I({ x: -1e3, y: -1e3, isDown: !1, active: !1 });
   return L(() => {
     const n = t.current;
@@ -505,70 +505,70 @@ function ct(t) {
       e.current.x = o.clientX - h.left, e.current.y = o.clientY - h.top, e.current.active = !0;
     }, s = () => {
       e.current.active = !1;
-    }, m = () => {
+    }, y = () => {
       e.current.isDown = !0;
     }, r = () => {
       e.current.isDown = !1;
     };
-    return n.addEventListener("pointermove", i), n.addEventListener("pointerleave", s), n.addEventListener("pointerdown", m), n.addEventListener("pointerup", r), n.style.touchAction = "none", () => {
-      n.removeEventListener("pointermove", i), n.removeEventListener("pointerleave", s), n.removeEventListener("pointerdown", m), n.removeEventListener("pointerup", r);
+    return n.addEventListener("pointermove", i), n.addEventListener("pointerleave", s), n.addEventListener("pointerdown", y), n.addEventListener("pointerup", r), n.style.touchAction = "none", () => {
+      n.removeEventListener("pointermove", i), n.removeEventListener("pointerleave", s), n.removeEventListener("pointerdown", y), n.removeEventListener("pointerup", r);
     };
   }, [t]), e;
 }
-function at(t, e, n, i, s, m, r, o, h) {
-  if (s === null || m === null || !o && h === "none")
+function lt(t, e, n, i, s, y, r, o, h) {
+  if (s === null || y === null || !o && h === "none")
     return { x: n, y: i };
-  let y = n, d = i;
-  const c = s - t, a = m - e, l = c * c + a * a, u = Math.sqrt(l);
+  let g = n, d = i;
+  const c = s - t, a = y - e, l = c * c + a * a, u = Math.sqrt(l);
   if (o && !r && l < 3e4) {
     const P = (3e4 - l) / 3e4;
-    y += c * P * 0.15, d += a * P * 0.15;
+    g += c * P * 0.15, d += a * P * 0.15;
   }
   if (r && h !== "none") {
     if (h === "attract") {
       if (l < 3e4) {
         const P = (3e4 - l) / 3e4;
-        y += c * P * 0.8, d += a * P * 0.8;
+        g += c * P * 0.8, d += a * P * 0.8;
       }
     } else if (h === "repel" && l < 5e4 && u > 0) {
       const P = Math.pow(Math.max(0, 5e4 - l) / 5e4, 1.2);
-      y -= c / u * P * 400, d -= a / u * P * 400;
+      g -= c / u * P * 400, d -= a / u * P * 400;
     }
   }
-  return { x: y, y: d };
+  return { x: g, y: d };
 }
 class H {
   constructor(e, n, i = "255, 255, 255") {
-    g(this, "x");
-    g(this, "y");
-    g(this, "vx");
-    g(this, "vy");
-    g(this, "targetX");
-    g(this, "targetY");
-    g(this, "baseColor");
-    g(this, "opacity");
-    g(this, "size");
-    g(this, "sizeMultiplier");
-    g(this, "friction");
-    g(this, "ease");
-    g(this, "easeMultiplier");
-    g(this, "floatSpeed");
-    g(this, "floatOffset");
-    g(this, "randomSpeed");
+    m(this, "x");
+    m(this, "y");
+    m(this, "vx");
+    m(this, "vy");
+    m(this, "targetX");
+    m(this, "targetY");
+    m(this, "baseColor");
+    m(this, "opacity");
+    m(this, "size");
+    m(this, "sizeMultiplier");
+    m(this, "friction");
+    m(this, "ease");
+    m(this, "easeMultiplier");
+    m(this, "floatSpeed");
+    m(this, "floatOffset");
+    m(this, "randomSpeed");
     this.x = Math.random() * e, this.y = Math.random() * n, this.targetX = this.x, this.targetY = this.y, this.vx = 0, this.vy = 0, this.size = Math.random() * 1.8 + 0.5, this.sizeMultiplier = 1, this.baseColor = Array.isArray(i) ? i[Math.floor(Math.random() * i.length)] : i, this.opacity = 0.4 + Math.random() * 0.6, this.friction = 0.82 + Math.random() * 0.1, this.ease = 0.03 + Math.random() * 0.05, this.easeMultiplier = 1, this.floatSpeed = Math.random() * 0.02 + 5e-3, this.floatOffset = Math.random() * Math.PI * 2, this.randomSpeed = Math.random();
   }
-  update(e, n, i = null, s = null, m = !1, r = !0, o = "none") {
-    const { x: h, y } = at(
+  update(e, n, i = null, s = null, y = !1, r = !0, o = "none") {
+    const { x: h, y: g } = lt(
       this.x,
       this.y,
       this.targetX,
       this.targetY,
       i,
       s,
-      m,
+      y,
       r,
       o
-    ), d = h - this.x, c = y - this.y, a = n ? 0 : Math.cos(e * 0.01 + this.y * 0.01) * 0.5, l = n ? 0 : Math.sin(e * 0.01 + this.x * 0.01) * 0.5;
+    ), d = h - this.x, c = g - this.y, a = n ? 0 : Math.cos(e * 0.01 + this.y * 0.01) * 0.5, l = n ? 0 : Math.sin(e * 0.01 + this.x * 0.01) * 0.5;
     this.vx += d * (this.ease * this.easeMultiplier) + a, this.vy += c * (this.ease * this.easeMultiplier) + l, this.vx *= this.friction, this.vy *= this.friction, this.x += this.vx, this.y += this.vy;
     const u = n ? 0.2 : 2;
     this.x += Math.cos(e * this.floatSpeed + this.floatOffset) * u, this.y += Math.sin(e * this.floatSpeed + this.floatOffset) * u;
@@ -579,8 +579,8 @@ class H {
     if (n === "square")
       e.fillRect(this.x - s, this.y - s, s * 2, s * 2);
     else if (n === "bean") {
-      const m = 6 + this.size * 2 * this.sizeMultiplier, r = Math.sin(i * 0.05 + this.x * 0.01 + this.randomSpeed * 5), o = 0.4 + 0.6 * ((r + 1) / 2), h = m * 0.5 * o, y = Math.max(0.8, s * 1.5 * (0.8 + 0.2 * r)), d = this.vx !== 0 || this.vy !== 0 ? Math.atan2(this.vy, this.vx) : 0;
-      e.beginPath(), e.ellipse(this.x, this.y, h, y, d, 0, Math.PI * 2), e.fill();
+      const y = 6 + this.size * 2 * this.sizeMultiplier, r = Math.sin(i * 0.05 + this.x * 0.01 + this.randomSpeed * 5), o = 0.4 + 0.6 * ((r + 1) / 2), h = y * 0.5 * o, g = Math.max(0.8, s * 1.5 * (0.8 + 0.2 * r)), d = this.vx !== 0 || this.vy !== 0 ? Math.atan2(this.vy, this.vx) : 0;
+      e.beginPath(), e.ellipse(this.x, this.y, h, g, d, 0, Math.PI * 2), e.fill();
     } else
       e.beginPath(), e.arc(this.x, this.y, s, 0, Math.PI * 2), e.fill();
   }
@@ -592,36 +592,36 @@ function j(t, e, n) {
   const s = i.getContext("2d", { willReadFrequently: !0 });
   if (!s) return [];
   s.clearRect(0, 0, e, n);
-  let m = Math.min(e, n) * 0.65;
-  s.font = `bold ${m}px "Georgia", serif`;
+  let y = Math.min(e, n) * 0.65;
+  s.font = `bold ${y}px "Georgia", serif`;
   const r = s.measureText(t);
-  r.width > e * 0.9 && (m = m * (e * 0.9) / r.width, s.font = `bold ${m}px "Georgia", serif`), s.fillStyle = "white", s.textAlign = "center", s.textBaseline = "middle", s.fillText(t, e / 2, n / 2.05);
-  const h = s.getImageData(0, 0, e, n).data, y = [], d = window.innerWidth < 600 ? 6 : 8;
+  r.width > e * 0.9 && (y = y * (e * 0.9) / r.width, s.font = `bold ${y}px "Georgia", serif`), s.fillStyle = "white", s.textAlign = "center", s.textBaseline = "middle", s.fillText(t, e / 2, n / 2.05);
+  const h = s.getImageData(0, 0, e, n).data, g = [], d = window.innerWidth < 600 ? 6 : 8;
   for (let c = 0; c < n; c += d)
     for (let a = 0; a < e; a += d) {
       const l = (c * e + a) * 4;
-      h[l + 3] > 128 && y.push({
+      h[l + 3] > 128 && g.push({
         x: a + (Math.random() - 0.5) * 4,
         y: c + (Math.random() - 0.5) * 4
       });
     }
-  return y;
+  return g;
 }
-function lt(t, e, n) {
+function ht(t, e, n) {
   const i = I(t);
   return L(() => {
     i.current = t;
-  }, [t]), { getPixelsForText: j, updateTextTargets: (m, r, o) => {
+  }, [t]), { getPixelsForText: j, updateTextTargets: (y, r, o) => {
     var q, b;
-    const h = r || ((q = n.current) == null ? void 0 : q.offsetWidth) || window.innerWidth, y = o || ((b = n.current) == null ? void 0 : b.offsetHeight) || window.innerHeight;
-    if (!m) {
+    const h = r || ((q = n.current) == null ? void 0 : q.offsetWidth) || window.innerWidth, g = o || ((b = n.current) == null ? void 0 : b.offsetHeight) || window.innerHeight;
+    if (!y) {
       e.current.forEach((f) => {
-        const p = 50 + Math.random() * (h - 100), R = 50 + Math.random() * (y - 100);
+        const p = 50 + Math.random() * (h - 100), R = 50 + Math.random() * (g - 100);
         (Math.abs(p - f.x) > 20 || Math.abs(R - f.y) > 20) && (f.vx += (Math.random() - 0.5) * 20, f.vy += (Math.random() - 0.5) * 20), f.targetX = p, f.targetY = R;
       });
       return;
     }
-    const d = j(m, h, y);
+    const d = j(y, h, g);
     if (d.length === 0) return;
     const c = h * 0.15, a = d.map((C) => ({ pt: C, key: C.x + (Math.random() - 0.5) * c }));
     a.sort((C, f) => C.key - f.key);
@@ -666,14 +666,14 @@ function yt({
   particleSize: n = 1,
   particleDensity: i = 1,
   particleEase: s = 1,
-  isMagnet: m = !0,
+  isMagnet: y = !0,
   clickMode: r = "none",
   particleShape: o = "circle",
   backgroundColor: h = "#050505"
 }) {
-  const y = I(null), d = I(null), c = I([]), a = I(0), l = I(0), u = ct(d), w = I({ isMagnet: m, clickMode: r, particleShape: o, backgroundColor: h });
-  w.current = { isMagnet: m, clickMode: r, particleShape: o, backgroundColor: h };
-  const { updateTextTargets: P, textRef: q } = lt(
+  const g = I(null), d = I(null), c = I([]), a = I(0), l = I(0), u = at(d), w = I({ isMagnet: y, clickMode: r, particleShape: o, backgroundColor: h });
+  w.current = { isMagnet: y, clickMode: r, particleShape: o, backgroundColor: h };
+  const { updateTextTargets: P, textRef: q } = ht(
     t,
     c,
     d
@@ -701,7 +701,7 @@ function yt({
       f.easeMultiplier = s;
     });
   }, [s]), L(() => {
-    if (c.current.length > 0 && y.current && d.current) {
+    if (c.current.length > 0 && g.current && d.current) {
       const f = window.innerWidth < 600 ? 1500 : 3e3, p = Math.floor(f * i), R = c.current.length;
       if (p > R) {
         const S = d.current.getBoundingClientRect(), D = b();
@@ -713,7 +713,7 @@ function yt({
       } else p < R && c.current.splice(p);
     }
   }, [i]), L(() => {
-    const f = d.current, p = y.current;
+    const f = d.current, p = g.current;
     if (!f || !p) return;
     const R = (v) => {
       for (const X of v) {
@@ -753,20 +753,40 @@ function yt({
       children: /* @__PURE__ */ $(
         "canvas",
         {
-          ref: y,
+          ref: g,
           style: { display: "block", width: "100%", height: "100%" }
         }
       )
     }
   );
 }
+function gt({
+  name: t,
+  config: e,
+  width: n = "100%",
+  height: i = "60vh",
+  backgroundColor: s = "#050505",
+  className: y = "",
+  style: r
+}) {
+  const o = { name: t, ...e };
+  return /* @__PURE__ */ $(
+    ct,
+    {
+      width: n,
+      height: i,
+      backgroundColor: s,
+      className: y,
+      style: r,
+      background: o
+    }
+  );
+}
 export {
-  et as BackgroundParticleEngine,
-  ot as JellyfishParticleEngine,
-  rt as NetParticleEngine,
-  ft as ParticleCanvas,
+  gt as ParticleBackground,
+  ct as ParticleCanvas,
   yt as TextParticleEngine,
-  at as getMagnetTarget,
-  ct as useParticleInteraction,
-  lt as useTextParticles
+  lt as getMagnetTarget,
+  at as useParticleInteraction,
+  ht as useTextParticles
 };
