@@ -3,7 +3,7 @@ import { BackgroundModeName, BackgroundCanvas } from '../../types/background';
 import ParticleCanvas from '../ParticleCanvas';
 
 export interface ParticleBackgroundProps {
-  name: BackgroundModeName;
+  name?: BackgroundModeName;
   config?: Omit<BackgroundCanvas, 'name'>;
   width?: string | number;
   height?: string | number;
@@ -13,7 +13,7 @@ export interface ParticleBackgroundProps {
 }
 
 export default function ParticleBackground({
-  name,
+  name = 'FOLLOW_POINTER',
   config,
   width = '100%',
   height = '60vh',
@@ -21,7 +21,12 @@ export default function ParticleBackground({
   className = '',
   style,
 }: ParticleBackgroundProps) {
-  const background: BackgroundCanvas = { name, ...config };
+  const background: BackgroundCanvas = {
+    name,
+    shape: 'bean',
+    orientation: 'vertical',
+    ...config,
+  };
 
   return (
     <ParticleCanvas
