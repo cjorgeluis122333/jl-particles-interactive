@@ -11,7 +11,7 @@
   "homepage": "https://cjorgeluis122333.github.io/jl-particles-interactive",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cjorgeluis122333/jl-particles-interactive"
+    "url": "git+https://github.com/cjorgeluis122333/jl-particles-interactive.git"
   },
   "bugs": {
     "url": "https://github.com/cjorgeluis122333/jl-particles-interactive/issues"

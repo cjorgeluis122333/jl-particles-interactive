@@ -52,9 +52,9 @@ jobs:
 
       - name: Publish to npm
         if: steps.tag_check.outputs.exists == 'false'
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          npm publish --access public
 
       - name: Create git tag
         if: steps.tag_check.outputs.exists == 'false'
