@@ -92,7 +92,7 @@ function SubSection({ title, children }: { title: string; children: React.ReactN
   );
 }
 
-export default function ApiReferenceSection() {
+export default function ApiReferencePage() {
   return (
     <SectionWrapper
       id="api"
@@ -101,7 +101,6 @@ export default function ApiReferenceSection() {
     >
       <div className="space-y-10">
 
-        {/* ParticleCanvas */}
         <SubSection title="<ParticleCanvas>">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             Container div that establishes the particle stage. Manages sizing, device pixel ratio scaling,
@@ -118,7 +117,6 @@ export default function ApiReferenceSection() {
           </p>
         </SubSection>
 
-        {/* TextParticleEngine */}
         <SubSection title="<TextParticleEngine>">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             The core animation engine. Renders <code className="text-violet-300 font-mono text-xs">text</code> as
@@ -137,7 +135,6 @@ export default function ApiReferenceSection() {
           </div>
         </SubSection>
 
-        {/* ParticleBackground */}
         <SubSection title="<ParticleBackground>">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             Unified background component. Selects the engine via the{' '}
@@ -148,7 +145,6 @@ export default function ApiReferenceSection() {
           <PropTable rows={PBG_PROPS} />
         </SubSection>
 
-        {/* useParticleInteraction */}
         <SubSection title="useParticleInteraction">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             Tracks pointer events (pointermove, pointerleave, pointerdown, pointerup) on a container element.
@@ -172,7 +168,6 @@ export default function ApiReferenceSection() {
           </div>
         </SubSection>
 
-        {/* getMagnetTarget */}
         <SubSection title="getMagnetTarget">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             Pure function. Computes the effective target position for a particle given magnetic forces.
@@ -188,7 +183,6 @@ export default function ApiReferenceSection() {
           </div>
         </SubSection>
 
-        {/* useTextParticles */}
         <SubSection title="useTextParticles">
           <p className="text-sm text-white/50 mb-4 leading-relaxed">
             Converts text into target positions using an offscreen canvas. Returns{' '}
@@ -198,7 +192,6 @@ export default function ApiReferenceSection() {
           <CodeBlock code={TEXT_PARTICLES_HOOK_CODE} language="ts" />
         </SubSection>
 
-        {/* Types */}
         <SubSection title="Types">
           <CodeBlock code={TYPES_CODE} language="ts" />
         </SubSection>

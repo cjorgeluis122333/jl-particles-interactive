@@ -25,7 +25,7 @@ const FRAMEWORKS = [
   { name: 'TypeScript', supported: true, note: 'strict mode, declarations included' },
 ];
 
-export default function InstallSection() {
+export default function InstallPage() {
   return (
     <SectionWrapper
       id="install"
@@ -33,7 +33,6 @@ export default function InstallSection() {
       subtitle="One command, zero runtime dependencies."
     >
       <div className="space-y-8">
-        {/* npm install */}
         <div>
           <CodeBlock code={INSTALL_CODE} language="bash" />
           <p className="mt-3 text-sm text-white/45">
@@ -43,7 +42,6 @@ export default function InstallSection() {
           </p>
         </div>
 
-        {/* Framework compatibility */}
         <div>
           <h3 className="text-base font-semibold text-white mb-4">Framework compatibility</h3>
           <div className="rounded-xl border border-white/10 overflow-hidden">
@@ -75,7 +73,6 @@ export default function InstallSection() {
           </div>
         </div>
 
-        {/* Next.js note */}
         <div>
           <h3 className="text-base font-semibold text-white mb-4">Next.js note</h3>
           <p className="text-sm text-white/50 mb-3">
@@ -86,7 +83,6 @@ export default function InstallSection() {
           <CodeBlock code={NEXTJS_CODE} language="tsx" />
         </div>
 
-        {/* Zero deps callout */}
         <div className="flex gap-3 p-4 rounded-xl bg-violet-500/10 border border-violet-500/20">
           <span className="text-violet-400 shrink-0 mt-0.5">ℹ</span>
           <p className="text-sm text-white/60 leading-relaxed">

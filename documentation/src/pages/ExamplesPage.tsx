@@ -69,7 +69,6 @@ const JELLYFISH_FULL_CODE = `import { ParticleBackground } from 'jl-particle-int
 export default function AnimatedPage() {
   return (
     <div style={{ position: 'relative' }}>
-      {/* Full-screen JELLYFISH background */}
       <ParticleBackground
         name="JELLYFISH"
         width="100%"
@@ -83,8 +82,6 @@ export default function AnimatedPage() {
           pointerTrackingSpeed: 0.02,
         }}
       />
-
-      {/* Page content renders on top */}
       <div style={{ position: 'relative', zIndex: 10 }}>
         <h1>Your content here</h1>
       </div>
@@ -145,7 +142,7 @@ function HeroDemo() {
   );
 }
 
-export default function ExamplesSection() {
+export default function ExamplesPage() {
   return (
     <SectionWrapper
       id="examples"
@@ -154,7 +151,6 @@ export default function ExamplesSection() {
     >
       <div className="space-y-14">
 
-        {/* Hero with NET background */}
         <div>
           <h3 className="text-base font-semibold text-white mb-1">Hero section with word carousel + NET background</h3>
           <p className="text-sm text-white/45 mb-4">
@@ -168,7 +164,6 @@ export default function ExamplesSection() {
           </LiveDemo>
         </div>
 
-        {/* Loading screen */}
         <div>
           <h3 className="text-base font-semibold text-white mb-1">Loading screen</h3>
           <p className="text-sm text-white/45 mb-4">
@@ -195,7 +190,6 @@ export default function ExamplesSection() {
           </LiveDemo>
         </div>
 
-        {/* Click attract */}
         <div>
           <h3 className="text-base font-semibold text-white mb-1">Click attract</h3>
           <p className="text-sm text-white/45 mb-4">
@@ -223,7 +217,6 @@ export default function ExamplesSection() {
           </LiveDemo>
         </div>
 
-        {/* Full-page JELLYFISH background */}
         <div>
           <h3 className="text-base font-semibold text-white mb-1">Full-screen JELLYFISH background</h3>
           <p className="text-sm text-white/45 mb-4">

@@ -13,7 +13,7 @@ export default function App() {
   );
 }`;
 
-export default function QuickStartSection() {
+export default function QuickStartPage() {
   return (
     <SectionWrapper
       id="quick-start"

@@ -1,10 +1,27 @@
 import { Menu, ExternalLink } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { NAV_ITEMS } from '../App';
 
 interface NavbarProps {
   onMenuClick: () => void;
 }
 
+function getPageTitle(pathname: string): string {
+  for (const item of NAV_ITEMS) {
+    if (item.path === pathname) return item.label;
+    if (item.children) {
+      for (const child of item.children) {
+        if (child.path === pathname) return `${item.label} — ${child.label}`;
+      }
+    }
+  }
+  return 'Documentation';
+}
+
 export default function Navbar({ onMenuClick }: NavbarProps) {
+  const location = useLocation();
+  const title = getPageTitle(location.pathname);
+
   return (
     <header className="sticky top-0 z-10 flex items-center gap-4 px-4 sm:px-6 py-3 bg-[#070710]/90 backdrop-blur-sm border-b border-white/10">
       {/* Hamburger — mobile only */}
@@ -18,7 +35,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
 
       {/* Page title — mobile only */}
       <span className="lg:hidden text-sm font-medium text-white/70 truncate">
-        Documentation
+        {title}
       </span>
 
       {/* Right side links */}
