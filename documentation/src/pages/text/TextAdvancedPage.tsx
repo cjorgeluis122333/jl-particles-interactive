@@ -18,11 +18,11 @@ export default function WordCarousel() {
   }, []);
 
   return (
-    <ParticleCanvas height="60vh" backgroundColor="#050505">
+    <ParticleCanvas height="300px" backgroundColor="#050505">
       <TextParticleEngine
         text={words[index]}
         particleColor={['96, 165, 250', '167, 139, 250', '244, 114, 182']}
-        particleSize={1.5}
+        particleDensity={0.5}
         particleEase={1.2}
         isMagnet={true}
         particleShape="bean"
@@ -46,11 +46,11 @@ export default function HeroSection() {
 
   return (
     <ParticleCanvas
-      height="60vh"
+      height="320px"
       backgroundColor="#050505"
       background={{
         name: 'NET',
-        density: 0.7,
+        density: 0.5,
         colors: ['#7dd3fc', '#60a5fa', '#a78bfa'],
         colorMode: 'mixed',
       }}
@@ -58,7 +58,8 @@ export default function HeroSection() {
       <TextParticleEngine
         text={words[index]}
         particleColor={['255, 255, 255']}
-        particleSize={1.8}
+        particleDensity={0.5}
+        particleSize={1.2}
         particleEase={1.3}
         isMagnet={true}
         particleShape="bean"
@@ -81,10 +82,8 @@ export default function LoadingScreen() {
         <TextParticleEngine
           text="Loading..."
           particleColor={['167, 139, 250', '96, 165, 250']}
-          particleSize={1}
-          particleDensity={0.8}
+          particleDensity={0.5}
           isMagnet={false}
-          particleShape="circle"
         />
       </ParticleCanvas>
     </div>
@@ -111,7 +110,7 @@ function CarouselDemo() {
       <TextParticleEngine
         text={CAROUSEL_WORDS[index]}
         particleColor={['96, 165, 250', '167, 139, 250', '244, 114, 182']}
-        particleSize={1.5}
+        particleDensity={0.5}
         particleEase={1.2}
         isMagnet={true}
         particleShape="bean"
@@ -138,7 +137,7 @@ function HeroDemo() {
       style={{ borderRadius: 0 }}
       background={{
         name: 'NET',
-        density: 0.55,
+        density: 0.5,
         colors: ['#7dd3fc', '#60a5fa', '#a78bfa'],
         colorMode: 'mixed',
       }}
@@ -146,7 +145,8 @@ function HeroDemo() {
       <TextParticleEngine
         text={HERO_WORDS[index]}
         particleColor={['255, 255, 255']}
-        particleSize={1.8}
+        particleDensity={0.5}
+        particleSize={1.2}
         particleEase={1.3}
         isMagnet={true}
         particleShape="bean"
@@ -178,7 +178,7 @@ export default function TextAdvancedPage() {
             Particles re-form smoothly on each change with an arc impulse for natural transitions.
           </p>
           <CodeBlock code={CAROUSEL_CODE} language="tsx" />
-          <LiveDemo height="240px">
+          <LiveDemo height="300px">
             <CarouselDemo />
           </LiveDemo>
         </div>
@@ -192,7 +192,7 @@ export default function TextAdvancedPage() {
             <code className="text-violet-300 font-mono text-xs">ParticleCanvas</code>. Both engines run simultaneously.
           </p>
           <CodeBlock code={HERO_CODE} language="tsx" />
-          <LiveDemo height="260px">
+          <LiveDemo height="320px">
             <HeroDemo />
           </LiveDemo>
         </div>
@@ -206,7 +206,7 @@ export default function TextAdvancedPage() {
             Disable <code className="text-violet-300 font-mono text-xs">isMagnet</code> for a non-interactive loading state.
           </p>
           <CodeBlock code={LOADING_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -216,10 +216,8 @@ export default function TextAdvancedPage() {
               <TextParticleEngine
                 text="Loading..."
                 particleColor={['167, 139, 250', '96, 165, 250']}
-                particleSize={1}
-                particleDensity={0.8}
+                particleDensity={0.5}
                 isMagnet={false}
-                particleShape="circle"
               />
             </ParticleCanvas>
           </LiveDemo>

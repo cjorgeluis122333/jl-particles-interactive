@@ -16,20 +16,21 @@ const PROPS = [
   { prop: 'backgroundColor', type: 'string', default: "'#050505'", description: "Hex background for trail-fade effect. Pass 'transparent' to disable fading." },
 ];
 
-const FREE_FLOAT_CODE = `<ParticleCanvas height="60vh" backgroundColor="#050505">
+const FREE_FLOAT_CODE = `<ParticleCanvas height="300px" backgroundColor="#050505">
   <TextParticleEngine
     text=""
     particleColor={['60, 165, 250', '167, 139, 250', '52, 211, 153']}
     particleSize={1.2}
+    particleDensity={0.5}
     isMagnet={true}
   />
 </ParticleCanvas>`;
 
-const HELLO_CODE = `<ParticleCanvas height="60vh" backgroundColor="#050505">
+const HELLO_CODE = `<ParticleCanvas height="300px" backgroundColor="#050505">
   <TextParticleEngine
     text="Hello"
     particleColor="255, 255, 255"
-    particleSize={1}
+    particleDensity={0.5}
     isMagnet={true}
   />
 </ParticleCanvas>`;
@@ -68,7 +69,7 @@ export default function TextBasicPage() {
             Great for loading screens or decorative backgrounds.
           </p>
           <CodeBlock code={FREE_FLOAT_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -79,6 +80,7 @@ export default function TextBasicPage() {
                 text=""
                 particleColor={['60, 165, 250', '167, 139, 250', '52, 211, 153']}
                 particleSize={1.2}
+                particleDensity={0.5}
                 isMagnet={true}
               />
             </ParticleCanvas>
@@ -93,7 +95,7 @@ export default function TextBasicPage() {
             form the letters. Hover to attract particles toward the cursor.
           </p>
           <CodeBlock code={HELLO_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -103,7 +105,7 @@ export default function TextBasicPage() {
               <TextParticleEngine
                 text="Hello"
                 particleColor="255, 255, 255"
-                particleSize={1}
+                particleDensity={0.5}
                 isMagnet={true}
               />
             </ParticleCanvas>

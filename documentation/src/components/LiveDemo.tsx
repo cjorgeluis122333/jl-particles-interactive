@@ -10,14 +10,14 @@ export default function LiveDemo({ children, height = '280px', label = 'Live Pre
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 
-  // Only mount the canvas when the demo scrolls into the viewport
+  // Mount canvas when visible, unmount when scrolled away
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setInView(true);
+        setInView(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );

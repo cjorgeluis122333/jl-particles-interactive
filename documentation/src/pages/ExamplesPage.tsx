@@ -19,11 +19,11 @@ export default function HeroSection() {
 
   return (
     <ParticleCanvas
-      height="60vh"
+      height="320px"
       backgroundColor="#050505"
       background={{
         name: 'NET',
-        density: 0.7,
+        density: 0.5,
         colors: ['#7dd3fc', '#60a5fa', '#a78bfa'],
         colorMode: 'mixed',
       }}
@@ -31,7 +31,8 @@ export default function HeroSection() {
       <TextParticleEngine
         text={words[index]}
         particleColor={['255, 255, 255']}
-        particleSize={1.8}
+        particleDensity={0.5}
+        particleSize={1.2}
         particleEase={1.3}
         isMagnet={true}
         particleShape="bean"
@@ -54,10 +55,8 @@ export default function LoadingScreen() {
         <TextParticleEngine
           text="Loading..."
           particleColor={['167, 139, 250', '96, 165, 250']}
-          particleSize={1}
-          particleDensity={0.8}
+          particleDensity={0.5}
           isMagnet={false}
-          particleShape="circle"
         />
       </ParticleCanvas>
     </div>
@@ -93,15 +92,14 @@ const ATTRACT_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl-par
 
 export default function AttractDemo() {
   return (
-    <ParticleCanvas height="60vh" backgroundColor="#050505">
+    <ParticleCanvas height="300px" backgroundColor="#050505">
       <TextParticleEngine
         text="Click me"
         particleColor={['250, 204, 21', '251, 146, 60', '244, 114, 182']}
-        particleSize={1.2}
+        particleDensity={0.5}
         particleEase={0.8}
         isMagnet={true}
         clickMode="attract"
-        particleShape="circle"
       />
     </ParticleCanvas>
   );
@@ -125,7 +123,7 @@ function HeroDemo() {
       style={{ borderRadius: 0 }}
       background={{
         name: 'NET',
-        density: 0.55,
+        density: 0.5,
         colors: ['#7dd3fc', '#60a5fa', '#a78bfa'],
         colorMode: 'mixed',
       }}
@@ -133,7 +131,8 @@ function HeroDemo() {
       <TextParticleEngine
         text={HERO_WORDS[index]}
         particleColor={['255, 255, 255']}
-        particleSize={1.8}
+        particleDensity={0.5}
+        particleSize={1.2}
         particleEase={1.3}
         isMagnet={true}
         particleShape="bean"
@@ -159,7 +158,7 @@ export default function ExamplesPage() {
             <code className="text-violet-300 font-mono text-xs">ParticleCanvas</code>. Both run simultaneously.
           </p>
           <CodeBlock code={HERO_CODE} language="tsx" />
-          <LiveDemo height="260px">
+          <LiveDemo height="320px">
             <HeroDemo />
           </LiveDemo>
         </div>
@@ -171,7 +170,7 @@ export default function ExamplesPage() {
             <code className="text-violet-300 font-mono text-xs">style</code> to make the canvas fill a fixed overlay.
           </p>
           <CodeBlock code={LOADING_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -181,10 +180,8 @@ export default function ExamplesPage() {
               <TextParticleEngine
                 text="Loading..."
                 particleColor={['167, 139, 250', '96, 165, 250']}
-                particleSize={1}
-                particleDensity={0.8}
+                particleDensity={0.5}
                 isMagnet={false}
-                particleShape="circle"
               />
             </ParticleCanvas>
           </LiveDemo>
@@ -197,7 +194,7 @@ export default function ExamplesPage() {
             toward the cursor on click. Combine with <code className="text-violet-300 font-mono text-xs">isMagnet</code> for dual interaction.
           </p>
           <CodeBlock code={ATTRACT_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -207,11 +204,10 @@ export default function ExamplesPage() {
               <TextParticleEngine
                 text="Click me"
                 particleColor={['250, 204, 21', '251, 146, 60', '244, 114, 182']}
-                particleSize={1.2}
+                particleDensity={0.5}
                 particleEase={0.8}
                 isMagnet={true}
                 clickMode="attract"
-                particleShape="circle"
               />
             </ParticleCanvas>
           </LiveDemo>

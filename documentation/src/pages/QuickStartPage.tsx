@@ -7,8 +7,11 @@ const QUICK_START_CODE = `import { ParticleCanvas, TextParticleEngine } from 'jl
 
 export default function App() {
   return (
-    <ParticleCanvas height="60vh">
-      <TextParticleEngine text="Hello" />
+    <ParticleCanvas height="300px" backgroundColor="#050505">
+      <TextParticleEngine
+        text="Hello"
+        particleDensity={0.5}
+      />
     </ParticleCanvas>
   );
 }`;
@@ -29,7 +32,7 @@ export default function QuickStartPage() {
 
         <CodeBlock code={QUICK_START_CODE} language="tsx" />
 
-        <LiveDemo height="240px">
+        <LiveDemo height="300px">
           <ParticleCanvas
             width="100%"
             height="100%"
@@ -38,10 +41,7 @@ export default function QuickStartPage() {
           >
             <TextParticleEngine
               text="Hello"
-              particleColor={['255, 255, 255']}
-              particleSize={1.2}
-              isMagnet={true}
-              clickMode="repel"
+              particleDensity={0.5}
             />
           </ParticleCanvas>
         </LiveDemo>

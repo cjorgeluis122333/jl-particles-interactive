@@ -3,38 +3,36 @@ import SectionWrapper from '../../components/SectionWrapper';
 import CodeBlock from '../../components/CodeBlock';
 import LiveDemo from '../../components/LiveDemo';
 
-const REPEL_CODE = `<ParticleCanvas height="60vh" backgroundColor="#050505">
+const REPEL_CODE = `<ParticleCanvas height="300px" backgroundColor="#050505">
   <TextParticleEngine
-    text="Hello 🖐️"
+    text="Hello"
     particleColor={['244, 114, 182', '251, 146, 60', '250, 204, 21', '52, 211, 153', '96, 165, 250']}
-    particleSize={1.3}
+    particleDensity={0.5}
     particleEase={1.2}
     isMagnet={true}
     clickMode="repel"
-    particleShape="circle"
   />
 </ParticleCanvas>`;
 
-const ATTRACT_CODE = `<ParticleCanvas height="60vh" backgroundColor="#050505">
+const ATTRACT_CODE = `<ParticleCanvas height="300px" backgroundColor="#050505">
   <TextParticleEngine
     text="Click me"
     particleColor={['250, 204, 21', '251, 146, 60', '244, 114, 182']}
-    particleSize={1.2}
+    particleDensity={0.5}
     particleEase={0.8}
     isMagnet={true}
     clickMode="attract"
-    particleShape="circle"
   />
 </ParticleCanvas>`;
 
 const SHAPES_CODE = `// Circle (default) — soft round dots
-<TextParticleEngine text="Circle" particleShape="circle" />
+<TextParticleEngine text="Circle" particleShape="circle" particleDensity={0.3} />
 
 // Square — pixel-art style
-<TextParticleEngine text="Square" particleShape="square" />
+<TextParticleEngine text="Square" particleShape="square" particleDensity={0.3} />
 
 // Bean — oriented elongated ovals
-<TextParticleEngine text="Bean" particleShape="bean" />`;
+<TextParticleEngine text="Bean" particleShape="bean" particleDensity={0.3} />`;
 
 export default function TextIntermediatePage() {
   return (
@@ -59,7 +57,7 @@ export default function TextIntermediatePage() {
             assign a random color from the array to each particle.
           </p>
           <CodeBlock code={REPEL_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -67,13 +65,12 @@ export default function TextIntermediatePage() {
               style={{ borderRadius: 0 }}
             >
               <TextParticleEngine
-                text="Hello 🖐️"
+                text="Hello"
                 particleColor={['244, 114, 182', '251, 146, 60', '250, 204, 21', '52, 211, 153', '96, 165, 250']}
-                particleSize={1.3}
+                particleDensity={0.5}
                 particleEase={1.2}
                 isMagnet={true}
                 clickMode="repel"
-                particleShape="circle"
               />
             </ParticleCanvas>
           </LiveDemo>
@@ -87,7 +84,7 @@ export default function TextIntermediatePage() {
             toward the cursor on click. Combine with <code className="text-violet-300 font-mono text-xs">isMagnet</code> for dual interaction.
           </p>
           <CodeBlock code={ATTRACT_CODE} language="tsx" />
-          <LiveDemo height="220px">
+          <LiveDemo height="300px">
             <ParticleCanvas
               width="100%"
               height="100%"
@@ -97,11 +94,10 @@ export default function TextIntermediatePage() {
               <TextParticleEngine
                 text="Click me"
                 particleColor={['250, 204, 21', '251, 146, 60', '244, 114, 182']}
-                particleSize={1.2}
+                particleDensity={0.5}
                 particleEase={0.8}
                 isMagnet={true}
                 clickMode="attract"
-                particleShape="circle"
               />
             </ParticleCanvas>
           </LiveDemo>
@@ -118,7 +114,7 @@ export default function TextIntermediatePage() {
             {(['circle', 'square', 'bean'] as const).map(shape => (
               <div key={shape}>
                 <p className="text-xs text-white/40 uppercase tracking-wider font-semibold mb-2 text-center">{shape}</p>
-                <LiveDemo height="160px" label={shape}>
+                <LiveDemo height="180px" label={shape}>
                   <ParticleCanvas
                     width="100%"
                     height="100%"
@@ -128,7 +124,7 @@ export default function TextIntermediatePage() {
                     <TextParticleEngine
                       text={shape.charAt(0).toUpperCase() + shape.slice(1)}
                       particleColor={['167, 139, 250', '96, 165, 250']}
-                      particleSize={1.2}
+                      particleDensity={0.3}
                       particleShape={shape}
                       isMagnet={true}
                     />
