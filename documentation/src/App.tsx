@@ -65,7 +65,6 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   { id: 'api', label: 'API Reference', path: '/api' },
-  { id: 'examples', label: 'Examples', path: '/examples' },
 ];
 
 export default function App() {

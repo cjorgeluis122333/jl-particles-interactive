@@ -21,7 +21,6 @@ import FollowPointerPage from '../documentation/src/pages/backgrounds/FollowPoin
 import NetPage from '../documentation/src/pages/backgrounds/NetPage';
 import JellyfishPage from '../documentation/src/pages/backgrounds/JellyfishPage';
 import ApiReferencePage from '../documentation/src/pages/ApiReferencePage';
-import ExamplesPage from '../documentation/src/pages/ExamplesPage';
 
 import DemoApp from '../demo/src/App';
 
@@ -50,7 +49,6 @@ const router = createBrowserRouter([
       { path: 'backgrounds/net', element: <NetPage /> },
       { path: 'backgrounds/jellyfish', element: <JellyfishPage /> },
       { path: 'api', element: <ApiReferencePage /> },
-      { path: 'examples', element: <ExamplesPage /> },
       { path: '*', element: <IntroPage /> },
     ],
   },

@@ -63,7 +63,6 @@ documentation/
       InstallPage.tsx              ← /install — npm install, framework compat, Next.js note
       QuickStartPage.tsx           ← /quick-start — minimal code + live demo
       ApiReferencePage.tsx         ← /api — full API for all exports + types
-      ExamplesPage.tsx             ← /examples — 4 copy-paste recipes with live demos
       text/
         basic/
           FreeFloatingPage.tsx     ← /text/basic/free-floating — Free-floating Ambient example
@@ -99,7 +98,6 @@ documentation/
 /backgrounds/net               → NetPage
 /backgrounds/jellyfish         → JellyfishPage
 /api                           → ApiReferencePage
-/examples                      → ExamplesPage
 ```
 
 All routes prefixed with `basename: '/jl-particles-interactive/docs'`.
@@ -167,7 +165,6 @@ documentation/
         ├── InstallPage.tsx            ← /install
         ├── QuickStartPage.tsx         ← /quick-start
         ├── ApiReferencePage.tsx       ← /api
-        ├── ExamplesPage.tsx           ← /examples
         │
         ├── text/
         │   ├── TextBasicPage.tsx      ← /text/basic
@@ -242,12 +239,11 @@ Renders `<section id={id} className="border-b border-white/5">`. Content inside 
 | `QuickStartPage` | `/quick-start` | 1 (TextParticleEngine "Hello") | SectionWrapper |
 | `TextBasicPage` | `/text/basic` | 2 (free-float, simple text) | SectionWrapper |
 | `TextIntermediatePage` | `/text/intermediate` | 4 (repel, attract, 3× shapes) | SectionWrapper |
-| `TextAdvancedPage` | `/text/advanced` | 3 (carousel, hero+NET, loading) | SectionWrapper |
+| `TextAdvancedPage` | `/text/advanced` | 2 (carousel, hero+NET) | SectionWrapper |
 | `FollowPointerPage` | `/backgrounds/follow-pointer` | Fixed BG (page-level FOLLOW_POINTER) | Custom: fixed bg + glassmorphic cards |
 | `NetPage` | `/backgrounds/net` | Fixed BG (page-level NET) | Custom: fixed bg + glassmorphic cards |
 | `JellyfishPage` | `/backgrounds/jellyfish` | Fixed BG (page-level JELLYFISH) | Custom: fixed bg + glassmorphic cards |
 | `ApiReferencePage` | `/api` | 0 | SectionWrapper |
-| `ExamplesPage` | `/examples` | 4 (hero+NET, loading, attract, jellyfish) | SectionWrapper |
 
 ---
 
@@ -338,3 +334,4 @@ After every task that modifies the documentation project, update this file befor
 - 2026-06-30: **Route-based restructuring.** Converted from single-page scroll to multi-route SPA with `react-router-dom` v6. Added `React.lazy` code splitting (11 page chunks). Replaced `sections/` directory with `pages/` directory. IntroPage redesigned with full-viewport FOLLOW_POINTER hero + centered glassmorphic install card. Text Particles split into 3 sub-routes (Basic/Intermediate/Advanced). Each background mode (FOLLOW_POINTER, NET, JELLYFISH) gets its own page with the effect running as a fixed page background behind glassmorphic content cards. Sidebar updated with `NavLink` and collapsible groups. Added `public/404.html` + SPA redirect handler in `index.html` for GitHub Pages routing support. Added `react-router-dom` dependency.
 - 2026-06-30: **Text demo legibility fix.** `LiveDemo` IntersectionObserver now toggles mount/unmount (was mount-only, never unmounting off-screen canvases). All text particle demos updated: `particleDensity` set to 0.5 (single demos) or 0.3 (shape grid) — was default 1.0 causing 3000-particle blob in small containers. `particleSize` reduced to ≤1.0 (was 1.2–1.8). Container heights increased to 300px (was 220px). All code string constants synced exactly to match preview JSX props — code examples now produce the same visual as the preview. Affected files: LiveDemo.tsx, QuickStartPage.tsx, TextBasicPage.tsx, TextIntermediatePage.tsx, TextAdvancedPage.tsx, ExamplesPage.tsx.
 - 2026-07-27: **TextParticleEngine initialization fix.** Fixed an issue where the text was not correctly sized/positioned on initial load. `handleResize` in `TextParticleEngine` now uses `textRef.current` instead of the stale `text` prop from the initial render closure. Added a `document.fonts.ready` check on mount to recalculate text targets once web fonts have fully loaded, ensuring `measureText` calculations are completely accurate when the library is used in external apps.
+- 2026-07-27: **Removal of Examples page.** Removed the redundant/unused "Examples" navigation link and page (`ExamplesPage.tsx`) entirely from the documentation layout, routes, and configs (`App.tsx`, `main.tsx`).
