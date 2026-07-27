@@ -9,10 +9,13 @@ import InstallPage from '../documentation/src/pages/InstallPage';
 import QuickStartPage from '../documentation/src/pages/QuickStartPage';
 import FreeFloatingPage from '../documentation/src/pages/text/basic/FreeFloatingPage';
 import SimpleTextPage from '../documentation/src/pages/text/basic/SimpleTextPage';
+import MultilinePage from '../documentation/src/pages/text/basic/MultilinePage';
 import RepelPage from '../documentation/src/pages/text/intermediate/RepelPage';
 import AttractPage from '../documentation/src/pages/text/intermediate/AttractPage';
 import ShapesPage from '../documentation/src/pages/text/intermediate/ShapesPage';
+import DynamicInputPage from '../documentation/src/pages/text/intermediate/DynamicInputPage';
 import CarouselPage from '../documentation/src/pages/text/advanced/CarouselPage';
+import MultilineCarouselPage from '../documentation/src/pages/text/advanced/MultilineCarouselPage';
 import HeroComboPage from '../documentation/src/pages/text/advanced/HeroComboPage';
 import LoadingScreenPage from '../documentation/src/pages/text/advanced/LoadingScreenPage';
 import FollowPointerPage from '../documentation/src/pages/backgrounds/FollowPointerPage';
@@ -34,12 +37,15 @@ const router = createBrowserRouter([
       { path: 'text/basic', element: <FreeFloatingPage /> },
       { path: 'text/basic/free-floating', element: <FreeFloatingPage /> },
       { path: 'text/basic/simple-text', element: <SimpleTextPage /> },
+      { path: 'text/basic/multiline', element: <MultilinePage /> },
       { path: 'text/intermediate', element: <RepelPage /> },
       { path: 'text/intermediate/repel', element: <RepelPage /> },
       { path: 'text/intermediate/attract', element: <AttractPage /> },
       { path: 'text/intermediate/shapes', element: <ShapesPage /> },
+      { path: 'text/intermediate/dynamic-input', element: <DynamicInputPage /> },
       { path: 'text/advanced', element: <CarouselPage /> },
       { path: 'text/advanced/carousel', element: <CarouselPage /> },
+      { path: 'text/advanced/multiline-carousel', element: <MultilineCarouselPage /> },
       { path: 'text/advanced/hero', element: <HeroComboPage /> },
       { path: 'text/advanced/loading', element: <LoadingScreenPage /> },
       { path: 'backgrounds/follow-pointer', element: <FollowPointerPage /> },

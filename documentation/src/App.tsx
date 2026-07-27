@@ -30,6 +30,7 @@ export const NAV_ITEMS: NavItem[] = [
         items: [
           { id: 'text-free-floating', label: 'Free-floating Ambient', path: '/text/basic/free-floating' },
           { id: 'text-simple-text', label: 'Simple Text Rendering', path: '/text/basic/simple-text' },
+          { id: 'text-multiline', label: 'Multiline Text Rendering', path: '/text/basic/multiline' },
         ],
       },
       {
@@ -39,6 +40,7 @@ export const NAV_ITEMS: NavItem[] = [
           { id: 'text-repel', label: 'Magnetic Hover + Repel', path: '/text/intermediate/repel' },
           { id: 'text-attract', label: 'Click Attract', path: '/text/intermediate/attract' },
           { id: 'text-shapes', label: 'Particle Shapes', path: '/text/intermediate/shapes' },
+          { id: 'text-dynamic-input', label: 'Dynamic User Input', path: '/text/intermediate/dynamic-input' },
         ],
       },
       {
@@ -46,6 +48,7 @@ export const NAV_ITEMS: NavItem[] = [
         title: 'Advanced',
         items: [
           { id: 'text-carousel', label: 'Word Carousel', path: '/text/advanced/carousel' },
+          { id: 'text-multiline-carousel', label: 'Multiline Quote Carousel', path: '/text/advanced/multiline-carousel' },
           { id: 'text-hero-combo', label: 'Text + Background Combo', path: '/text/advanced/hero' },
           { id: 'text-loading-screen', label: 'Loading Screen', path: '/text/advanced/loading' },
         ],

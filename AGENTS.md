@@ -275,7 +275,7 @@ import { TextParticleEngine } from 'jl-particle-interactive';
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `text` | `string` | **required** | Text to form. Empty string (`''`) scatters all particles freely |
+| `text` | `string \| string[]` | **required** | Text to form (array for multiple lines). Empty string (`''`) scatters all particles freely |
 | `particleColor` | `string \| string[]` | `'255, 255, 255'` | RGB string(s). Array = each particle gets a random color from the list |
 | `particleSize` | `number` | `1` | Size multiplier (0.5 = small, 2 = large) |
 | `particleDensity` | `number` | `1` | Count multiplier (0.5 = half, 2 = double). Base: 3000 desktop / 1500 mobile |
@@ -583,6 +583,8 @@ cd demo && npm run build
 - 2026-07-27: **Text Truncation Fix.** Updated particle assignment logic in `useTextParticles`. When the offscreen text generates more pixels than available particles (especially on smaller containers due to the dynamic gap), particles are now correctly uniformly distributed across the entire `sortedPoints` array via a proportional index calculation (`Math.floor((j / numParticles) * numPoints)`). Previously, particles just mapped 1-to-1 to the first N pixels after X-coordinate sorting, resulting in the right half of text strings being visually chopped off.
 - 2026-07-27: **Mejora del renderizado de texto (Anti-aliasing y Distribución).** Se actualizó el muestreo en `useTextParticles` para usar probabilidad estocástica (`Math.random() * 255 < alpha`) en lugar de un umbral duro, logrando bordes suaves anti-aliased. El ruido espacial (jitter) se limitó exactamente al tamaño del `gap`, logrando un muestreo estratificado perfecto que elimina huecos y agrupaciones antiestéticas.
 - 2026-07-27: **Soporte Multilínea en TextParticleEngine.** Se añadió soporte para pasar múltiples líneas de texto utilizando arreglos de strings (`string | string[]`). Para mantener la arquitectura limpia (DRY), no se duplicó el hook, sino que se extrajo la lógica de muestreo del canvas (conversión de texto a píxeles) a un nuevo archivo de utilidad `src/utils/textSampling.ts`. Esto permite a `TextParticleEngine` escalar la fuente automáticamente para que todas las líneas quepan dentro del lienzo, y distribuir las partículas en las oraciones sin necesidad de usar un prop `mode`.
+- 2026-07-27: **Documentación de Soporte Multilínea.** Se agregó una página de ejemplo dedicada para la renderización de texto multilínea ("Multiline Text Rendering") dentro de la sección básica del menú lateral de la aplicación de documentación, incluyendo un ejemplo interactivo en tiempo real y el bloque de código correspondiente. También se sincronizaron las rutas de desarrollo del enrutador principal en `src/main.tsx` para evitar que la ruta de multilínea renderizara la pantalla de introducción (IntroPage).
+- 2026-07-27: **Mejora de Legibilidad Multilínea.** Se optimizó la legibilidad en todos los ejemplos de texto multilínea de la documentación (`MultilinePage`, `DynamicInputPage` y `MultilineCarouselPage`). Se incrementó la densidad de partículas a `0.8` (antes `0.4` o `0.5`) para asegurar una distribución densa que defina claramente cada carácter, y se cambió la forma de partículas por defecto a `'circle'` para evitar el desenfoque u overlap que genera la forma `'bean'`.
 | Change type | Update this section |
 |---|---|
 | New file added | Section 3 — Annotated File Tree |

@@ -172,6 +172,28 @@ export default function WordCarousel() {
 
 ---
 
+### 4. Multiline text
+You can pass an array of strings to display multiple lines of text simultaneously. The engine automatically scales the font and centers all the lines vertically.
+
+```tsx
+import { ParticleCanvas, TextParticleEngine } from 'jl-particle-interactive';
+
+export default function MultilineParticles() {
+  return (
+    <ParticleCanvas height="60vh" backgroundColor="#050505">
+      <TextParticleEngine
+        text={['Creative', 'Interactive', 'Particles']}
+        particleColor={['#60a5fa', '#34d399', '#f472b6']}
+        particleSize={1.2}
+        isMagnet={true}
+      />
+    </ParticleCanvas>
+  );
+}
+```
+
+---
+
 ## Background examples
 
 Use `<ParticleBackground>` for standalone animated backgrounds. Set the mode with the `name` prop and pass all options through `config`.
@@ -312,7 +334,7 @@ Container that combines text particles with an optional background. Use `backgro
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `text` | `string` | **required** | Text the particles form |
+| `text` | `string \| string[]` | **required** | Text the particles form (array for multiple lines) |
 | `particleColor` | `string \| string[]` | `'255, 255, 255'` | RGB string or array of hex colors |
 | `particleSize` | `number` | `1` | Size multiplier |
 | `particleDensity` | `number` | `1` | Particle count multiplier |
