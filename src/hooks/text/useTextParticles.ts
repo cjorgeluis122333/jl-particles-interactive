@@ -1,69 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 import { Particle } from '../../components/text/Particle';
-
-function getPixelsForText(text: string, width: number, height: number): { x: number; y: number }[] {
-  if (width <= 0 || height <= 0) return [];
-  const w = Math.floor(width);
-  const h = Math.floor(height);
-  const canvas = document.createElement('canvas');
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  if (!ctx) return [];
-
-  ctx.clearRect(0, 0, w, h);
-
-  let fontSize = Math.min(w, h) * 0.65;
-  ctx.font = `bold ${fontSize}px "Georgia", serif`;
-
-  const textMetrics = ctx.measureText(text);
-  if (textMetrics.width > w * 0.9) {
-    fontSize = fontSize * (w * 0.9) / textMetrics.width;
-    ctx.font = `bold ${fontSize}px "Georgia", serif`;
-  }
-
-  ctx.fillStyle = 'white';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(text, w / 2, h / 2.05);
-
-  const imageData = ctx.getImageData(0, 0, w, h);
-  const pixels = imageData.data;
-  const points: { x: number; y: number }[] = [];
-
-  const gap = Math.max(2, Math.floor(fontSize / 40));
-  for (let y = 0; y < h; y += gap) {
-    for (let x = 0; x < w; x += gap) {
-      const index = (y * w + x) * 4;
-      const alpha = pixels[index + 3];
-
-      if (Math.random() * 255 < alpha) {
-        points.push({
-          x: x + (Math.random() - 0.5) * gap,
-          y: y + (Math.random() - 0.5) * gap,
-        });
-      }
-    }
-  }
-  return points;
-}
+import { getPixelsForText } from '../../utils/textSampling';
 
 export function useTextParticles(
-  text: string,
+  text: string | string[],
   particlesRef: React.MutableRefObject<Particle[]>,
   containerRef: React.RefObject<HTMLElement | null>
 ) {
-  const textRef = useRef<string>(text);
+  const textRef = useRef<string | string[]>(text);
 
   useEffect(() => {
     textRef.current = text;
   }, [text]);
 
-  const updateTextTargets = (char: string, w?: number, h?: number) => {
+  const updateTextTargets = (char: string | string[], w?: number, h?: number) => {
     const width = w || containerRef.current?.offsetWidth || window.innerWidth;
     const height = h || containerRef.current?.offsetHeight || window.innerHeight;
 
-    if (!char) {
+    const isEmpty = Array.isArray(char) ? char.length === 0 || char.every(c => !c) : !char;
+
+    if (isEmpty) {
       const padding = 50;
       particlesRef.current.forEach(p => {
         const targetX = padding + Math.random() * (width - padding * 2);
@@ -81,6 +37,7 @@ export function useTextParticles(
     }
 
     const points = getPixelsForText(char, width, height);
+
     if (points.length === 0) return;
 
     const noiseFactor = width * 0.15;
@@ -96,7 +53,6 @@ export function useTextParticles(
 
     for (let i = 0; i < sortedParticleIndices.length; i += chunkSize) {
       const end = Math.min(i + chunkSize, sortedParticleIndices.length);
-
       const pIndicesChunk = sortedParticleIndices.slice(i, end);
       const ptsChunk: { x: number; y: number }[] = [];
 
@@ -119,7 +75,6 @@ export function useTextParticles(
         if (Math.abs(distanceX) > 20 || Math.abs(distanceY) > 20) {
           p.vx += (Math.random() - 0.5) * 20;
           p.vy += (Math.random() - 0.5) * 20;
-
           const arcStrength = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 10 + 5);
           p.vx += Math.sign(distanceY) * arcStrength;
           p.vy -= Math.sign(distanceX) * arcStrength;

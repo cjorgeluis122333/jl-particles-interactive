@@ -5,7 +5,7 @@ import { useParticleInteraction, ClickMode } from '../../hooks/useParticleIntera
 import { ParticleShape } from '../../types';
 
 export interface TextParticleEngineProps {
-  text: string;
+  text: string | string[];
   particleColor?: string | string[];
   particleSize?: number;
   particleDensity?: number;
@@ -195,7 +195,11 @@ export default function TextParticleEngine({
         ctx.globalCompositeOperation = 'screen';
       }
 
-      const isActive = textRef.current !== '';
+      const currentText = textRef.current;
+      const isEmpty = Array.isArray(currentText)
+        ? currentText.length === 0 || currentText.every(t => !t)
+        : !currentText;
+      const isActive = !isEmpty;
       const mx = mouseRef.current.active ? mouseRef.current.x : null;
       const my = mouseRef.current.active ? mouseRef.current.y : null;
       const isDown = mouseRef.current.isDown;

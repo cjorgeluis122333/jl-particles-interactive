@@ -51,7 +51,9 @@ export default function TextPlayground() {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  const displayText = text || (showDefaultWords ? DEFAULT_WORDS[defaultWordIndex] : '');
+  const displayText = text
+    ? (text.includes('\n') ? text.split('\n') : text)
+    : (showDefaultWords ? DEFAULT_WORDS[defaultWordIndex] : '');
 
   const cycleClickMode = useCallback(() => {
     setClickMode((prev) => {
@@ -294,13 +296,13 @@ export default function TextPlayground() {
 
           {/* Row 3 — Text input */}
           <div className="flex justify-center">
-            <input
-              type="text"
+            <textarea
               value={text}
-              onChange={(e) => setText(e.target.value.toUpperCase().slice(0, 40))}
-              placeholder="ENTER TEXT"
+              onChange={(e) => setText(e.target.value.toUpperCase().slice(0, 100))}
+              placeholder="ENTER TEXT\n(MULTIPLE LINES SUPPORTED)"
               autoFocus
-              className="w-full max-w-md bg-transparent border-b border-white/20 focus:border-white text-center text-white text-[20px] uppercase tracking-[0.2em] outline-none placeholder:text-white/20 transition-colors py-1"
+              rows={2}
+              className="w-full max-w-md bg-transparent border-b border-white/20 focus:border-white text-center text-white text-[20px] uppercase tracking-[0.2em] outline-none placeholder:text-white/20 transition-colors py-1 resize-none custom-scrollbar"
             />
           </div>
         </div>
