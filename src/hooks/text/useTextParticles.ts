@@ -101,7 +101,13 @@ export function useTextParticles(
       const ptsChunk: { x: number; y: number }[] = [];
 
       for (let j = i; j < end; j++) {
-        ptsChunk.push(sortedPoints[j % sortedPoints.length]);
+        let ptIndex;
+        if (sortedParticleIndices.length >= sortedPoints.length) {
+          ptIndex = j % sortedPoints.length;
+        } else {
+          ptIndex = Math.floor((j / sortedParticleIndices.length) * sortedPoints.length);
+        }
+        ptsChunk.push(sortedPoints[ptIndex]);
       }
 
       pIndicesChunk.sort((a, b) => particlesRef.current[a].y - particlesRef.current[b].y);
