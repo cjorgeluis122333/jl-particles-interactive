@@ -7,7 +7,12 @@ export interface NavItem {
   id: string;
   label: string;
   path: string;
-  children?: NavItem[];
+  sections?: {
+    id: string;
+    title: string;
+    items: { id: string; label: string; path: string }[];
+  }[];
+  children?: { id: string; label: string; path: string }[];
 }
 
 export const NAV_ITEMS: NavItem[] = [
@@ -17,11 +22,34 @@ export const NAV_ITEMS: NavItem[] = [
   {
     id: 'text-particles',
     label: 'Text Particles',
-    path: '/text/basic',
-    children: [
-      { id: 'text-basic', label: 'Basic', path: '/text/basic' },
-      { id: 'text-intermediate', label: 'Intermediate', path: '/text/intermediate' },
-      { id: 'text-advanced', label: 'Advanced', path: '/text/advanced' },
+    path: '/text/basic/free-floating',
+    sections: [
+      {
+        id: 'basic',
+        title: 'Basic',
+        items: [
+          { id: 'text-free-floating', label: 'Free-floating Ambient', path: '/text/basic/free-floating' },
+          { id: 'text-simple-text', label: 'Simple Text Rendering', path: '/text/basic/simple-text' },
+        ],
+      },
+      {
+        id: 'intermediate',
+        title: 'Intermediate',
+        items: [
+          { id: 'text-repel', label: 'Magnetic Hover + Repel', path: '/text/intermediate/repel' },
+          { id: 'text-attract', label: 'Click Attract', path: '/text/intermediate/attract' },
+          { id: 'text-shapes', label: 'Particle Shapes', path: '/text/intermediate/shapes' },
+        ],
+      },
+      {
+        id: 'advanced',
+        title: 'Advanced',
+        items: [
+          { id: 'text-carousel', label: 'Word Carousel', path: '/text/advanced/carousel' },
+          { id: 'text-hero-combo', label: 'Text + Background Combo', path: '/text/advanced/hero' },
+          { id: 'text-loading-screen', label: 'Loading Screen', path: '/text/advanced/loading' },
+        ],
+      },
     ],
   },
   {

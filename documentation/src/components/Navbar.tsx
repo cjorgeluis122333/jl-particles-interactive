@@ -1,5 +1,5 @@
-import { Menu, ExternalLink } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { Menu, ExternalLink, Play } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../App';
 
 interface NavbarProps {
@@ -9,6 +9,13 @@ interface NavbarProps {
 function getPageTitle(pathname: string): string {
   for (const item of NAV_ITEMS) {
     if (item.path === pathname) return item.label;
+    if (item.sections) {
+      for (const section of item.sections) {
+        for (const child of section.items) {
+          if (child.path === pathname) return `${item.label} (${section.title}) — ${child.label}`;
+        }
+      }
+    }
     if (item.children) {
       for (const child of item.children) {
         if (child.path === pathname) return `${item.label} — ${child.label}`;
@@ -40,15 +47,13 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
 
       {/* Right side links */}
       <div className="flex items-center gap-4 ml-auto">
-        <a
-          href="https://cjorgeluis122333.github.io/jl-particles-interactive/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/demo"
           className="hidden sm:flex items-center gap-1.5 text-xs text-white/35 hover:text-white/80 transition-colors"
         >
-          <ExternalLink size={13} />
+          <Play size={13} />
           Live Demo
-        </a>
+        </Link>
         <a
           href="https://www.npmjs.com/package/jl-particle-interactive"
           target="_blank"

@@ -1,4 +1,4 @@
-# AGENTS.md — Agent Context for jl-particle-interactive **Documentation**
+# AGENTS.md — Agent Context for jl-particle-interactive Documentation
 
 > This file contains context exclusively for the `documentation/` project.
 > For the library itself, see the root `AGENTS.md`.
@@ -65,9 +65,17 @@ documentation/
       ApiReferencePage.tsx         ← /api — full API for all exports + types
       ExamplesPage.tsx             ← /examples — 4 copy-paste recipes with live demos
       text/
-        TextBasicPage.tsx          ← /text/basic — props table + free-float + simple text
-        TextIntermediatePage.tsx   ← /text/intermediate — repel + attract + shape comparison
-        TextAdvancedPage.tsx       ← /text/advanced — carousel + text+bg combo + loading screen
+        basic/
+          FreeFloatingPage.tsx     ← /text/basic/free-floating — Free-floating Ambient example
+          SimpleTextPage.tsx       ← /text/basic/simple-text — Simple Text Rendering example
+        intermediate/
+          RepelPage.tsx            ← /text/intermediate/repel — Magnetic Hover + Repel example
+          AttractPage.tsx          ← /text/intermediate/attract — Click Attract example
+          ShapesPage.tsx           ← /text/intermediate/shapes — Particle Shapes comparison example
+        advanced/
+          CarouselPage.tsx         ← /text/advanced/carousel — Word Carousel example
+          HeroComboPage.tsx        ← /text/advanced/hero — Text + Background combination example
+          LoadingScreenPage.tsx    ← /text/advanced/loading — Loading Screen overlay example
       backgrounds/
         FollowPointerPage.tsx      ← /backgrounds/follow-pointer — FOLLOW_POINTER as page bg + docs overlay
         NetPage.tsx                ← /backgrounds/net — NET as page bg + docs overlay
@@ -79,9 +87,14 @@ documentation/
 /                              → IntroPage
 /install                       → InstallPage
 /quick-start                   → QuickStartPage
-/text/basic                    → TextBasicPage
-/text/intermediate             → TextIntermediatePage
-/text/advanced                 → TextAdvancedPage
+/text/basic/free-floating      → FreeFloatingPage
+/text/basic/simple-text        → SimpleTextPage
+/text/intermediate/repel       → RepelPage
+/text/intermediate/attract     → AttractPage
+/text/intermediate/shapes      → ShapesPage
+/text/advanced/carousel        → CarouselPage
+/text/advanced/hero            → HeroComboPage
+/text/advanced/loading         → LoadingScreenPage
 /backgrounds/follow-pointer    → FollowPointerPage
 /backgrounds/net               → NetPage
 /backgrounds/jellyfish         → JellyfishPage
@@ -324,3 +337,4 @@ After every task that modifies the documentation project, update this file befor
 - 2026-06-30: Initial creation. 7 sections, 6 shared components, deploy via modified `deploy-demo.yml`.
 - 2026-06-30: **Route-based restructuring.** Converted from single-page scroll to multi-route SPA with `react-router-dom` v6. Added `React.lazy` code splitting (11 page chunks). Replaced `sections/` directory with `pages/` directory. IntroPage redesigned with full-viewport FOLLOW_POINTER hero + centered glassmorphic install card. Text Particles split into 3 sub-routes (Basic/Intermediate/Advanced). Each background mode (FOLLOW_POINTER, NET, JELLYFISH) gets its own page with the effect running as a fixed page background behind glassmorphic content cards. Sidebar updated with `NavLink` and collapsible groups. Added `public/404.html` + SPA redirect handler in `index.html` for GitHub Pages routing support. Added `react-router-dom` dependency.
 - 2026-06-30: **Text demo legibility fix.** `LiveDemo` IntersectionObserver now toggles mount/unmount (was mount-only, never unmounting off-screen canvases). All text particle demos updated: `particleDensity` set to 0.5 (single demos) or 0.3 (shape grid) — was default 1.0 causing 3000-particle blob in small containers. `particleSize` reduced to ≤1.0 (was 1.2–1.8). Container heights increased to 300px (was 220px). All code string constants synced exactly to match preview JSX props — code examples now produce the same visual as the preview. Affected files: LiveDemo.tsx, QuickStartPage.tsx, TextBasicPage.tsx, TextIntermediatePage.tsx, TextAdvancedPage.tsx, ExamplesPage.tsx.
+- 2026-07-27: **TextParticleEngine initialization fix.** Fixed an issue where the text was not correctly sized/positioned on initial load. `handleResize` in `TextParticleEngine` now uses `textRef.current` instead of the stale `text` prop from the initial render closure. Added a `document.fonts.ready` check on mount to recalculate text targets once web fonts have fully loaded, ensuring `measureText` calculations are completely accurate when the library is used in external apps.

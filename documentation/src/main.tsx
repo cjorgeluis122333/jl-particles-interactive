@@ -1,26 +1,25 @@
-import { StrictMode, lazy, Suspense } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 
-const IntroPage = lazy(() => import('./pages/IntroPage'));
-const InstallPage = lazy(() => import('./pages/InstallPage'));
-const QuickStartPage = lazy(() => import('./pages/QuickStartPage'));
-const TextBasicPage = lazy(() => import('./pages/text/TextBasicPage'));
-const TextIntermediatePage = lazy(() => import('./pages/text/TextIntermediatePage'));
-const TextAdvancedPage = lazy(() => import('./pages/text/TextAdvancedPage'));
-const FollowPointerPage = lazy(() => import('./pages/backgrounds/FollowPointerPage'));
-const NetPage = lazy(() => import('./pages/backgrounds/NetPage'));
-const JellyfishPage = lazy(() => import('./pages/backgrounds/JellyfishPage'));
-const ApiReferencePage = lazy(() => import('./pages/ApiReferencePage'));
-const ExamplesPage = lazy(() => import('./pages/ExamplesPage'));
-
-const Loading = () => (
-  <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="w-5 h-5 border-2 border-violet-400/30 border-t-violet-400 rounded-full animate-spin" />
-  </div>
-);
+import IntroPage from './pages/IntroPage';
+import InstallPage from './pages/InstallPage';
+import QuickStartPage from './pages/QuickStartPage';
+import FreeFloatingPage from './pages/text/basic/FreeFloatingPage';
+import SimpleTextPage from './pages/text/basic/SimpleTextPage';
+import RepelPage from './pages/text/intermediate/RepelPage';
+import AttractPage from './pages/text/intermediate/AttractPage';
+import ShapesPage from './pages/text/intermediate/ShapesPage';
+import CarouselPage from './pages/text/advanced/CarouselPage';
+import HeroComboPage from './pages/text/advanced/HeroComboPage';
+import LoadingScreenPage from './pages/text/advanced/LoadingScreenPage';
+import FollowPointerPage from './pages/backgrounds/FollowPointerPage';
+import NetPage from './pages/backgrounds/NetPage';
+import JellyfishPage from './pages/backgrounds/JellyfishPage';
+import ApiReferencePage from './pages/ApiReferencePage';
+import ExamplesPage from './pages/ExamplesPage';
 
 const router = createBrowserRouter(
   [
@@ -28,17 +27,25 @@ const router = createBrowserRouter(
       path: '/',
       element: <App />,
       children: [
-        { index: true, element: <Suspense fallback={<Loading />}><IntroPage /></Suspense> },
-        { path: 'install', element: <Suspense fallback={<Loading />}><InstallPage /></Suspense> },
-        { path: 'quick-start', element: <Suspense fallback={<Loading />}><QuickStartPage /></Suspense> },
-        { path: 'text/basic', element: <Suspense fallback={<Loading />}><TextBasicPage /></Suspense> },
-        { path: 'text/intermediate', element: <Suspense fallback={<Loading />}><TextIntermediatePage /></Suspense> },
-        { path: 'text/advanced', element: <Suspense fallback={<Loading />}><TextAdvancedPage /></Suspense> },
-        { path: 'backgrounds/follow-pointer', element: <Suspense fallback={<Loading />}><FollowPointerPage /></Suspense> },
-        { path: 'backgrounds/net', element: <Suspense fallback={<Loading />}><NetPage /></Suspense> },
-        { path: 'backgrounds/jellyfish', element: <Suspense fallback={<Loading />}><JellyfishPage /></Suspense> },
-        { path: 'api', element: <Suspense fallback={<Loading />}><ApiReferencePage /></Suspense> },
-        { path: 'examples', element: <Suspense fallback={<Loading />}><ExamplesPage /></Suspense> },
+        { index: true, element: <IntroPage /> },
+        { path: 'install', element: <InstallPage /> },
+        { path: 'quick-start', element: <QuickStartPage /> },
+        { path: 'text/basic', element: <FreeFloatingPage /> },
+        { path: 'text/basic/free-floating', element: <FreeFloatingPage /> },
+        { path: 'text/basic/simple-text', element: <SimpleTextPage /> },
+        { path: 'text/intermediate', element: <RepelPage /> },
+        { path: 'text/intermediate/repel', element: <RepelPage /> },
+        { path: 'text/intermediate/attract', element: <AttractPage /> },
+        { path: 'text/intermediate/shapes', element: <ShapesPage /> },
+        { path: 'text/advanced', element: <CarouselPage /> },
+        { path: 'text/advanced/carousel', element: <CarouselPage /> },
+        { path: 'text/advanced/hero', element: <HeroComboPage /> },
+        { path: 'text/advanced/loading', element: <LoadingScreenPage /> },
+        { path: 'backgrounds/follow-pointer', element: <FollowPointerPage /> },
+        { path: 'backgrounds/net', element: <NetPage /> },
+        { path: 'backgrounds/jellyfish', element: <JellyfishPage /> },
+        { path: 'api', element: <ApiReferencePage /> },
+        { path: 'examples', element: <ExamplesPage /> },
       ],
     },
   ],

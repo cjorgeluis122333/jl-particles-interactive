@@ -24,7 +24,7 @@
 | Field | Value |
 |---|---|
 | **Package name** | `jl-particle-interactive` |
-| **Version** | `0.2.2` |
+| **Version** | `0.3.1` |
 | **License** | MIT |
 | **Type** | React component library (not an app) |
 | **Output formats** | ES Module + UMD + TypeScript declarations |
@@ -576,6 +576,8 @@ cd demo && npm run build
 - 2026-06-30: Added `documentation/` mini-app — standalone Vite + React + Tailwind 4 docs site. 7 sections with live embedded particle demos, full API reference. Deployed to `/jl-particles-interactive/docs/` via updated `deploy-demo.yml`. See `documentation/AGENTS.md` for full context.
 - 2026-06-30: **Documentation route restructuring** — converted documentation from single-page scroll to multi-route SPA using `react-router-dom` v6 + `React.lazy` code splitting (11 page chunks). Text Particles split into 3 sub-routes (Basic/Intermediate/Advanced). Each background mode gets its own page with the effect as fixed page background. IntroPage redesigned with full-viewport FOLLOW_POINTER hero + glassmorphic install card. Added `public/404.html` for GitHub Pages SPA support. Old `sections/` directory replaced by `pages/` directory. See `documentation/AGENTS.md` for full updated context.
 - 2026-06-30: **Documentation text demo legibility fix** — `LiveDemo` now unmounts canvases when scrolled off-screen (was mount-only). All text demos tuned: `particleDensity=0.5` (was default 1.0), `particleSize≤1.0` (was 1.2–1.8), container heights increased to 300px (was 220px). Code examples synced to match preview props exactly. See `documentation/AGENTS.md`.
+- 2026-07-27: **TextParticleEngine initialization fix.** Fixed an issue where the text was not correctly sized/positioned on initial load. `handleResize` in `TextParticleEngine` now uses `textRef.current` instead of the stale `text` prop from the initial render closure. Added a `document.fonts.ready` check on mount to recalculate text targets once web fonts have fully loaded, ensuring `measureText` calculations are completely accurate when the library is used in external apps.
+- 2026-07-27: **Subpixel Text Rendering Fix (Float Index Bug).** Fixed a critical issue where the text particles would look skewed, clipped, or wrapped (e.g., showing a "C" on the wrong side) on initial load. This was caused by `ResizeObserver` returning a float value for `entry.contentRect.width`. When used directly in `useTextParticles` to calculate the `ImageData` pixel array stride (`index = (y * width + x) * 4`), the fractional width shifted row reads exponentially. Enforced strict `Math.floor()` rounding for all dimensions and loops in the sampling engine, correctly locking particle coordinates to absolute pixels.
 
 | Change type | Update this section |
 |---|---|

@@ -1,0 +1,6 @@
+{
+  "name": "Particle Interactive",
+  "description": "Canvas-based React library and interactive playground for particle text animations and interactive backgrounds with spring physics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

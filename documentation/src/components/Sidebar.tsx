@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { BookOpen, ChevronDown } from 'lucide-react';
 import { NAV_ITEMS } from '../App';
 
@@ -20,6 +20,11 @@ export default function Sidebar({ isOpen, onNavClick }: SidebarProps) {
   };
 
   const isGroupActive = (item: typeof NAV_ITEMS[number]) => {
+    if (item.sections) {
+      return item.sections.some(section =>
+        section.items.some(child => location.pathname === child.path)
+      );
+    }
     if (item.children) {
       return item.children.some(child => location.pathname === child.path);
     }
@@ -51,6 +56,74 @@ export default function Sidebar({ isOpen, onNavClick }: SidebarProps) {
         </p>
         <ul className="space-y-0.5">
           {NAV_ITEMS.map((item) => {
+            if (item.sections) {
+              const groupActive = isGroupActive(item);
+              const isExpanded = expandedGroups[item.id] ?? groupActive;
+
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => toggleGroup(item.id)}
+                    className={`
+                      w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-all duration-150
+                      ${groupActive
+                        ? 'text-white font-medium'
+                        : 'text-white/45 hover:text-white/80 hover:bg-white/5'
+                      }
+                    `}
+                  >
+                    <span className="flex items-center gap-2">
+                      {groupActive && (
+                        <span className="inline-block w-1 h-1 rounded-full bg-violet-400" />
+                      )}
+                      {item.label}
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className={`text-white/30 transition-transform duration-200 ${isExpanded ? 'rotate-0' : '-rotate-90'}`}
+                    />
+                  </button>
+                  {isExpanded && (
+                    <div className="ml-3 mt-1 space-y-2 border-l border-white/8 pl-2">
+                      {item.sections.map((section) => (
+                        <div key={section.id} className="space-y-0.5">
+                          <div className="px-3 pt-1.5 pb-0.5 text-[10px] font-bold uppercase tracking-wider text-violet-400/90 select-none">
+                            {section.title}
+                          </div>
+                          <ul className="space-y-0.5">
+                            {section.items.map((child) => (
+                              <li key={child.id}>
+                                <NavLink
+                                  to={child.path}
+                                  onClick={() => onNavClick(child.id)}
+                                  className={({ isActive }) => `
+                                    block px-3 py-1.5 rounded-md text-[13px] transition-all duration-150
+                                    ${isActive
+                                      ? 'bg-white/10 text-white font-medium'
+                                      : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                                    }
+                                  `}
+                                >
+                                  {({ isActive }) => (
+                                    <>
+                                      {isActive && (
+                                        <span className="inline-block w-1 h-1 rounded-full bg-violet-400 mr-2 mb-0.5 align-middle" />
+                                      )}
+                                      {child.label}
+                                    </>
+                                  )}
+                                </NavLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              );
+            }
+
             if (item.children) {
               const groupActive = isGroupActive(item);
               const isExpanded = expandedGroups[item.id] ?? groupActive;
@@ -141,14 +214,12 @@ export default function Sidebar({ isOpen, onNavClick }: SidebarProps) {
 
       {/* Footer links */}
       <div className="px-6 py-4 border-t border-white/10 shrink-0 flex items-center gap-4">
-        <a
-          href="https://cjorgeluis122333.github.io/jl-particles-interactive/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/demo"
           className="text-[11px] text-white/30 hover:text-white/60 transition-colors"
         >
           Demo
-        </a>
+        </Link>
         <a
           href="https://www.npmjs.com/package/jl-particle-interactive"
           target="_blank"

@@ -32,7 +32,9 @@
     "README.md"
   ],
   "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "vite build",
+    "start": "vite preview --host 0.0.0.0 --port 3000",
     "lint": "tsc --noEmit"
   },
   "keywords": [
@@ -64,9 +66,19 @@
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@vitejs/plugin-react": "^5.0.4",
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
     "vite-plugin-dts": "^4.5.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "lucide-react": "^1.27.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.1",
+    "react-syntax-highlighter": "^16.1.1",
+    "tailwindcss": "^4.3.3"
   }
 }

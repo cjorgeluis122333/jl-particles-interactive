@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ParticleBackground } from 'jl-particle-interactive';
-import { Copy, Check, ArrowRight } from 'lucide-react';
+import { Copy, Check, ArrowRight, Play } from 'lucide-react';
 
 const INSTALL_CMD = 'npm install jl-particle-interactive';
 
@@ -105,14 +105,23 @@ export default function IntroPage() {
               </div>
             </div>
 
-            {/* CTA button */}
-            <button
-              onClick={() => navigate('/quick-start')}
-              className="w-full flex items-center justify-center gap-2 bg-violet-600/80 hover:bg-violet-600 text-white text-sm font-medium py-3 rounded-xl transition-colors duration-200 border border-violet-500/30"
-            >
-              Get Started
-              <ArrowRight size={15} />
-            </button>
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => navigate('/quick-start')}
+                className="flex-1 flex items-center justify-center gap-2 bg-violet-600/80 hover:bg-violet-600 text-white text-sm font-medium py-3 rounded-xl transition-colors duration-200 border border-violet-500/30"
+              >
+                Get Started
+                <ArrowRight size={15} />
+              </button>
+              <button
+                onClick={() => navigate('/demo')}
+                className="flex-1 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white/80 hover:text-white text-sm font-medium py-3 rounded-xl transition-colors duration-200 border border-white/15"
+              >
+                <Play size={14} />
+                Live Demo
+              </button>
+            </div>
           </div>
         </div>
       </section>

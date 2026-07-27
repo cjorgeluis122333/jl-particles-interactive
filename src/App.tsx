@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 import TextPlayground from './components/TextPlayground';
 import BackgroundPlayground from './components/BackgroundPlayground';
 
@@ -41,19 +40,11 @@ export default function App() {
 
       {/* Links (top-right) */}
       <div className="fixed top-4 right-4 z-20 flex items-center gap-3">
-        <Link
-          to="/"
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white/80 hover:text-white bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg transition-colors shadow-sm"
-          title="Documentación"
-        >
-          <BookOpen size={14} />
-          Documentación
-        </Link>
         <a
           href="https://www.npmjs.com/package/jl-particle-interactive"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-white transition-colors p-1"
+          className="text-white/40 hover:text-white transition-colors"
           title="npm"
         >
           <ExternalLink size={18} />
@@ -62,7 +53,7 @@ export default function App() {
           href="https://github.com/cjorgeluis122333/jl-particles-interactive"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-white transition-colors p-1"
+          className="text-white/40 hover:text-white transition-colors"
           title="GitHub"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

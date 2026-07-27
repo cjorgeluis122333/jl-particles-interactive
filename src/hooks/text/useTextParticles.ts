@@ -3,36 +3,38 @@ import { Particle } from '../../components/text/Particle';
 
 function getPixelsForText(text: string, width: number, height: number): { x: number; y: number }[] {
   if (width <= 0 || height <= 0) return [];
+  const w = Math.floor(width);
+  const h = Math.floor(height);
   const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
+  canvas.width = w;
+  canvas.height = h;
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   if (!ctx) return [];
 
-  ctx.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, w, h);
 
-  let fontSize = Math.min(width, height) * 0.65;
+  let fontSize = Math.min(w, h) * 0.65;
   ctx.font = `bold ${fontSize}px "Georgia", serif`;
 
   const textMetrics = ctx.measureText(text);
-  if (textMetrics.width > width * 0.9) {
-    fontSize = fontSize * (width * 0.9) / textMetrics.width;
+  if (textMetrics.width > w * 0.9) {
+    fontSize = fontSize * (w * 0.9) / textMetrics.width;
     ctx.font = `bold ${fontSize}px "Georgia", serif`;
   }
 
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, width / 2, height / 2.05);
+  ctx.fillText(text, w / 2, h / 2.05);
 
-  const imageData = ctx.getImageData(0, 0, width, height);
+  const imageData = ctx.getImageData(0, 0, w, h);
   const pixels = imageData.data;
   const points: { x: number; y: number }[] = [];
 
   const gap = window.innerWidth < 600 ? 6 : 8;
-  for (let y = 0; y < height; y += gap) {
-    for (let x = 0; x < width; x += gap) {
-      const index = (y * width + x) * 4;
+  for (let y = 0; y < h; y += gap) {
+    for (let x = 0; x < w; x += gap) {
+      const index = (y * w + x) * 4;
       const alpha = pixels[index + 3];
 
       if (alpha > 128) {

@@ -156,12 +156,26 @@ export default function TextParticleEngine({
           initParticles(width, height, particleDensity);
         }
 
-        updateTextTargets(text, width, height);
+        updateTextTargets(textRef.current, width, height);
       }
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
+
+    // Wait for fonts to load before assigning final text targets, 
+    // to ensure measureText gets correct widths on initial load
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        if (containerRef.current) {
+          updateTextTargets(
+            textRef.current,
+            containerRef.current.offsetWidth,
+            containerRef.current.offsetHeight
+          );
+        }
+      });
+    }
 
     const ctx = canvas.getContext('2d')!;
 

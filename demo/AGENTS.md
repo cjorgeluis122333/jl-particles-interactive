@@ -1,4 +1,4 @@
-# AGENTS.md — Agent Context for jl-particle-interactive **Demo**
+# AGENTS.md — Agent Context for jl-particle-interactive Demo
 
 > This file contains context exclusively for the `demo/` project.
 > For the library itself, see the root `AGENTS.md`.
