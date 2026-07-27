@@ -31,7 +31,7 @@ function getPixelsForText(text: string, width: number, height: number): { x: num
   const pixels = imageData.data;
   const points: { x: number; y: number }[] = [];
 
-  const gap = window.innerWidth < 600 ? 6 : 8;
+  const gap = Math.max(2, Math.floor(fontSize / 40));
   for (let y = 0; y < h; y += gap) {
     for (let x = 0; x < w; x += gap) {
       const index = (y * w + x) * 4;
