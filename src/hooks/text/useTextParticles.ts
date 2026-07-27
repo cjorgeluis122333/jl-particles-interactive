@@ -37,10 +37,10 @@ function getPixelsForText(text: string, width: number, height: number): { x: num
       const index = (y * w + x) * 4;
       const alpha = pixels[index + 3];
 
-      if (alpha > 128) {
+      if (Math.random() * 255 < alpha) {
         points.push({
-          x: x + (Math.random() - 0.5) * 4,
-          y: y + (Math.random() - 0.5) * 4,
+          x: x + (Math.random() - 0.5) * gap,
+          y: y + (Math.random() - 0.5) * gap,
         });
       }
     }
@@ -101,12 +101,7 @@ export function useTextParticles(
       const ptsChunk: { x: number; y: number }[] = [];
 
       for (let j = i; j < end; j++) {
-        let ptIndex;
-        if (sortedParticleIndices.length >= sortedPoints.length) {
-          ptIndex = j % sortedPoints.length;
-        } else {
-          ptIndex = Math.floor((j / sortedParticleIndices.length) * sortedPoints.length);
-        }
+        const ptIndex = Math.floor((j / sortedParticleIndices.length) * sortedPoints.length);
         ptsChunk.push(sortedPoints[ptIndex]);
       }
 
