@@ -17,7 +17,6 @@ import DynamicInputPage from '../documentation/src/pages/text/intermediate/Dynam
 import CarouselPage from '../documentation/src/pages/text/advanced/CarouselPage';
 import MultilineCarouselPage from '../documentation/src/pages/text/advanced/MultilineCarouselPage';
 import HeroComboPage from '../documentation/src/pages/text/advanced/HeroComboPage';
-import LoadingScreenPage from '../documentation/src/pages/text/advanced/LoadingScreenPage';
 import FollowPointerPage from '../documentation/src/pages/backgrounds/FollowPointerPage';
 import NetPage from '../documentation/src/pages/backgrounds/NetPage';
 import JellyfishPage from '../documentation/src/pages/backgrounds/JellyfishPage';
@@ -47,7 +46,6 @@ const router = createBrowserRouter([
       { path: 'text/advanced/carousel', element: <CarouselPage /> },
       { path: 'text/advanced/multiline-carousel', element: <MultilineCarouselPage /> },
       { path: 'text/advanced/hero', element: <HeroComboPage /> },
-      { path: 'text/advanced/loading', element: <LoadingScreenPage /> },
       { path: 'backgrounds/follow-pointer', element: <FollowPointerPage /> },
       { path: 'backgrounds/net', element: <NetPage /> },
       { path: 'backgrounds/jellyfish', element: <JellyfishPage /> },
