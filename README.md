@@ -12,6 +12,20 @@ A canvas-based React library for rendering text and backgrounds as thousands of 
 
 ---
 
+## Interactive previews
+
+### 1. Text particles engine (`TextParticleEngine`)
+Dynamic text transitions with spatial coherence, magnetic pointer hover, and click repel:
+
+![Text Particles Preview](assets/text_preview.svg)
+
+### 2. Animated background presets (`ParticleBackground`)
+Native presets designed for seamless overlay integration:
+
+![Background Presets Preview](assets/backgrounds_preview.svg)
+
+---
+
 ## Why jl-particle-interactive?
 
 | Feature | jl-particle-interactive | tsparticles | particles.js |

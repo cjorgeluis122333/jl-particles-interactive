@@ -587,6 +587,7 @@ cd demo && npm run build
 - 2026-07-27: **Mejora de Legibilidad Multilínea.** Se optimizó la legibilidad en todos los ejemplos de texto multilínea de la documentación (`MultilinePage`, `DynamicInputPage` y `MultilineCarouselPage`). Se incrementó la densidad de partículas a `0.8` (antes `0.4` o `0.5`) para asegurar una distribución densa que defina claramente cada carácter, y se cambió la forma de partículas por defecto a `'circle'` para evitar el desenfoque u overlap que genera la forma `'bean'`.
 - 2026-07-27: **Eliminación de página de Ejemplos.** Se removió por completo la sección "Examples" y su ruta asociada (`ExamplesPage.tsx`) de la documentación para evitar redundancia de ejemplos interactivos, limpiando el cajón de navegación (`App.tsx`) y los enrutadores (`main.tsx`).
 - 2026-07-27: **Eliminación de página de Combinación Text + Background.** Se removió la página de demostración "Text + Background Combo" (`HeroComboPage.tsx` y `HeroComboExample.tsx`) de la documentación para simplificar la sección de opciones avanzadas de navegación, actualizando los enrutadores (`main.tsx`) y el menú lateral (`App.tsx`).
+- 2026-07-27: **Assets de Previsualización en README.** Se añadieron dos archivos SVG animados mediante CSS puro (`text_preview.svg` y `backgrounds_preview.svg`) dentro de `/assets` para ofrecer una demostración visual interactiva, ligera y fluida directamente en la página de inicio del repositorio (`README.md`).
 | Change type | Update this section |
 |---|---|
 | New file added | Section 3 — Annotated File Tree |

@@ -1,0 +1,357 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-glow-back" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0a14" />
+      <stop offset="100%" stop-color="#050505" />
+    </radialGradient>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-net" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="glow-jelly" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Jellyfish Radial Gradients -->
+    <radialGradient id="jelly-radial-1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="jelly-radial-2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <style>
+    .bg {
+      fill: url(#bg-glow-back);
+    }
+    .panel-bg {
+      fill: #06060c;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 1;
+    }
+    .panel-divider {
+      stroke: rgba(255, 255, 255, 0.07);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
+    }
+    .panel-label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      fill: #ffffff;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+    }
+    .panel-desc {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 9.5px;
+      fill: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.02em;
+    }
+    .border-rect {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 1.5;
+    }
+
+    /* ---------------------------------
+       1. FOLLOW POINTER SWARM
+       --------------------------------- */
+    .swarm-target {
+      animation: swarm-target-move 8s infinite linear;
+    }
+    .swarm-particle {
+      animation: swarm-particle-float 4s infinite ease-in-out;
+    }
+    @keyframes swarm-target-move {
+      0% { transform: translate(130px, 110px); }
+      25% { transform: translate(190px, 170px); }
+      50% { transform: translate(70px, 200px); }
+      75% { transform: translate(140px, 150px); }
+      100% { transform: translate(130px, 110px); }
+    }
+    @keyframes swarm-particle-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(var(--tx, 15px), var(--ty, -15px)) scale(1.15); }
+    }
+
+    /* ---------------------------------
+       2. NET NODE GRAPH
+       --------------------------------- */
+    .net-node {
+      animation: net-node-move var(--dur, 6s) infinite linear;
+    }
+    .net-line {
+      stroke: rgba(96, 165, 250, 0.18);
+      stroke-width: 0.75;
+      animation: net-line-fade var(--dur, 6s) infinite ease-in-out;
+    }
+    @keyframes net-node-move {
+      0% { transform: translate(0, 0); }
+      33% { transform: translate(var(--mx1, 15px), var(--my1, -25px)); }
+      66% { transform: translate(var(--mx2, -20px), var(--my2, 15px)); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes net-line-fade {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ---------------------------------
+       3. JELLYFISH GLOW PULSE
+       --------------------------------- */
+    .jelly-pulse-outer {
+      animation: jelly-breath-outer 4s infinite ease-in-out;
+      transform-origin: 670px 150px;
+    }
+    .jelly-pulse-inner {
+      animation: jelly-breath-inner 4s infinite ease-in-out;
+      transform-origin: 670px 150px;
+    }
+    .jelly-particle {
+      animation: jelly-drift 6s infinite ease-in-out;
+    }
+    @keyframes jelly-breath-outer {
+      0%, 100% { transform: scale(0.85); opacity: 0.4; }
+      30% { transform: scale(1.15); opacity: 0.8; }
+      100% { transform: scale(0.85); opacity: 0.4; }
+    }
+    @keyframes jelly-breath-inner {
+      0%, 100% { transform: scale(0.9); opacity: 0.6; }
+      30% { transform: scale(1.25); opacity: 0.9; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+    @keyframes jelly-drift {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(var(--jx, -10px), var(--jy, 15px)); }
+    }
+  </style>
+
+  <!-- Stage Background -->
+  <rect class="bg" width="800" height="300" rx="12" />
+  
+  <!-- Bento Panels -->
+  <!-- Panel 1: FOLLOW POINTER -->
+  <rect class="panel-bg" x="12" y="12" width="248" height="276" rx="8" />
+  <text class="panel-label" x="28" y="42">FOLLOW_POINTER</text>
+  <text class="panel-desc" x="28" y="58">Active pointer swarm &amp; wave colors</text>
+
+  <!-- Panel 2: NET GRAPH -->
+  <rect class="panel-bg" x="276" y="12" width="248" height="276" rx="8" />
+  <text class="panel-label" x="292" y="42">NET GRAPH PRESET</text>
+  <text class="panel-desc" x="292" y="58">Bouncing nodes with dynamic link edges</text>
+
+  <!-- Panel 3: JELLYFISH GLOW -->
+  <rect class="panel-bg" x="540" y="12" width="248" height="276" rx="8" />
+  <text class="panel-label" x="556" y="42">JELLYFISH GLOW</text>
+  <text class="panel-desc" x="556" y="58">Organic breathing rings &amp; float noise</text>
+
+
+  <!-- ==========================================
+       PANEL 1 CONTENT: FOLLOW_POINTER PREVIEW
+       ========================================== -->
+  <g>
+    <!-- Swarm target represents the pointer coordinate -->
+    <g class="swarm-target">
+      <!-- Hidden group to position particles around center target -->
+      <g filter="url(#glow-net)">
+        <!-- Pointer glow ring -->
+        <circle cx="0" cy="0" r="15" fill="none" stroke="#22d3ee" stroke-width="1.5" opacity="0.4" />
+        <circle cx="0" cy="0" r="3" fill="#22d3ee" />
+          <circle class="swarm-particle" cx="31.146626949269862" cy="0" r="1.3427601938532479" fill="#22d3ee" 
+          style="--tx: -11.502371924995504px; --ty: 0.0867085868261146px; animation-delay: -0.00s" />
+        <circle class="swarm-particle" cx="22.88564516443899" cy="5.223499165991689" r="1.3724405455700466" fill="#818cf8" 
+          style="--tx: -3.048378993199943px; --ty: -5.2272335108303665px; animation-delay: -0.15s" />
+        <circle class="swarm-particle" cx="13.969231612859927" cy="6.727227388997098" r="1.0376961902554718" fill="#f472b6" 
+          style="--tx: 5.9101567950222105px; --ty: -0.7828248712326431px; animation-delay: -0.30s" />
+        <circle class="swarm-particle" cx="27.906965884532465" cy="22.255062657363737" r="1.4517379690860248" fill="#34d399" 
+          style="--tx: -8.351575728914991px; --ty: -0.014493338405573652px; animation-delay: -0.45s" />
+        <circle class="swarm-particle" cx="19.478199624134408" cy="24.42488977774113" r="1.368567127670826" fill="#22d3ee" 
+          style="--tx: 7.735297624979578px; --ty: -6.45553912944745px; animation-delay: -0.60s" />
+        <circle class="swarm-particle" cx="11.595418172297078" cy="24.078133936978578" r="1.0412377936661446" fill="#818cf8" 
+          style="--tx: -6.899561278151435px; --ty: 9.642285275285118px; animation-delay: -0.75s" />
+        <circle class="swarm-particle" cx="4.076832884820583" cy="17.86177193329879" r="1.7471613987468282" fill="#f472b6" 
+          style="--tx: 7.655302788413412px; --ty: 7.772208127142067px; animation-delay: -0.90s" />
+        <circle class="swarm-particle" cx="1.0328797471873468e-15" cy="16.86820637438448" r="1.3517458936734368" fill="#34d399" 
+          style="--tx: -10.702473313206449px; --ty: -8.712903667813187px; animation-delay: -1.05s" />
+        <circle class="swarm-particle" cx="-5.7499837377980425" cy="25.192324788963127" r="0.8833953579064147" fill="#22d3ee" 
+          style="--tx: -1.155195366800502px; --ty: 11.081055294454366px; animation-delay: -1.20s" />
+        <circle class="swarm-particle" cx="-7.918467179020797" cy="16.442866525292477" r="1.5540804054273383" fill="#818cf8" 
+          style="--tx: 11.48860157246651px; --ty: -3.266023199289503px; animation-delay: -1.35s" />
+        <circle class="swarm-particle" cx="-17.102345441326463" cy="21.445662864429938" r="1.3661972673771003" fill="#f472b6" 
+          style="--tx: -9.266018251245747px; --ty: 10.356695874851384px; animation-delay: -1.50s" />
+        <circle class="swarm-particle" cx="-22.614679533374943" cy="18.034605125970064" r="1.57579011560754" fill="#34d399" 
+          style="--tx: 2.2459738058591707px; --ty: 6.413998156512552px; animation-delay: -1.65s" />
+        <circle class="swarm-particle" cx="-25.4152018242811" cy="12.239316130444582" r="1.5024104754856373" fill="#22d3ee" 
+          style="--tx: 6.722359892096959px; --ty: -1.7217811573736483px; animation-delay: -1.80s" />
+        <circle class="swarm-particle" cx="-23.018110081808533" cy="5.25373341896692" r="1.7958837634381466" fill="#818cf8" 
+          style="--tx: -8.032259205721479px; --ty: 6.681456381957192px; animation-delay: -1.95s" />
+        <circle class="swarm-particle" cx="-33.03554227062709" cy="4.045687109982055e-15" r="1.0245722836258795" fill="#f472b6" 
+          style="--tx: -3.4280158198450774px; --ty: 4.971461626518952px; animation-delay: -2.10s" />
+        <circle class="swarm-particle" cx="-18.076626530098242" cy="-4.12587204448278" r="1.2375304808757432" fill="#34d399" 
+          style="--tx: 0.5971898158521132px; --ty: -7.562585194119611px; animation-delay: -2.25s" />
+        <circle class="swarm-particle" cx="-28.59280810145265" cy="-13.769570662093873" r="0.8029659655670824" fill="#22d3ee" 
+          style="--tx: -11.394525193650127px; --ty: 11.598807304721301px; animation-delay: -2.40s" />
+        <circle class="swarm-particle" cx="-25.594190304639266" cy="-20.410685677941817" r="2.095636770758129" fill="#818cf8" 
+          style="--tx: -11.449221580042371px; --ty: -9.250800785686568px; animation-delay: -2.55s" />
+        <circle class="swarm-particle" cx="-13.572853716185621" cy="-17.0198202289946" r="1.7790829793830716" fill="#f472b6" 
+          style="--tx: 10.941338648534px; --ty: -1.516498843242701px; animation-delay: -2.70s" />
+        <circle class="swarm-particle" cx="-15.297955135915787" cy="-31.766531163532786" r="1.3079549203412688" fill="#34d399" 
+          style="--tx: 5.421552928875183px; --ty: 8.775501821106953px; animation-delay: -2.85s" />
+        <circle class="swarm-particle" cx="-6.01142912721341" cy="-26.33779188331894" r="0.881867148447092" fill="#22d3ee" 
+          style="--tx: 11.47115529498778px; --ty: -11.616789001514533px; animation-delay: -3.00s" />
+        <circle class="swarm-particle" cx="-3.363839897469343e-15" cy="-18.311891503800005" r="0.9833554795743654" fill="#818cf8" 
+          style="--tx: 8.960331771082894px; --ty: 4.92467438097168px; animation-delay: -3.15s" />
+        <circle class="swarm-particle" cx="7.752168319731318" cy="-33.96446860285735" r="2.234089308307058" fill="#f472b6" 
+          style="--tx: -1.9977881754742999px; --ty: -5.3275742080657285px; animation-delay: -3.30s" />
+        <circle class="swarm-particle" cx="11.183811793658828" cy="-23.22342448477061" r="1.6756517213905058" fill="#34d399" 
+          style="--tx: 11.972179097212482px; --ty: -7.999256367854516px; animation-delay: -3.45s" />
+        <circle class="swarm-particle" cx="14.449219039879075" cy="-18.118747586209142" r="1.0797365969703843" fill="#22d3ee" 
+          style="--tx: 1.8229689678954717px; --ty: -1.7119451003927857px; animation-delay: -3.60s" />
+        <circle class="swarm-particle" cx="24.94435020237477" cy="-19.892455489357296" r="0.9957800885806052" fill="#818cf8" 
+          style="--tx: -7.533379928265001px; --ty: -1.5204208975281137px; animation-delay: -3.75s" />
+        <circle class="swarm-particle" cx="22.784200698865316" cy="-10.9722927663903" r="1.035323058601704" fill="#f472b6" 
+          style="--tx: 2.0266606687451016px; --ty: -3.5606949660587084px; animation-delay: -3.90s" />
+        <circle class="swarm-particle" cx="20.640888424854822" cy="-4.711148088588299" r="1.055216682545233" fill="#34d399" 
+          style="--tx: -7.317008155684176px; --ty: 0.19619921316555278px; animation-delay: -4.05s" />
+      </g>
+    </g>
+  </g>
+
+
+  <!-- ==========================================
+       PANEL 2 CONTENT: NET PREVIEW
+       ========================================== -->
+  <g filter="url(#glow-net)" transform="translate(276, 12)">
+    <!-- Let's render 10 bouncing network nodes -->
+      <line class="net-line" x1="40" y1="90" x2="110" y2="120" 
+      style="--dur: 5s" />
+    <line class="net-line" x1="40" y1="90" x2="80" y2="190" 
+      style="--dur: 5s" />
+    <line class="net-line" x1="110" y1="120" x2="80" y2="190" 
+      style="--dur: 7s" />
+    <line class="net-line" x1="110" y1="120" x2="190" y2="110" 
+      style="--dur: 7s" />
+    <line class="net-line" x1="80" y1="190" x2="170" y2="210" 
+      style="--dur: 6s" />
+    <line class="net-line" x1="190" y1="110" x2="210" y2="170" 
+      style="--dur: 8s" />
+    <line class="net-line" x1="170" y1="210" x2="210" y2="170" 
+      style="--dur: 5.5s" />
+    <line class="net-line" x1="50" y1="230" x2="80" y2="190" 
+      style="--dur: 7.5s" />
+    <line class="net-line" x1="130" y1="70" x2="110" y2="120" 
+      style="--dur: 6s" />
+    <line class="net-line" x1="130" y1="70" x2="190" y2="110" 
+      style="--dur: 6s" />
+    <circle class="net-node" cx="40" cy="90" r="2.5" fill="#60a5fa"
+      style="--mx1: 20px; --my1: -15px; --mx2: -10px; --my2: 30px; --dur: 5s" />
+    <circle class="net-node" cx="40" cy="90" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: 20px; --my1: -15px; --mx2: -10px; --my2: 30px; --dur: 5s" />
+    <circle class="net-node" cx="110" cy="120" r="2.5" fill="#60a5fa"
+      style="--mx1: -30px; --my1: 25px; --mx2: 15px; --my2: -10px; --dur: 7s" />
+    <circle class="net-node" cx="110" cy="120" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: -30px; --my1: 25px; --mx2: 15px; --my2: -10px; --dur: 7s" />
+    <circle class="net-node" cx="80" cy="190" r="2.5" fill="#60a5fa"
+      style="--mx1: 15px; --my1: -20px; --mx2: -25px; --my2: 10px; --dur: 6s" />
+    <circle class="net-node" cx="80" cy="190" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: 15px; --my1: -20px; --mx2: -25px; --my2: 10px; --dur: 6s" />
+    <circle class="net-node" cx="190" cy="110" r="2.5" fill="#60a5fa"
+      style="--mx1: -25px; --my1: 10px; --mx2: 20px; --my2: -25px; --dur: 8s" />
+    <circle class="net-node" cx="190" cy="110" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: -25px; --my1: 10px; --mx2: 20px; --my2: -25px; --dur: 8s" />
+    <circle class="net-node" cx="170" cy="210" r="2.5" fill="#60a5fa"
+      style="--mx1: 20px; --my1: -30px; --mx2: -15px; --my2: 15px; --dur: 5.5s" />
+    <circle class="net-node" cx="170" cy="210" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: 20px; --my1: -30px; --mx2: -15px; --my2: 15px; --dur: 5.5s" />
+    <circle class="net-node" cx="210" cy="170" r="2.5" fill="#60a5fa"
+      style="--mx1: -15px; --my1: -15px; --mx2: 10px; --my2: 20px; --dur: 6.5s" />
+    <circle class="net-node" cx="210" cy="170" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: -15px; --my1: -15px; --mx2: 10px; --my2: 20px; --dur: 6.5s" />
+    <circle class="net-node" cx="50" cy="230" r="2.5" fill="#60a5fa"
+      style="--mx1: 25px; --my1: -20px; --mx2: -15px; --my2: -10px; --dur: 7.5s" />
+    <circle class="net-node" cx="50" cy="230" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: 25px; --my1: -20px; --mx2: -15px; --my2: -10px; --dur: 7.5s" />
+    <circle class="net-node" cx="130" cy="70" r="2.5" fill="#60a5fa"
+      style="--mx1: -10px; --my1: 30px; --mx2: 25px; --my2: -15px; --dur: 6s" />
+    <circle class="net-node" cx="130" cy="70" r="6" fill="none" stroke="rgba(96, 165, 250, 0.25)" stroke-width="0.75"
+      style="--mx1: -10px; --my1: 30px; --mx2: 25px; --my2: -15px; --dur: 6s" />
+  </g>
+
+
+  <!-- ==========================================
+       PANEL 3 CONTENT: JELLYFISH PREVIEW
+       ========================================== -->
+  <!-- Center is x=664, y=150 -->
+  <g filter="url(#glow-jelly)">
+    <!-- Breathing Outer Ring -->
+    <circle class="jelly-pulse-outer" cx="664" cy="150" r="38" fill="url(#jelly-radial-1)" />
+    <circle class="jelly-pulse-outer" cx="664" cy="150" r="44" fill="none" stroke="#a78bfa" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.3" />
+    
+    <!-- Breathing Inner Ring -->
+    <circle class="jelly-pulse-inner" cx="664" cy="150" r="22" fill="url(#jelly-radial-2)" />
+    <circle class="jelly-pulse-inner" cx="664" cy="150" r="25" fill="none" stroke="#f472b6" stroke-width="1" opacity="0.4" />
+    <circle class="jelly-pulse-inner" cx="664" cy="150" r="12" fill="none" stroke="#f472b6" stroke-width="2" opacity="0.65" />
+
+    <!-- Tiny floating jellyfish stingers / drift particles -->
+      <circle class="jelly-particle" cx="691.1714410624908" cy="150" r="0.7547941577022034" fill="#f472b6"
+      style="--jx: 2.768425956732294px; --jy: -2.304096625820935px; animation-delay: -0.00s" />
+    <circle class="jelly-particle" cx="705.8401307806195" cy="161.21102925387956" r="1.9155582672948999" fill="#a78bfa"
+      style="--jx: -3.894731155139823px; --jy: -7.115644162928763px; animation-delay: -0.25s" />
+    <circle class="jelly-particle" cx="686.2004364791605" cy="162.81742797737053" r="1.3798571958740433" fill="#22d3ee"
+      style="--jx: -5.348397224332576px; --jy: 7.412716016011598px; animation-delay: -0.50s" />
+    <circle class="jelly-particle" cx="704.4095487916095" cy="190.4095487916095" r="0.6087747582026977" fill="#fb923c"
+      style="--jx: 5.66855434678811px; --jy: 5.646405402051182px; animation-delay: -0.75s" />
+    <circle class="jelly-particle" cx="683.827526366262" cy="184.34228305477717" r="1.026979419535314" fill="#f472b6"
+      style="--jx: 5.953441475958822px; --jy: 5.437222291027899px; animation-delay: -1.00s" />
+    <circle class="jelly-particle" cx="670.6646771913767" cy="174.87291389426312" r="0.9700082013368478" fill="#a78bfa"
+      style="--jx: -0.15742791973792336px; --jy: -9.72427545255119px; animation-delay: -1.25s" />
+    <circle class="jelly-particle" cx="664" cy="173.02994326272128" r="1.993011322236406" fill="#22d3ee"
+      style="--jx: 7.508382864379609px; --jy: 9.629402001094839px; animation-delay: -1.50s" />
+    <circle class="jelly-particle" cx="654.3124643590701" cy="186.15437521208474" r="0.8517846370078285" fill="#fb923c"
+      style="--jx: -2.6842249520905526px; --jy: -0.540187294823693px; animation-delay: -1.75s" />
+    <circle class="jelly-particle" cx="639.4187377296105" cy="192.57599516649063" r="1.6793265293349044" fill="#f472b6"
+      style="--jx: 1.5096961358934102px; --jy: 5.796787535116468px; animation-delay: -2.00s" />
+    <circle class="jelly-particle" cx="624.2999064121996" cy="189.70009358780047" r="1.7033872392796425" fill="#a78bfa"
+      style="--jx: -6.438462284965823px; --jy: 9.51020089010445px; animation-delay: -2.25s" />
+    <circle class="jelly-particle" cx="617.1040705049693" cy="177.07537751785372" r="0.967331929485965" fill="#22d3ee"
+      style="--jx: -0.26588910334398363px; --jy: 0.9677977247866965px; animation-delay: -2.50s" />
+    <circle class="jelly-particle" cx="622.5208831841888" cy="161.11429585355282" r="1.301439224785532" fill="#fb923c"
+      style="--jx: -6.401725979513582px; --jy: -5.98562868986356px; animation-delay: -2.75s" />
+    <circle class="jelly-particle" cx="622.5124498799021" cy="150" r="2.029132688633894" fill="#f472b6"
+      style="--jx: -6.3801814349419566px; --jy: 0.7855424286165036px; animation-delay: -3.00s" />
+    <circle class="jelly-particle" cx="633.9590235857265" cy="141.95054462995304" r="1.5499896857830935" fill="#a78bfa"
+      style="--jx: 4.404026380288009px; --jy: -2.28053563651478px; animation-delay: -3.25s" />
+    <circle class="jelly-particle" cx="621.5372995368557" cy="125.48414845708521" r="1.2220537429249965" fill="#22d3ee"
+      style="--jx: -3.129137819178112px; --jy: 4.482368515791206px; animation-delay: -3.50s" />
+    <circle class="jelly-particle" cx="644.1852049608661" cy="130.18520496086614" r="1.1924815348872835" fill="#fb923c"
+      style="--jx: -4.765030981166706px; --jy: 3.27093123463833px; animation-delay: -3.75s" />
+    <circle class="jelly-particle" cx="647.4134340338371" cy="121.27122502351325" r="0.8213657234916439" fill="#f472b6"
+      style="--jx: -2.7548024618725258px; --jy: -6.005257917202802px; animation-delay: -4.00s" />
+    <circle class="jelly-particle" cx="655.8744382876827" cy="119.67499084959553" r="0.8180774245509621" fill="#a78bfa"
+      style="--jx: -5.448241697149697px; --jy: -1.6304912533541938px; animation-delay: -4.25s" />
+    <circle class="jelly-particle" cx="664" cy="113.9821904201" r="1.2738738110014425" fill="#22d3ee"
+      style="--jx: -6.808748196374339px; --jy: 8.209573115298365px; animation-delay: -4.50s" />
+    <circle class="jelly-particle" cx="670.9088846687034" cy="124.215691392765" r="1.5763352564202164" fill="#fb923c"
+      style="--jx: 7.392967951369247px; --jy: -9.554523626768393px; animation-delay: -4.75s" />
+    <circle class="jelly-particle" cx="674.5229606534879" cy="131.77369750211074" r="1.6405629240885222" fill="#f472b6"
+      style="--jx: 5.718726126321165px; --jy: 3.9235540555641935px; animation-delay: -5.00s" />
+    <circle class="jelly-particle" cx="683.6265436536652" cy="130.37345634633485" r="1.9898142114307502" fill="#a78bfa"
+      style="--jx: -7.490080218026531px; --jy: 0.5981216090309571px; animation-delay: -5.25s" />
+    <circle class="jelly-particle" cx="681.7717400434235" cy="139.73948110196136" r="1.4648366516537716" fill="#22d3ee"
+      style="--jx: -6.349121990395705px; --jy: 6.046722573995464px; animation-delay: -5.50s" />
+    <circle class="jelly-particle" cx="686.3778843518977" cy="144.00386395959194" r="1.9812618672872868" fill="#fb923c"
+      style="--jx: -0.765492401264769px; --jy: -8.654862555732695px; animation-delay: -5.75s" />
+  </g>
+
+  <!-- Final Top Outer Border Layer -->
+  <rect class="border-rect" x="0.75" y="0.75" width="798.5" height="298.5" rx="12" />
+</svg>
