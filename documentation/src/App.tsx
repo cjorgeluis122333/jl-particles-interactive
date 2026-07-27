@@ -49,7 +49,6 @@ export const NAV_ITEMS: NavItem[] = [
         items: [
           { id: 'text-carousel', label: 'Word Carousel', path: '/text/advanced/carousel' },
           { id: 'text-multiline-carousel', label: 'Multiline Quote Carousel', path: '/text/advanced/multiline-carousel' },
-          { id: 'text-hero-combo', label: 'Text + Background Combo', path: '/text/advanced/hero' },
         ],
       },
     ],

@@ -73,8 +73,6 @@ documentation/
           ShapesPage.tsx           ← /text/intermediate/shapes — Particle Shapes comparison example
         advanced/
           CarouselPage.tsx         ← /text/advanced/carousel — Word Carousel example
-          HeroComboPage.tsx        ← /text/advanced/hero — Text + Background combination example
-          LoadingScreenPage.tsx    ← /text/advanced/loading — Loading Screen overlay example
       backgrounds/
         FollowPointerPage.tsx      ← /backgrounds/follow-pointer — FOLLOW_POINTER as page bg + docs overlay
         NetPage.tsx                ← /backgrounds/net — NET as page bg + docs overlay
@@ -239,7 +237,7 @@ Renders `<section id={id} className="border-b border-white/5">`. Content inside 
 | `QuickStartPage` | `/quick-start` | 1 (TextParticleEngine "Hello") | SectionWrapper |
 | `TextBasicPage` | `/text/basic` | 2 (free-float, simple text) | SectionWrapper |
 | `TextIntermediatePage` | `/text/intermediate` | 4 (repel, attract, 3× shapes) | SectionWrapper |
-| `TextAdvancedPage` | `/text/advanced` | 2 (carousel, hero+NET) | SectionWrapper |
+| `TextAdvancedPage` | `/text/advanced` | 2 (word carousel, multiline quote carousel) | SectionWrapper |
 | `FollowPointerPage` | `/backgrounds/follow-pointer` | Fixed BG (page-level FOLLOW_POINTER) | Custom: fixed bg + glassmorphic cards |
 | `NetPage` | `/backgrounds/net` | Fixed BG (page-level NET) | Custom: fixed bg + glassmorphic cards |
 | `JellyfishPage` | `/backgrounds/jellyfish` | Fixed BG (page-level JELLYFISH) | Custom: fixed bg + glassmorphic cards |
