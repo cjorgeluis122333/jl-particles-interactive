@@ -12,17 +12,11 @@ A canvas-based React library for rendering text and backgrounds as thousands of 
 
 ---
 
-## Interactive previews
+## Live Preview
 
-### 1. Text particles engine (`TextParticleEngine`)
-Dynamic text transitions with spatial coherence, magnetic pointer hover, and click repel:
+A high-density visual preview of how the `TextParticleEngine` renders text ("HOLA") and icons (the waving hand "👋") with responsive particle-based physics and organic float:
 
 ![Text Particles Preview](assets/text_preview.svg)
-
-### 2. Animated background presets (`ParticleBackground`)
-Native presets designed for seamless overlay integration:
-
-![Background Presets Preview](assets/backgrounds_preview.svg)
 
 ---
 
