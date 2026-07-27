@@ -16,7 +16,7 @@ A canvas-based React library for rendering text and backgrounds as thousands of 
 
 A high-density visual preview of how the `TextParticleEngine` renders text ("HOLA") and icons (the waving hand "👋") with responsive particle-based physics and organic float:
 
-![Text Particles Preview](assets/text_preview.svg)
+![Text Particles Preview](assets/text_preview.gif)
 
 ---
 
