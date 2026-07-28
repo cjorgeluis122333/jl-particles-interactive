@@ -34,3 +34,4 @@ El workflow de GitHub también publica automáticamente una versión nueva al ha
 ## Despliegue web
 
 El archivo `vercel.json` construye `apps/web` y sirve sus rutas SPA. Conecta el repositorio a Vercel y conserva la raíz del proyecto en el repositorio; no hace falta desplegar la librería como una aplicación.
+
