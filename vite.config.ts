@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      'jl-particle-interactive': path.resolve(__dirname, './library/src/index.ts')
+      'jl-particle-interactive': path.resolve(__dirname, './library/index.ts')
     }
   },
   server: {

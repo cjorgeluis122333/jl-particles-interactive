@@ -14,8 +14,8 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "jl-particle-interactive": ["./library/src/index.ts"]
+      "jl-particle-interactive": ["./library/index.ts"]
     }
   },
-  "include": ["src", "library/src"]
+  "include": ["demo", "documentation", "library/index.ts", "library/components", "library/hooks", "library/types", "library/utils", "library/types.ts"]
 }

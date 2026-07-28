@@ -13,8 +13,8 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "jl-particle-interactive": ["src/index.ts"]
+      "jl-particle-interactive": ["index.ts"]
     }
   },
-  "include": ["src", "documentation/src", "demo/src"]
+  "include": ["index.ts", "components", "hooks", "types", "types.ts", "utils"]
 }

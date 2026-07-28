@@ -9,13 +9,13 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dts({
-      include: ['src'],
+      include: ['.'], exclude: ['dist', 'node_modules'],
       insertTypesEntry: true,
     }),
   ],
   resolve: {
     alias: {
-      'jl-particle-interactive': resolve(__dirname, 'src/index.ts'),
+      'jl-particle-interactive': resolve(__dirname, 'index.ts'),
     },
   },
   server: {
@@ -25,7 +25,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'index.ts'),
       name: 'JlParticleInteractive',
       fileName: 'jl-particle-interactive',
       formats: ['es', 'umd'],
