@@ -5,10 +5,33 @@
 [![bundle size](https://img.shields.io/bundlephobia/minzip/jl-particle-interactive)](https://bundlephobia.com/package/jl-particle-interactive)
 [![license](https://img.shields.io/npm/l/jl-particle-interactive)](https://github.com/cjorgeluis122333/jl-particles-interactive/blob/main/LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
+[![docs](https://img.shields.io/badge/documentation-website-8b5cf6?logo=readthedocs&logoColor=white)](https://jl-particles-interactive-web-e3hr-ow3sdt2t9.vercel.app/)
+[![playground](https://img.shields.io/badge/playground-try%20it%20live-22d3ee?logo=playcanvas&logoColor=white)](https://jl-particles-interactive-web-e3hr-ow3sdt2t9.vercel.app/demo)
 
 A canvas-based React library for rendering text and backgrounds as thousands of animated particles. Letters form from particle swarms, respond to magnetic hover, attract or repel on click, and backgrounds come alive with NET graphs, JELLYFISH glows, or pointer-following swarms. Built with zero runtime dependencies, full TypeScript support, and DPR-aware rendering for sharp output on retina displays.
 
-> Requires React 18+. No global CSS. Zero runtime dependencies.
+---
+
+## Installation
+
+```bash
+npm install jl-particle-interactive
+```
+
+Requires React 18+. No global CSS. Zero runtime dependencies.
+
+---
+
+## Live documentation & playground
+
+The library ships with a full documentation site and an interactive playground so you can see every feature in action and tune the props in real time before writing any code.
+
+| Resource | URL | What you get |
+|---|---|---|
+| 📖 **Documentation** | <https://jl-particles-interactive-web-e3hr-ow3sdt2t9.vercel.app/> | Live examples, API reference, and use-case guides for every component and background mode |
+| 🎮 **Interactive playground** | <https://jl-particles-interactive-web-e3hr-ow3sdt2t9.vercel.app/demo> | A hands-on screen where you can change text, colors, shapes, density, click modes and background modes, then immediately see how the particles behave |
+
+> **Tip:** Open the playground in a new tab and experiment with the controls — the same props you tweak there map 1:1 to the ones documented below, so once you find a look you like, just copy the values into your own `<ParticleCanvas>` or `<ParticleBackground>`.
 
 ---
 
@@ -33,14 +56,6 @@ A canvas-based React library for rendering text and backgrounds as thousands of 
 - **Loading screens** — Words form and dissolve while content loads
 - **Interactive word carousels** — Cycle through words; particles re-form smoothly
 - **Animated backgrounds** — NET graph, JELLYFISH glow, or pointer-following swarm behind any content
-
----
-
-## Installation
-
-```bash
-npm install jl-particle-interactive
-```
 
 ---
 
@@ -83,6 +98,8 @@ export default function App() {
   );
 }
 ```
+
+> 🎮 **Want to see it before you code?** Open the [interactive playground](https://jl-particles-interactive-web-e3hr-ow3sdt2t9.vercel.app/demo) and tweak text, colors, shapes, density, click modes and background modes in real time. When you like the result, copy the same prop values into the snippet above.
 
 ---
 
