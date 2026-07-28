@@ -28,6 +28,7 @@ export default function CodeBlock({ code, language = 'tsx' }: CodeBlockProps) {
         {copied ? <Check size={12} /> : <Copy size={12} />}
         {copied ? 'Copied!' : 'Copy'}
       </button>
+      {/* @ts-ignore */}
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}
