@@ -12,14 +12,6 @@ A canvas-based React library for rendering text and backgrounds as thousands of 
 
 ---
 
-## Live Preview
-
-A high-density visual preview of how the `TextParticleEngine` renders text ("HOLA") and icons (the waving hand "👋") with responsive particle-based physics and organic float:
-
-![Text Particles Preview](assets/text_preview.gif)
-
----
-
 ## Why jl-particle-interactive?
 
 | Feature | jl-particle-interactive | tsparticles | particles.js |
