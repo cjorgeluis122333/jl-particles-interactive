@@ -109,6 +109,7 @@ The library's `files` allowlist contains only `dist` and `README.md`; verify thi
 ## CI and deployment
 
 - `.github/workflows/publish.yml` runs only when the package, root lockfile, or publish workflow changes. It reads the version from `packages/jl-particle-interactive/package.json`, then type-checks, builds, publishes, tags, and creates a GitHub release only if the tag does not already exist.
+- The publish workflow authenticates npm through the `NODE_AUTH_TOKEN` environment variable. The repository must define an `NPM_TOKEN` Actions secret containing an npm automation/access token with publish permission; the workflow validates it with `npm whoami` before publishing.
 - Vercel should be connected to the repository root. `vercel.json` runs `npm run build:web`, serves `apps/web/dist`, and rewrites SPA routes to `index.html`.
 - Update the package version before publishing. Never publish the root coordinator package; it is `private`.
 
