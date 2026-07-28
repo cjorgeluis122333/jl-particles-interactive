@@ -104,76 +104,29 @@ ctx.scale(dpr, dpr);  // scale once after resize
 ---
 
 ## 3. Annotated File Tree
-
 ```
 jl-particles-interactive/
 │
 ├── AGENTS.md                          ← this file; AI agent context
-├── package.json                       ← library metadata, scripts, peer deps
-├── tsconfig.json                      ← strict TS, ES2020, bundler resolution
-├── vite.config.ts                     ← library build (ES + UMD), DTS generation
+├── package.json                       ← monorepo root config (depends on library)
+├── tsconfig.json                      ← strict TS, bundler resolution for apps
+├── vite.config.ts                     ← root app build (combines docs & demo)
 ├── skills-lock.json                   ← installed agent skills (do not edit manually)
-├── README.md                          ← primary public documentation (install, API, background guide)
-├── README_Samples.md                  ← usage examples for consumers
+├── README.md                          ← primary public documentation
 │
-├── .github/
-│   └── workflows/
-│       └── deploy-demo.yml            ← GitHub Actions: build demo + docs → merge → deploy to GitHub Pages on push to main
+├── library/                           ← NEW: Standalone library package
+│   ├── package.json                   ← Library-only metadata (npm publish)
+│   ├── vite.config.ts                 ← Library build (ES + UMD)
+│   ├── tsconfig.json
+│   └── src/                           ← Library source code
+│       ├── index.ts                   ← PUBLIC API
+│       └── components/...             ← Particle components
 │
-├── demo/                              ← standalone interactive playground for testing the library
-│   └── AGENTS.md                      ← agent context exclusively for the demo project (see there)
-│
-├── documentation/                     ← standalone documentation site; see documentation/AGENTS.md
-│
-├── doc/
-│   └── particle_interactive_code.md   ← detailed code samples and explanations
-│
-└── src/
-    ├── index.ts                       ← PUBLIC API: all exports live here
-    ├── types.ts                       ← ColorMode, ParticleShape
-    │
-    ├── types/
-    │   └── background.ts              ← BackgroundModeName, ParticleOrientation,
-    │                                     BackgroundCanvas interface
-    │
-    ├── components/
-    │   ├── ParticleCanvas.tsx         ← Container: sizing, background slot, z-index
-    │   │
-    │   ├── background/
-    │   │   ├── ParticleBackground.tsx        ← Unified background component (selects engine via `name` prop)
-    │   │   ├── BackgroundParticleEngine.tsx  ← FOLLOW_POINTER mode; swarm + color waves
-    │   │   ├── FollowPointerParticle.ts      ← Swarm particle class (depth, orientation)
-    │   │   ├── NetParticleEngine.tsx         ← NET mode; bouncing nodes + edge lines
-    │   │   └── JellyfishParticleEngine.tsx   ← JELLYFISH mode; glow rings + tentacles
-    │   │
-    │   └── text/
-    │       ├── TextParticleEngine.tsx        ← Main text animation engine
-    │       └── Particle.ts                   ← Text particle class (spring + float)
-    │
-    └── hooks/
-        ├── useParticleInteraction.ts         ← Pointer events + getMagnetTarget()
-        │
-        ├── background/
-        │   ├── useParticleMovement.ts        ← Swarm velocity + separation pass
-        │   ├── useParticleOrientation.ts     ← Direction vectors for bean rendering
-        │   ├── useParticleScaling.ts         ← Distance-to-center size scaling
-        │   └── usePointerTracking.ts         ← Smooth cursor interpolation
-        │
-        └── text/
-            └── useTextParticles.ts           ← Offscreen canvas text sampling
-```
+└── src/                               ← Root app source
+    ├── main.tsx                       ← Main React Router (routes to / documentation and /demo)
+    ├── documentation/                 ← Documentation app source
+    └── demo/                          ← Demo app source
 
----
-
-## 4. Public API Reference
-
-Everything exported from `src/index.ts` is public API. Do not remove or rename exports without a major version bump.
-
-**Exported symbols (complete list):**
-- Components: `ParticleCanvas`, `TextParticleEngine`, `ParticleBackground`
-- Prop types: `ParticleCanvasProps`, `TextParticleEngineProps`, `ParticleBackgroundProps`
-- Hooks: `useParticleInteraction`, `useTextParticles`
-- Functions: `getMagnetTarget`
 - Types: `ClickMode`, `ColorMode`, `ParticleShape`, `BackgroundModeName`, `BackgroundCanvas`, `ParticleOrientation`
 
 ---
@@ -564,6 +517,8 @@ cd demo && npm run build
 **After every task that modifies this project, update AGENTS.md before finishing.**
 
 ### Recent maintenance notes
+- 2026-07-28: **Arquitectura Monorepo/Librería.** Se separó el código fuente de la librería a la carpeta `library/` para modularizarlo por completo, de manera que publicar en npm solo requiere hacer `cd library && npm publish`. La raíz del proyecto ahora actúa como una aplicación Vite/React envolvente (`src/main.tsx`) que gestiona el enrutamiento principal entre `/` (anteriormente `documentation`) y `/demo` (anteriormente `demo`).
+
 
 - 2026-06-10: Expanded `README.md` with a dedicated background usage guide (mode-specific examples, option matrix, and `BackgroundCanvas` reference).
 - 2026-06-27: Added `ParticleBackground` component — unified background wrapper with `name` prop at top level and optional `config` object; exported from `src/index.ts`.

@@ -6,12 +6,15 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "jl-particle-interactive": ["src/index.ts"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "documentation/src", "demo/src"]
 }
