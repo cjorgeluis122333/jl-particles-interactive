@@ -26,6 +26,7 @@ npm run build
 Tras actualizar la versión de `packages/jl-particle-interactive/package.json`:
 
 ```bash
+npm login
 npm run publish:library
 ```
 
