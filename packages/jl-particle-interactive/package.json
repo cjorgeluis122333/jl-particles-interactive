@@ -1,6 +1,6 @@
 {
   "name": "jl-particle-interactive",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "Canvas-based React library for particle text animations and interactive backgrounds — spring physics, magnetic hover, click attract/repel, NET/JELLYFISH modes. TypeScript. Zero dependencies.",
   "author": {
