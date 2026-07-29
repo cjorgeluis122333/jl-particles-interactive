@@ -39,6 +39,12 @@
     "prepublishOnly": "npm run lint && npm run build"
   },
   "keywords": [
+    "jl",
+    "jl-react",
+    "jl-react-particles",
+    "jl-react-particles-interactive",
+    "jl-particles-interactive",
+    "particles-interactive",
     "react",
     "particles",
     "animation",
